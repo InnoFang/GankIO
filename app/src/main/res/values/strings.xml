@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">GankIO</string>
+    <string name="nav_daily_gank">每日干货</string>
+    <string name="nav_category">分类浏览</string>
+    <string name="luck">福利 (☆▽☆)y</string>
+    <string name="gank">Gank</string>
+    <string name="i_o">IO</string>
+    <string name="nav_collection">收藏</string>
+    <string name="nav_setting">设置</string>
+    <string name="nav_about">关于</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="android">Android</string>
+    <string name="ios">iOS</string>
+    <string name="web">前端</string>
+    <string name="expand_resource">拓展资源</string>
+    <string name="recommend">瞎推荐</string>
+    <string name="app">App</string>
+    <string name="video">休息视频</string>
+    <string name="action_open_browser">在浏览器中打开</string>
+</resources>

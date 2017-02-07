@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android1:id="@+id/coordinator_layout"
+    android1:layout_width="match_parent"
+    android1:layout_height="match_parent"
+    android1:fitsSystemWindows="true">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android1:id="@+id/swipe_refresh_layout"
+        android1:layout_width="match_parent"
+        android1:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android1:id="@+id/nested_scroll_view"
+            android1:layout_width="match_parent"
+            android1:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android1:id="@+id/daily_gank_recycler_view"
+                android1:layout_width="match_parent"
+                android1:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:layout_collapseMode="pin"/>
+
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android1:id="@+id/show_calendar_fab"
+        android1:layout_width="wrap_content"
+        android1:layout_height="wrap_content"
+        android1:layout_margin="16dp"
+        android1:src="@drawable/ic_fab_calendar"
+        app:backgroundTint="@color/colorFAB"
+        app:fabSize="normal"
+        app:layout_anchor="@id/nested_scroll_view"
+        app:layout_anchorGravity="bottom|end"/>
+
+</android.support.design.widget.CoordinatorLayout>
