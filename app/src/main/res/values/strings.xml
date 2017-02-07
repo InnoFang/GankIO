@@ -18,4 +18,5 @@
     <string name="app">App</string>
     <string name="video">休息视频</string>
     <string name="action_open_browser">在浏览器中打开</string>
+    <string name="action_share">分享</string>
 </resources>

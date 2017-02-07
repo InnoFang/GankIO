@@ -3,6 +3,7 @@ package com.innofang.gankiodemo.module.dailygank;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,7 +17,6 @@ import android.view.ViewGroup;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.module.gankdetail.GankDetailActivity;
-import com.innofang.gankiodemo.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,7 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     public void showEmptyOrError(String error) {
         if (null != error){
             Log.i(TAG, error);
-            ToastUtils.showToast(error);
+            Snackbar.make(mShowCalendarButton, error, Snackbar.LENGTH_LONG).show();
         }
     }
 

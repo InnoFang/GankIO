@@ -24,10 +24,12 @@
         </activity>
         <activity android:name=".module.dailygank.MainActivity">
         </activity>
-        <activity android:name=".module.gankdetail.GankDetailActivity"
+        <activity
+            android:name=".module.gankdetail.GankDetailActivity"
             android:parentActivityName=".module.dailygank.MainActivity">
         </activity>
-        <activity android:name=".module.web.WebActivity"
+        <activity
+            android:name=".module.web.WebActivity"
             android:configChanges="keyboardHidden|keyboard|orientation|screenSize">
         </activity>
     </application>

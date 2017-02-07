@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.base.SingleFragmentActivity;
 
 public class WebActivity extends SingleFragmentActivity {
 
+    private static final String TAG = "WebActivity";
     private static final String EXTRA_URL = "com.innofang.gankiodemo.ui.activity.url";
     private static final String EXTRA_DESC = "com.innofang.gankiodemo.ui.activity.desc";
     private Toolbar mToolbar;
@@ -49,6 +52,14 @@ public class WebActivity extends SingleFragmentActivity {
         super.init();
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_close);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
 
@@ -68,17 +79,21 @@ public class WebActivity extends SingleFragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        String url = mWebFragment.getCurrentUrl();
+        Uri uri = Uri.parse(url);
+        Log.i(TAG, "url = " + url);
         switch (item.getItemId()) {
+            case R.id.action_share:
+                intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, uri);
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent, "分享到"));
+                break;
             case R.id.action_open_browser:
-                Intent intent = new Intent();
+                intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                String url = mWebFragment.getCurrentUrl();
-                Uri uri;
-                if (null != url) {
-                    uri = Uri.parse(url);
-                } else {
-                    uri = Uri.parse(mUrl);
-                }
                 intent.setData(uri);
                 startActivity(Intent.createChooser(intent, "请选择浏览器"));
                 break;

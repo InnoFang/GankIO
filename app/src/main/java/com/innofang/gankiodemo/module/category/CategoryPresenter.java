@@ -1,14 +1,16 @@
-package com.innofang.gankiodemo.model.impl;
+package com.innofang.gankiodemo.module.category;
 
 import android.util.Log;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.innofang.gankiodemo.App;
+import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.constant.URL;
 import com.innofang.gankiodemo.http.LoadingCallback;
 import com.innofang.gankiodemo.http.RemoteManager;
-import com.innofang.gankiodemo.model.ILoadingDailyGank;
 import com.innofang.gankiodemo.utils.JSONParser;
-import com.innofang.gankiodemo.event.LoadingStateCallback;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -20,22 +22,29 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * Author: Inno Fang
- * Time: 2017/2/5 15:42
+ * Time: 2017/2/7 17:34
  * Description:
  */
 
-public class DailyGankModel implements ILoadingDailyGank {
-    private static final String TAG = "DailyGankModel";
+public class CategoryPresenter implements CategoryContract.Presenter {
+    private static final String TAG = "CategoryPresenter";
+
+    private CategoryContract.View mView;
+
+    public CategoryPresenter(CategoryContract.View view) {
+        mView = view;
+        mView.setPresenter(this);
+    }
 
     @Override
-    public void loadingDailyGank(final LoadingStateCallback<Luck.ResultsBean> listener) {
+    public void requestRandomMeizhi(final ImageView imageView) {
         Observable.create(new ObservableOnSubscribe<Luck>() {
             @Override
             public void subscribe(final ObservableEmitter<Luck> e) throws Exception {
-                RemoteManager.getInstance().asyncRequest(URL.DATA_LUCK, new LoadingCallback() {
+                RemoteManager.getInstance().asyncRequest(URL.DATA_RANDOM_MEIZHI, new LoadingCallback() {
                     @Override
                     public void onUnavailable() {
-                        listener.onFailure(null);
+                        mView.showErrorOrEmptyInfo("图片获取失败");
                     }
 
                     @Override
@@ -60,13 +69,17 @@ public class DailyGankModel implements ILoadingDailyGank {
                     public void onNext(Luck value) {
                         Log.i(TAG, "onNext: " + value.getResults().toString());
                         if (null != value.getResults()) {
-                            listener.onSuccess(value.getResults());
+                            Glide.with(App.getContext())
+                                    .load(value.getResults().get(0).getUrl())
+                                    .placeholder(R.drawable.default_nav_img)
+                                    .animate(R.anim.anim_scale)
+                                    .into(imageView);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.showErrorOrEmptyInfo("图片获取失败");
                     }
 
                     @Override
@@ -74,5 +87,15 @@ public class DailyGankModel implements ILoadingDailyGank {
 
                     }
                 });
+    }
+
+    @Override
+    public void start() {
+        mView.showMeizhi();
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

@@ -28,7 +28,6 @@
                 android:layout_gravity="center"
                 android:contentDescription="@null"
                 android:fitsSystemWindows="true"
-
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_nav_img"
                 app:layout_collapseMode="parallax"

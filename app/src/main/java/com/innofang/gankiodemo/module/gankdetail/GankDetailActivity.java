@@ -34,4 +34,11 @@ public class GankDetailActivity extends SingleFragmentActivity {
         return intent;
     }
 
+    @Override
+    public void init() {
+        super.init();
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
 }
