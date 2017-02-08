@@ -1,30 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="5dp">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/date_picker_title"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gank_date_picker_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="200dp"
+        tools:listitem="@layout/item_date_picker"
         android:layout_marginTop="2dp"/>
 
-    <Button
-        android:id="@+id/cancel_button"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/dialog_button_bg"
-        android:text="@string/cancel"/>
 </LinearLayout>

@@ -2,16 +2,17 @@ package com.innofang.gankiodemo.module.dailygank.datepicker;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.gankdetail.GankDetailActivity;
@@ -52,7 +53,7 @@ public class DatePickerFragment extends DialogFragment implements GankDatePicker
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        final Dialog dialog = new Dialog(getContext());
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_date_picker, null, false);
 
@@ -61,16 +62,15 @@ public class DatePickerFragment extends DialogFragment implements GankDatePicker
         mRecyclerView.setAdapter(mAdapter);
 
         dialog.setCancelable(true);
-        Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        dialog.setTitle(R.string.date_picker_title);
+        dialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-
-        dialog.setContentView(view);
-        return dialog;
+        dialog.setView(view);
+        return dialog.show();
     }
 
     @Override
