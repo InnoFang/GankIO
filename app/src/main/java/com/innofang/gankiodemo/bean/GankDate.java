@@ -33,4 +33,12 @@ public class GankDate {
     public void setResults(List<String> results) {
         this.results = results;
     }
+
+    @Override
+    public String toString() {
+        return "GankDate{" +
+                "error=" + error +
+                ", results=" + results +
+                '}';
+    }
 }

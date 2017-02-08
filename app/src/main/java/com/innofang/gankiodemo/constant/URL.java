@@ -13,6 +13,7 @@ public class URL {
 
     // 请求图片时，添加后缀获取合适的图片
     public static final String REQUEST_IMAGE_POSTFIX = "?imageView2/0/w/220";
+    public static final String REQUEST_IMAGE_POSTFIX_FOR_SPANNER = "?imageView2/0/w/500";
 
     // 发过干货日期接口
     public static final String HISTORY = "http://gank.io/api/day/history";

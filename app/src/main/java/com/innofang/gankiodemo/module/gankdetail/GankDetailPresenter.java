@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide;
 import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
+import com.innofang.gankiodemo.constant.URL;
 import com.innofang.gankiodemo.http.LoadingCallback;
 import com.innofang.gankiodemo.http.RemoteManager;
 import com.innofang.gankiodemo.utils.JSONParser;
@@ -71,7 +72,7 @@ public class GankDetailPresenter implements GankDetailContract.Presenter{
                         Log.i(TAG, "onNext: " + value.getResults().toString());
                         List<GankDetail.ResultsBean.福利Bean> luck = value.getResults().get福利();
                         if (null != luck) {
-                            String imgUrl = luck.get(0).getUrl();
+                            String imgUrl = luck.get(0).getUrl() + URL.REQUEST_IMAGE_POSTFIX_FOR_SPANNER;
                             Glide.with(App.getContext())
                                     .load(imgUrl)
                                     .placeholder(R.drawable.default_nav_img)
