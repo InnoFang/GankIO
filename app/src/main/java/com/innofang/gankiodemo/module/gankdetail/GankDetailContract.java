@@ -3,8 +3,8 @@ package com.innofang.gankiodemo.module.gankdetail;
 import android.widget.ImageView;
 
 import com.innofang.gankiodemo.bean.GankDetail;
-import com.innofang.gankiodemo.module.base.BasePresenter;
-import com.innofang.gankiodemo.module.base.BaseView;
+import com.innofang.gankiodemo.module.BasePresenter;
+import com.innofang.gankiodemo.module.BaseView;
 
 import java.util.List;
 

@@ -4,6 +4,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/action_collection"
+        android:icon="@drawable/ic_menu_dislike"
+        android:title="@string/action_dislike"
+        app:showAsAction="ifRoom|withText"
+        />
+
+    <item
         android:id="@+id/action_share"
         android:title="@string/action_share"
         app:showAsAction="never"

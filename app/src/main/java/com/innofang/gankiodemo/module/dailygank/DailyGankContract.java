@@ -1,8 +1,8 @@
 package com.innofang.gankiodemo.module.dailygank;
 
 import com.innofang.gankiodemo.bean.Luck;
-import com.innofang.gankiodemo.module.base.BasePresenter;
-import com.innofang.gankiodemo.module.base.BaseView;
+import com.innofang.gankiodemo.module.BasePresenter;
+import com.innofang.gankiodemo.module.BaseView;
 
 import java.util.List;
 

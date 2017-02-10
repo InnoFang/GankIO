@@ -7,7 +7,7 @@
     <string name="i_o">IO</string>
     <string name="nav_collection">收藏</string>
     <string name="nav_setting">设置</string>
-    <string name="nav_about">关于</string>
+    <string name="about_app">关于App</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="android">Android</string>
@@ -29,4 +29,7 @@
     <string name="source_from"><u>http://gank.io/</u></string>
     <string name="nav_search_gank">干货搜索</string>
     <string name="search_gank">搜搜都有啥干货？</string>
+    <string name="action_dislike">dislike</string>
+    <string name="action_like">like</string>
+    <string name="empty_view_desc">这里空空如也~</string>
 </resources>

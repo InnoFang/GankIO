@@ -10,7 +10,7 @@ import com.innofang.gankiodemo.App;
  * Description:
  */
 
-public class ToastUtils {
+public class ToastUtil {
 
     private static Toast mToast;
     private static long time = 0;

@@ -84,8 +84,8 @@ public class SearchFragment extends Fragment implements SearchContract.View{
         mAdapter.setOnClickItemListener(new SearchAdapter.OnClickItemListener() {
 
             @Override
-            public void onClick(String url, String desc) {
-                startActivity(WebActivity.newIntent(getActivity(), url, desc));
+            public void onClick(String url, String desc, String who, String type, String publishAt) {
+                startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
             }
         });
     }

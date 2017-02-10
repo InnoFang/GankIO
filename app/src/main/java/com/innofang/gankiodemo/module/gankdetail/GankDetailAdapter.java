@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
+import com.innofang.gankiodemo.utils.TimeUtil;
 
 import java.util.List;
 
@@ -77,7 +78,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(android.getUrl(), android.getDesc());
+                            mOnClickItemListener.onClick(android.getUrl(),
+                                    android.getDesc(),
+                                    android.getWho().toString(),
+                                    android.getType(),
+                                    TimeUtil.formatPublishAt(android.getPublishedAt()));
                         }
                     });
                 }
@@ -90,7 +95,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(iOS.getUrl(), iOS.getDesc());
+                            mOnClickItemListener.onClick(iOS.getUrl(),
+                                    iOS.getDesc(),
+                                    iOS.getWho(),
+                                    iOS.getType(),
+                                    TimeUtil.formatPublishAt(iOS.getPublishedAt()));
                         }
                     });
                 }
@@ -102,7 +111,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(web.getUrl(), web.getDesc());
+                            mOnClickItemListener.onClick(web.getUrl(),
+                                    web.getDesc(),
+                                    web.getWho(),
+                                    web.getType(),
+                                    TimeUtil.formatPublishAt(web.getPublishedAt()));
                         }
                     });
                 }
@@ -114,7 +127,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(expandResource.getUrl(), expandResource.getDesc());
+                            mOnClickItemListener.onClick(expandResource.getUrl(),
+                                    expandResource.getDesc(),
+                                    expandResource.getWho(),
+                                    expandResource.getType(),
+                                    TimeUtil.formatPublishAt(expandResource.getPublishedAt()));
                         }
                     });
                 }
@@ -126,7 +143,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(recommend.getUrl(), recommend.getDesc());
+                            mOnClickItemListener.onClick(recommend.getUrl(),
+                                    recommend.getDesc(),
+                                    recommend.getWho(),
+                                    recommend.getType(),
+                                    TimeUtil.formatPublishAt(recommend.getPublishedAt()));
                         }
                     });
                 }
@@ -138,7 +159,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(app.getUrl(), app.getDesc());
+                            mOnClickItemListener.onClick(app.getUrl(),
+                                    app.getDesc(),
+                                    app.getWho(),
+                                    app.getType(),
+                                    TimeUtil.formatPublishAt(app.getPublishedAt()));
                         }
                     });
                 }
@@ -150,7 +175,11 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     itemView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            mOnClickItemListener.onClick(video.getUrl(), video.getDesc());
+                            mOnClickItemListener.onClick(video.getUrl(),
+                                    video.getDesc(),
+                                    video.getWho(),
+                                    video.getType(),
+                                    TimeUtil.formatPublishAt(video.getPublishedAt()));
                         }
                     });
                 }
@@ -160,6 +189,6 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
     }
 
     public interface OnClickItemListener {
-        void onClick(String url, String desc);
+        void onClick(String url, String desc, String who, String type, String publishAt);
     }
 }

@@ -14,7 +14,7 @@
             android:id="@+id/gank_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_gank">
+            tools:listitem="@layout/item_gank_with_img">
 
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>

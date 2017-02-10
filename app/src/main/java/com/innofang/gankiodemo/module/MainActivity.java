@@ -11,11 +11,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.module.base.SingleFragmentActivity;
 import com.innofang.gankiodemo.module.category.CategoryFragment;
 import com.innofang.gankiodemo.module.collection.CollectionsFragment;
 import com.innofang.gankiodemo.module.dailygank.DailyGankFragment;
-import com.innofang.gankiodemo.module.dailygank.about.AboutFragment;
 import com.innofang.gankiodemo.module.luck.LuckFragment;
 import com.innofang.gankiodemo.module.search.SearchFragment;
 import com.innofang.gankiodemo.module.setting.SettingFragment;
@@ -24,7 +22,6 @@ public class MainActivity extends SingleFragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
-    private static final String DIALOG_ABOUT = "dialog_about";
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -82,17 +79,12 @@ public class MainActivity extends SingleFragmentActivity
                 switchFragment(SearchFragment.newInstance());
                 break;
             case R.id.nav_collections:
-                setActionBarState(true);
+                setActionBarState(false);
                 switchFragment(CollectionsFragment.newInstance());
                 break;
             case R.id.nav_setting:
                 setActionBarState(true);
                 switchFragment(SettingFragment.newInstance());
-                break;
-            case R.id.nav_about:
-                setActionBarState(true);
-                AboutFragment aboutFragment = new AboutFragment();
-                aboutFragment.show(getSupportFragmentManager(), DIALOG_ABOUT);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);

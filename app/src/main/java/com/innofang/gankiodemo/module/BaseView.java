@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo.module.base;
+package com.innofang.gankiodemo.module;
 
 /**
  * Author: Inno Fang

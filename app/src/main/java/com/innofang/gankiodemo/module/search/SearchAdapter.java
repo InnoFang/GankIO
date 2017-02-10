@@ -41,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
 
     @Override
     public SearchHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_search_gank, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_gank, parent, false);
         return new SearchHolder(view);
     }
 
@@ -80,7 +80,11 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mOnClickItemListener.onClick(result.getUrl(), result.getDesc());
+                        mOnClickItemListener.onClick(result.getUrl(),
+                                result.getDesc(),
+                                result.getWho(),
+                                result.getType(),
+                                TimeUtil.formatPublishAt(result.getPublishedAt()));
                     }
                 });
             }
@@ -88,6 +92,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
     }
 
     interface OnClickItemListener {
-        void onClick(String url, String desc);
+        void onClick(String url, String desc, String who, String type, String publishAt);
     }
 }

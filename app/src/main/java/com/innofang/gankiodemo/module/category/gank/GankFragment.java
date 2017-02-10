@@ -116,8 +116,8 @@ public class GankFragment extends Fragment implements GankContract.View{
         mGankAdapter.notifyDataSetChanged();
         mGankAdapter.setOnClickGankItemListener(new GankAdapter.OnClickGankItemListener() {
             @Override
-            public void onClick(String url, String desc) {
-                startActivity(WebActivity.newIntent(getContext(), url, desc));
+            public void onClick(String url, String desc, String who, String type, String publishAt) {
+                startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
             }
         });
     }

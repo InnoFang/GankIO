@@ -133,9 +133,10 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.ANDROID);
             mAndroidRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
+
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }
@@ -148,9 +149,10 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.IOS);
             mIOSRecyclerViwe.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
+
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }
@@ -164,8 +166,8 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             mAppRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }
@@ -179,8 +181,8 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             mVideoRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }
@@ -194,8 +196,8 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             mWebRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }
@@ -209,8 +211,8 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             mExpandResourceRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }
@@ -224,8 +226,8 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             mRecommendRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
                 @Override
-                public void onClick(String url, String desc) {
-                    startActivity(WebActivity.newIntent(getActivity(), url, desc));
+                public void onClick(String url, String desc, String who, String type, String publishAt) {
+                    startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
                 }
             });
         }

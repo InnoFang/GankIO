@@ -1,7 +1,7 @@
 package com.innofang.gankiodemo.module.dailygank.datepicker;
 
-import com.innofang.gankiodemo.module.base.BasePresenter;
-import com.innofang.gankiodemo.module.base.BaseView;
+import com.innofang.gankiodemo.module.BasePresenter;
+import com.innofang.gankiodemo.module.BaseView;
 
 import java.util.List;
 

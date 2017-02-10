@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo.module.category.gank;
+package com.innofang.gankiodemo.module.collection.collectiongank;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,13 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.bean.Gank;
-import com.innofang.gankiodemo.utils.TimeUtil;
+import com.innofang.gankiodemo.bean.Collection;
 
 import java.util.List;
 
@@ -22,14 +19,14 @@ import java.util.List;
  * Description:
  */
 
-public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
+public class CollectionGankAdapter extends RecyclerView.Adapter<CollectionGankAdapter.CollectionGankHolder> {
     private static final String TAG = "GankAdapter";
 
-    private List<Gank.ResultsBean> mList;
+    private List<Collection> mList;
     private Context mContext;
     private OnClickGankItemListener mOnClickGankItemListener;
 
-    public GankAdapter(Context context, List<Gank.ResultsBean> list) {
+    public CollectionGankAdapter(Context context, List<Collection> list) {
         mContext = context;
         mList = list;
     }
@@ -38,18 +35,18 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
         mOnClickGankItemListener = onClickGankItemListener;
     }
 
-    public void setList(List<Gank.ResultsBean> list) {
+    public void setList(List<Collection> list) {
         mList = list;
     }
 
     @Override
-    public GankHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CollectionGankHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_gank_with_img, parent, false);
-        return new GankHolder(view);
+        return new CollectionGankHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(GankHolder holder, int position) {
+    public void onBindViewHolder(CollectionGankHolder holder, int position) {
         Log.i(TAG, "onBindViewHolder: is called");
         holder.bindHolder(mList.get(position));
     }
@@ -59,47 +56,38 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
         return mList == null ? 0 : mList.size();
     }
 
-    public class GankHolder extends RecyclerView.ViewHolder {
+    public class CollectionGankHolder extends RecyclerView.ViewHolder {
 
         private TextView mWhoTextView,
                     mPublishAtTextView,
                     mDescTextView,
                     mTypeTextView;
-        private ImageView mImageView;
 
-        public GankHolder(View itemView) {
+        public CollectionGankHolder(View itemView) {
             super(itemView);
             mWhoTextView = (TextView) itemView.findViewById(R.id.gank_who_text_view);
             mPublishAtTextView = (TextView) itemView.findViewById(R.id.gank_publish_at_text_view);
             mDescTextView = (TextView) itemView.findViewById(R.id.gank_desc_text_view);
             mTypeTextView = (TextView) itemView.findViewById(R.id.gank_type_text_view);
-            mImageView = (ImageView) itemView.findViewById(R.id.gank_image_view);
         }
 
-        public void bindHolder(final Gank.ResultsBean result) {
-            Log.i(TAG, "bindHolder: Gank " + result.toString());
-            mWhoTextView.setText(result.getWho());
-            mTypeTextView.setText(result.getType());
-            mPublishAtTextView.setText(TimeUtil.formatPublishAt(result.getPublishedAt()));
-            mDescTextView.setText(result.getDesc());
-            if (null != result.getImages() && null != result.getImages().get(0)) {
-                mImageView.setVisibility(View.VISIBLE);
-                String imgUrl = result.getImages().get(0);
-                Glide.with(mContext)
-                        .load(imgUrl)
-                        .placeholder(R.drawable.image_default)
-                        .into(mImageView);
-            }
+        public void bindHolder(final Collection collection) {
+            Log.i(TAG, "bindHolder: collection gank " + collection.toString());
+            mWhoTextView.setText(collection.getWho());
+            mTypeTextView.setText(collection.getType());
+            mPublishAtTextView.setText(collection.getPublishAt());
+            mDescTextView.setText(collection.getDesc());
+
             if (null != mOnClickGankItemListener) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mOnClickGankItemListener.onClick(
-                                result.getUrl(),
-                                result.getDesc(),
-                                result.getWho(),
-                                result.getType(),
-                                TimeUtil.formatPublishAt(result.getPublishedAt()));
+                                collection.getUrl(),
+                                collection.getDesc(),
+                                collection.getWho(),
+                                collection.getType(),
+                                collection.getPublishAt());
                     }
                 });
             }

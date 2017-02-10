@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo.module.base;
+package com.innofang.gankiodemo.module;
 
 import android.graphics.Color;
 import android.os.Build;
