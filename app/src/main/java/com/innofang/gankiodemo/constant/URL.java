@@ -28,6 +28,10 @@ public class URL {
     public static String getCategoryData(String category, int number){
         return "http://gank.io/api/data/" + category + "/" +  number + "/1";
     }
+    // 分类数据，获取指定分类数据，个数：指定，页数：1
+    public static String getSearchData(String query){
+        return "http://gank.io/api/search/query/" + query + "/category/all/count/50/page/1";
+    }
 
 
 }

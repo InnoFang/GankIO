@@ -22,11 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".module.dailygank.MainActivity">
+        <activity android:name=".module.MainActivity">
         </activity>
         <activity
             android:name=".module.gankdetail.GankDetailActivity"
-            android:parentActivityName=".module.dailygank.MainActivity">
+            android:parentActivityName=".module.MainActivity">
         </activity>
         <activity
             android:name=".module.web.WebActivity"

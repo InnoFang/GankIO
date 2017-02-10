@@ -18,6 +18,11 @@
                 android:id="@+id/nav_luck"
                 android:icon="@drawable/ic_menu_luck"
                 android:title="@string/luck"/>
+            <item
+                android:id="@+id/nav_search_gank"
+                android:icon="@drawable/ic_menu_search"
+                android:title="@string/nav_search_gank"
+                />
         </menu>
 
     </item>

@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo.module.dailygank;
+package com.innofang.gankiodemo.module;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,14 +14,17 @@ import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.base.SingleFragmentActivity;
 import com.innofang.gankiodemo.module.category.CategoryFragment;
 import com.innofang.gankiodemo.module.collection.CollectionsFragment;
+import com.innofang.gankiodemo.module.dailygank.DailyGankFragment;
+import com.innofang.gankiodemo.module.dailygank.about.AboutFragment;
 import com.innofang.gankiodemo.module.luck.LuckFragment;
+import com.innofang.gankiodemo.module.search.SearchFragment;
 import com.innofang.gankiodemo.module.setting.SettingFragment;
-import com.innofang.gankiodemo.utils.ToastUtils;
 
 public class MainActivity extends SingleFragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
+    private static final String DIALOG_ABOUT = "dialog_about";
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -74,6 +77,10 @@ public class MainActivity extends SingleFragmentActivity
                 setActionBarState(true);
                 switchFragment(LuckFragment.newInstance());
                 break;
+            case R.id.nav_search_gank:
+                setActionBarState(true);
+                switchFragment(SearchFragment.newInstance());
+                break;
             case R.id.nav_collections:
                 setActionBarState(true);
                 switchFragment(CollectionsFragment.newInstance());
@@ -84,17 +91,13 @@ public class MainActivity extends SingleFragmentActivity
                 break;
             case R.id.nav_about:
                 setActionBarState(true);
-                showAbout();
+                AboutFragment aboutFragment = new AboutFragment();
+                aboutFragment.show(getSupportFragmentManager(), DIALOG_ABOUT);
                 break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    private void showAbout() {
-        ToastUtils.showToast("Author @InnoFang");
-    }
-
 
     @Override
     public void onBackPressed() {

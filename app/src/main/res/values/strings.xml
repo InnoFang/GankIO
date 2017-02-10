@@ -21,4 +21,12 @@
     <string name="action_share">分享</string>
     <string name="date_picker_title">干货日期选择</string>
     <string name="cancel">取消</string>
+    <string name="author">作者：</string>
+    <string name="author_name"><u>@InnoFang</u></string>
+    <string name="project">项目地址：</string>
+    <string name="project_address"><u>https://github.com/InnoFang/GankIODemo</u></string>
+    <string name="source">数据来源：</string>
+    <string name="source_from"><u>http://gank.io/</u></string>
+    <string name="nav_search_gank">干货搜索</string>
+    <string name="search_gank">搜搜都有啥干货？</string>
 </resources>

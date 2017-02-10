@@ -62,8 +62,9 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
     public class GankHolder extends RecyclerView.ViewHolder {
 
         private TextView mWhoTextView,
-                mPublishAtTextView,
-                mDescTextView;
+                    mPublishAtTextView,
+                    mDescTextView,
+                    mTypeTextView;
         private ImageView mImageView;
 
         public GankHolder(View itemView) {
@@ -71,12 +72,14 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
             mWhoTextView = (TextView) itemView.findViewById(R.id.gank_who_text_view);
             mPublishAtTextView = (TextView) itemView.findViewById(R.id.gank_publish_at_text_view);
             mDescTextView = (TextView) itemView.findViewById(R.id.gank_desc_text_view);
+            mTypeTextView = (TextView) itemView.findViewById(R.id.gank_type_text_view);
             mImageView = (ImageView) itemView.findViewById(R.id.gank_image_view);
         }
 
         public void bindHolder(final Gank.ResultsBean result) {
             Log.i(TAG, "bindHolder: Gank " + result.toString());
             mWhoTextView.setText(result.getWho());
+            mTypeTextView.setText(result.getType());
             mPublishAtTextView.setText(TimeUtil.formatPublishAt(result.getPublishedAt()));
             mDescTextView.setText(result.getDesc());
             if (null != result.getImages() && null != result.getImages().get(0)) {
