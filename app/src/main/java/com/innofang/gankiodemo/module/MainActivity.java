@@ -65,19 +65,28 @@ public class MainActivity extends SingleFragmentActivity
         switch (item.getItemId()) {
             case R.id.nav_daily_gank:
                 setActionBarState(true);
+                if (null != getSupportActionBar()) {
+                    getSupportActionBar().setTitle(R.string.nav_daily_gank);
+                }
                 switchFragment(DailyGankFragment.newInstance());
                 break;
             case R.id.nav_category:
                 setActionBarState(false);
                 switchFragment(CategoryFragment.newInstance());
                 break;
-            case R.id.nav_luck:
-                setActionBarState(true);
-                switchFragment(LuckFragment.newInstance());
-                break;
             case R.id.nav_search_gank:
                 setActionBarState(true);
+                if (null != getSupportActionBar()) {
+                    getSupportActionBar().setTitle(R.string.nav_search_gank);
+                }
                 switchFragment(SearchFragment.newInstance());
+                break;
+            case R.id.nav_luck:
+                setActionBarState(true);
+                if (null != getSupportActionBar()) {
+                    getSupportActionBar().setTitle(R.string.nav_luck);
+                }
+                switchFragment(LuckFragment.newInstance());
                 break;
             case R.id.nav_collections:
                 setActionBarState(false);
@@ -85,6 +94,9 @@ public class MainActivity extends SingleFragmentActivity
                 break;
             case R.id.nav_setting:
                 setActionBarState(true);
+                if (null != getSupportActionBar()) {
+                    getSupportActionBar().setTitle(R.string.nav_setting);
+                }
                 switchFragment(SettingFragment.newInstance());
                 break;
         }
@@ -100,7 +112,7 @@ public class MainActivity extends SingleFragmentActivity
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            if(mBackPressed + TIME_INTERVAL > System.currentTimeMillis()){
+            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
                 super.onBackPressed();
                 return;
             } else {
@@ -112,8 +124,8 @@ public class MainActivity extends SingleFragmentActivity
 
     private void setActionBarState(boolean state) {
         ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null ){
-            if(!state) {
+        if (actionBar != null) {
+            if (!state) {
                 actionBar.hide();
             } else {
                 actionBar.show();

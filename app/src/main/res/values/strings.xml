@@ -2,7 +2,7 @@
     <string name="app_name">GankIO</string>
     <string name="nav_daily_gank">每日干货</string>
     <string name="nav_category">分类浏览</string>
-    <string name="luck">福利 (☆▽☆)y</string>
+    <string name="nav_luck">福利 (☆▽☆)y</string>
     <string name="gank">Gank</string>
     <string name="i_o">IO</string>
     <string name="nav_collection">收藏</string>

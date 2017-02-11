@@ -114,6 +114,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
         String title = (String) mGankUrl.subSequence(mGankUrl.length() - 10, mGankUrl.length());
         toolbar.setTitle(title);
+
     }
 
     @Override
