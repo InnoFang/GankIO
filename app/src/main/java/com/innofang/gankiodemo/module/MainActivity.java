@@ -17,6 +17,7 @@ import com.innofang.gankiodemo.module.dailygank.DailyGankFragment;
 import com.innofang.gankiodemo.module.luck.LuckFragment;
 import com.innofang.gankiodemo.module.search.SearchFragment;
 import com.innofang.gankiodemo.module.setting.SettingFragment;
+import com.innofang.gankiodemo.utils.ToastUtil;
 
 public class MainActivity extends SingleFragmentActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -91,12 +92,21 @@ public class MainActivity extends SingleFragmentActivity
         return true;
     }
 
+    private static final int TIME_INTERVAL = 2000;
+    private long mBackPressed;
+
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if(mBackPressed + TIME_INTERVAL > System.currentTimeMillis()){
+                super.onBackPressed();
+                return;
+            } else {
+                ToastUtil.showToast("再点击一次退出");
+            }
+            mBackPressed = System.currentTimeMillis();
         }
     }
 
@@ -110,4 +120,5 @@ public class MainActivity extends SingleFragmentActivity
             }
         }
     }
+
 }

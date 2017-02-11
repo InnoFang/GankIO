@@ -46,7 +46,7 @@ public class CollectionManager {
 
     public List<Collection> getCollections() {
         List<Collection> collections = new ArrayList<>();
-        CollectionCursorWrapper cursor = queryCollections(null, null);
+        CollectionCursorWrapper cursor = queryCollections();
 
         try{
             cursor.moveToFirst();
@@ -92,7 +92,7 @@ public class CollectionManager {
         values.put(GankTable.Cols.TYPE, collection.getType());
         values.put(GankTable.Cols.WHO, collection.getWho());
         values.put(GankTable.Cols.PUBLISH_AT, collection.getPublishAt());
-
+        values.put(GankTable.Cols.URL, collection.getUrl());
         return values;
     }
 
@@ -106,6 +106,11 @@ public class CollectionManager {
                 null,
                 null
         );
+        return new CollectionCursorWrapper(cursor);
+    }
+
+    private CollectionCursorWrapper queryCollections(){
+        Cursor cursor = mDatabase.rawQuery("select * from " + GankTable.NAME, null);
         return new CollectionCursorWrapper(cursor);
     }
 }

@@ -63,6 +63,13 @@ public class CollectionGankFragment extends Fragment implements CollectionGankCo
         return view;
     }
 
+    // 刷新列表视图
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.queryCollections(mType);
+    }
+
     @Override
     public void setEmptyViewState(boolean state) {
         if (state) {

@@ -1,5 +1,6 @@
 package com.innofang.gankiodemo.utils;
 
+import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 import com.innofang.gankiodemo.App;
@@ -34,4 +35,17 @@ public class ToastUtil {
         mToast.show();
     }
 
+
+    public static void showToast(@StringRes int resId) {
+        long temp = System.currentTimeMillis();
+        if (mToast == null) {
+            mToast = Toast.makeText(App.getContext(), resId, Toast.LENGTH_SHORT);
+        }
+        mToast.setText(resId);
+        if (temp - time < 2000) {
+            mToast.setDuration(Toast.LENGTH_LONG);
+        }
+        time = temp;
+        mToast.show();
+    }
 }

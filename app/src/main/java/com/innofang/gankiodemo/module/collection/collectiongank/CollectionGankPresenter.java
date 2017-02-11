@@ -38,6 +38,7 @@ public class CollectionGankPresenter implements CollectionGankContract.Presenter
         }
         if (types.isEmpty()){
             mView.setEmptyViewState(true);
+            mView.showCollectionGank(types);
         } else {
             mView.setEmptyViewState(false);
             mView.showCollectionGank(types);

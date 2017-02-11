@@ -49,6 +49,7 @@ public class Collection {
                 ", mType='" + mType + '\'' +
                 ", mWho='" + mWho + '\'' +
                 ", mPublishAt='" + mPublishAt + '\'' +
+                ", mUrl='" + mUrl + '\'' +
                 '}';
     }
 }

@@ -2,7 +2,6 @@ package com.innofang.gankiodemo.database;
 
 import android.database.Cursor;
 import android.database.CursorWrapper;
-import android.util.Log;
 
 import com.innofang.gankiodemo.bean.Collection;
 
@@ -20,7 +19,6 @@ import static com.innofang.gankiodemo.constant.DbSchema.GankTable.Cols.WHO;
 
 public class CollectionCursorWrapper extends CursorWrapper {
 
-    private static final String TAG = "CCW";
 
     /**
      * Creates a cursor wrapper.
@@ -32,14 +30,11 @@ public class CollectionCursorWrapper extends CursorWrapper {
     }
 
     public Collection getCollection(){
-        Log.i(TAG, "getCollection: desc.getColumnIndex = " + getColumnIndex(DESC));
         String desc = getString(getColumnIndex(DESC));
         String type = getString(getColumnIndex(TYPE));
         String who = getString(getColumnIndex(WHO));
         String publishAt = getString(getColumnIndex(PUBLISH_AT));
         String url = getString(getColumnIndex(URL));
-        Collection collection = new Collection(desc, type, who, publishAt, url);
-        Log.i(TAG, "getCollection: " + collection.toString());
-        return collection;
+        return new Collection(desc, type, who, publishAt, url);
     }
 }

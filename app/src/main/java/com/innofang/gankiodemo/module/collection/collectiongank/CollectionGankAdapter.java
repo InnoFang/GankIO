@@ -41,7 +41,7 @@ public class CollectionGankAdapter extends RecyclerView.Adapter<CollectionGankAd
 
     @Override
     public CollectionGankHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_gank_with_img, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_gank, parent, false);
         return new CollectionGankHolder(view);
     }
 

@@ -14,6 +14,7 @@ import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Collection;
 import com.innofang.gankiodemo.module.SingleFragmentActivity;
 import com.innofang.gankiodemo.utils.CollectionManager;
+import com.innofang.gankiodemo.utils.ToastUtil;
 
 import java.util.List;
 
@@ -47,8 +48,11 @@ public class WebActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
         mUrl = getIntent().getStringExtra(EXTRA_URL);
-        String desc = getIntent().getStringExtra(EXTRA_DESC);
-        mWebFragment = (WebFragment) WebFragment.newInstance(mUrl, desc);
+        mDesc = getIntent().getStringExtra(EXTRA_DESC);
+        mWho = getIntent().getStringExtra(EXTRA_WHO);
+        mType = getIntent().getStringExtra(EXTRA_TYPE);
+        mPublishAt = getIntent().getStringExtra(EXTRA_PUBLISH_AT);
+        mWebFragment = (WebFragment) WebFragment.newInstance(mUrl, mDesc);
         return mWebFragment;
     }
 
@@ -92,7 +96,7 @@ public class WebActivity extends SingleFragmentActivity {
         for (Collection collection : collections) {
             // 如果收藏里面存在含有当前url的item，那么视为当前item已添加至收藏
             if (mUrl.equals(collection.getUrl())){
-                MenuItem item = menu.getItem(0);
+                MenuItem item = menu.findItem(R.id.action_collection);
                 item.setIcon(R.drawable.ic_menu_like);
                 item.setTitle(R.string.action_like);
             }
@@ -110,15 +114,19 @@ public class WebActivity extends SingleFragmentActivity {
         switch (item.getItemId()) {
             case R.id.action_collection:
                 if (item.getTitle().toString().equals(getString(R.string.action_dislike))){
+                    Log.i(TAG, "onOptionsItemSelected: dislike");
                     item.setIcon(R.drawable.ic_menu_like);
                     item.setTitle(R.string.action_like);
                     Collection collection = new Collection(mDesc, mType, mWho, mPublishAt, mUrl);
                     manager.addCollection(collection);
+                    ToastUtil.showToast(R.string.add_collection);
                 } else {
+                    Log.i(TAG, "onOptionsItemSelected: like");
                     item.setIcon(R.drawable.ic_menu_dislike);
                     item.setTitle(R.string.action_dislike);
                     Collection collection = manager.getCollection(mUrl);
                     manager.deleteCollection(collection);
+                    ToastUtil.showToast(R.string.delete_collection);
                 }
                 break;
             case R.id.action_share:
