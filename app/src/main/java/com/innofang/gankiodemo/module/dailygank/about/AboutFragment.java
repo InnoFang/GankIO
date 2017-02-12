@@ -50,7 +50,7 @@ public class AboutFragment extends DialogFragment {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("https://github.com/InnoFang/GankIODemo"));
+                intent.setData(Uri.parse("https://github.com/InnoFang/GankIO"));
                 startActivity(Intent.createChooser(intent, "请选择浏览器"));
             }
         });
