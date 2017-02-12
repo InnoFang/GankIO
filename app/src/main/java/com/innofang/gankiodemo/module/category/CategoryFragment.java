@@ -66,7 +66,6 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mViewPager.setCurrentItem(0);
-
         return v;
     }
 

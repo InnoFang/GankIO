@@ -70,6 +70,7 @@ public class CategoryPresenter implements CategoryContract.Presenter {
                         Log.i(TAG, "onNext: " + value.getResults().toString());
                         if (null != value.getResults()) {
                             String imgUrl = value.getResults().get(0).getUrl() + URL.REQUEST_IMAGE_POSTFIX_FOR_SPANNER;
+                            Log.i(TAG, "onNext: imgUrl = " + imgUrl);
                             Glide.with(App.getContext())
                                     .load(imgUrl)
                                     .placeholder(R.drawable.default_nav_img)
