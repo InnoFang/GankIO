@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo.module.dailygank.about;
+package com.innofang.gankiodemo.module.setting.about;
 
 import android.app.Dialog;
 import android.content.Context;

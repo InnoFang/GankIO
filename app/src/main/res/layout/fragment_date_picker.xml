@@ -11,6 +11,8 @@
         android:id="@+id/gank_date_picker_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         tools:listitem="@layout/item_date_picker"/>
 
 </LinearLayout>

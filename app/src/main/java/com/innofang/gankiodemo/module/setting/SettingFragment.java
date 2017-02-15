@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.module.dailygank.about.AboutFragment;
+import com.innofang.gankiodemo.module.setting.about.AboutFragment;
 
 /**
  * Author: Inno Fang

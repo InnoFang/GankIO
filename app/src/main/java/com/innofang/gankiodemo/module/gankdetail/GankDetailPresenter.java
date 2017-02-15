@@ -76,6 +76,7 @@ public class GankDetailPresenter implements GankDetailContract.Presenter{
                             Glide.with(App.getContext())
                                     .load(imgUrl)
                                     .placeholder(R.drawable.default_nav_img)
+                                    .animate(R.anim.anim_scale)
                                     .into(imageView);
                         }
                         showGankOfAndroid(value.getResults().getAndroid());

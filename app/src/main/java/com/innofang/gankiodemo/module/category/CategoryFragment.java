@@ -45,7 +45,7 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         mViewPager = (ViewPager) v.findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
         mMeizhiImageView = (ImageView) v.findViewById(R.id.meizhi_image_view);
-        String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App"};
+        String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App", "休息视频"};
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titles);
 
         GankFragment androidFragment = GankFragment.newInstance("Android");
@@ -54,6 +54,7 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         GankFragment expandResourceFragment = GankFragment.newInstance("拓展资源");
         GankFragment recommendFragment = GankFragment.newInstance("瞎推荐");
         GankFragment appFragment = GankFragment.newInstance("App");
+        GankFragment videoFragment = GankFragment.newInstance("休息视频");
 
         adapter.addFragment(androidFragment);
         adapter.addFragment(iOSFragment);
@@ -61,6 +62,8 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         adapter.addFragment(expandResourceFragment);
         adapter.addFragment(recommendFragment);
         adapter.addFragment(appFragment);
+        adapter.addFragment(videoFragment);
+
 
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);

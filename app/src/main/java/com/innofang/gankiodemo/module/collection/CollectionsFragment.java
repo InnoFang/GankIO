@@ -36,7 +36,7 @@ public class CollectionsFragment extends Fragment{
         View view =  inflater.inflate(R.layout.fragment_collections, container, false);
         mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
-        String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App"};
+        String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App", "休息视频"};
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titles);
 
         CollectionGankFragment androidFragment = CollectionGankFragment.newInstance("Android");
@@ -45,6 +45,7 @@ public class CollectionsFragment extends Fragment{
         CollectionGankFragment expandResourceFragment = CollectionGankFragment.newInstance("拓展资源");
         CollectionGankFragment recommendFragment = CollectionGankFragment.newInstance("瞎推荐");
         CollectionGankFragment appFragment = CollectionGankFragment.newInstance("App");
+        CollectionGankFragment videoFragment = CollectionGankFragment.newInstance("休息视频");
 
         adapter.addFragment(androidFragment);
         adapter.addFragment(iOSFragment);
@@ -52,6 +53,7 @@ public class CollectionsFragment extends Fragment{
         adapter.addFragment(expandResourceFragment);
         adapter.addFragment(recommendFragment);
         adapter.addFragment(appFragment);
+        adapter.addFragment(videoFragment);
 
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);

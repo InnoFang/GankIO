@@ -21,8 +21,8 @@ public class MainActivity extends SingleFragmentActivity
 
     private static final String TAG = "MainActivity";
 
-    private FloatingActionButton mShowNavigationFab;
-    private BottomNavigationView mNavigationView;
+    public FloatingActionButton showNavigationFab;
+    public BottomNavigationView navigationView;
 
     @Override
     protected Fragment createFragment() {
@@ -42,10 +42,10 @@ public class MainActivity extends SingleFragmentActivity
     @Override
     public void init() {
         super.init();
-        mShowNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
-        mNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
-        mNavigationView.setOnNavigationItemSelectedListener(this);
-        mShowNavigationFab.setOnClickListener(this);
+        showNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
+        navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        navigationView.setOnNavigationItemSelectedListener(this);
+        showNavigationFab.setOnClickListener(this);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class MainActivity extends SingleFragmentActivity
                                 mHandler.postDelayed(mRunnable, 5000);
                             }
                         })
-                        .transformTo(mNavigationView);
+                        .transformTo(navigationView);
                 break;
         }
     }
@@ -117,8 +117,8 @@ public class MainActivity extends SingleFragmentActivity
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
-            FabTransformation.with(mShowNavigationFab)
-                    .transformFrom(mNavigationView);
+            FabTransformation.with(showNavigationFab)
+                    .transformFrom(navigationView);
         }
     };
 }
