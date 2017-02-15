@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_daily_gank"
+        android:icon="@drawable/ic_menu_daily_gank"
+        android:title="@string/nav_daily_gank"/>
+    <item
+        android:id="@+id/nav_category"
+        android:icon="@drawable/ic_menu_categroy"
+        android:title="@string/nav_category"
+        />
+    <!--<item-->
+        <!--android:id="@+id/nav_luck"-->
+        <!--android:icon="@drawable/ic_menu_luck"-->
+        <!--android:title="@string/nav_luck"/>-->
+    <item
+        android:id="@+id/nav_collections"
+        android:icon="@drawable/ic_menu_collections"
+        android:title="@string/nav_collection"/>
+    <item
+        android:id="@+id/nav_setting"
+        android:icon="@drawable/ic_menu_setting"
+        android:title="@string/nav_setting"
+        />
+</menu>

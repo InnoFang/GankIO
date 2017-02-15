@@ -24,7 +24,8 @@
             <ImageView
                 android:id="@+id/meizhi_image_view"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:scaleType="centerCrop"
                 android:src="@drawable/default_nav_img"

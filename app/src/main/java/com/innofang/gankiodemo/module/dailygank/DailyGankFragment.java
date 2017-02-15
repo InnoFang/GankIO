@@ -2,22 +2,25 @@ package com.innofang.gankiodemo.module.dailygank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
-import com.innofang.gankiodemo.module.dailygank.datepicker.DatePickerFragment;
 import com.innofang.gankiodemo.module.gankdetail.GankDetailActivity;
+import com.innofang.gankiodemo.module.search.SearchActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +42,8 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mDailyGankRecyclerView;
-    private FloatingActionButton mShowDatePickerButton;
+    private Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
 
     public static Fragment newInstance(){
         return new DailyGankFragment();
@@ -63,7 +67,6 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
 
     private void initView(View view) {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        mShowDatePickerButton = (FloatingActionButton) view.findViewById(R.id.show_calendar_fab);
         mDailyGankRecyclerView = (RecyclerView) view.findViewById(R.id.daily_gank_recycler_view);
 
         mDailyGankRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
@@ -80,21 +83,39 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
             }
         });
 
-        mShowDatePickerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerFragment datePicker = new DatePickerFragment();
-                datePicker.show(getFragmentManager(), DIALOG_DATE);
-            }
-        });
-
         mAdapter.setOnShowDailyGankClickListener(new DailyGankAdapter.OnShowDailyGankClickListener() {
             @Override
             public void onClick(String url) {
                 startActivity(GankDetailActivity.newIntent(getActivity(), url));
             }
         });
+
+        mToolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        mToolbar.setNavigationIcon(R.drawable.ic_nav_calendar);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        TextView searchTextView = (TextView) view.findViewById(R.id.search_text_view);
+        searchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(SearchActivity.newIntent(getActivity()));
+            }
+        });
         setLoadingIndicator(true);
+    }
+
+    public boolean onBackPressed(){
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -117,7 +138,7 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     public void showEmptyOrError(String error) {
         if (null != error){
             Log.i(TAG, error);
-            Snackbar.make(mShowDatePickerButton, error, Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mToolbar, error, Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -141,4 +162,5 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
         }
         super.onDestroy();
     }
+
 }

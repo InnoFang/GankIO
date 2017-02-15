@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -27,7 +28,7 @@ import java.util.List;
  * Description:
  */
 
-public class SearchFragment extends Fragment implements SearchContract.View{
+public class SearchFragment extends Fragment implements SearchContract.View {
     private static final String TAG = "SearchFragment";
 
     private SearchAdapter mAdapter;
@@ -52,6 +53,13 @@ public class SearchFragment extends Fragment implements SearchContract.View{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_gank, container, false);
+        AppCompatImageView goBack = (AppCompatImageView) view.findViewById(R.id.go_back);
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
         mSearchEditeText = (EditText) view.findViewById(R.id.search_gank_edit_text);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -92,16 +100,16 @@ public class SearchFragment extends Fragment implements SearchContract.View{
 
     @Override
     public void setLoadingState(boolean active) {
-        if (active){
+        if (active) {
             mProgressBar.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             mProgressBar.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void showEmptyOrError(String msg) {
-        if (null != msg){
+        if (null != msg) {
             Snackbar.make(mSearchEditeText, msg, Snackbar.LENGTH_LONG).show();
         }
     }

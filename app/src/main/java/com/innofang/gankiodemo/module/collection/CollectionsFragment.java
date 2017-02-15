@@ -33,9 +33,9 @@ public class CollectionsFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_collections, container, false);
-        mViewPager = (ViewPager) v.findViewById(R.id.view_pager);
-        mTabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
+        View view =  inflater.inflate(R.layout.fragment_collections, container, false);
+        mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
         String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App"};
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titles);
 
@@ -58,6 +58,6 @@ public class CollectionsFragment extends Fragment{
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mViewPager.setCurrentItem(0);
 
-        return v;
+        return view;
     }
 }

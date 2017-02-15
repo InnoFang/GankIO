@@ -1,31 +1,28 @@
 package com.innofang.gankiodemo.module;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.category.CategoryFragment;
 import com.innofang.gankiodemo.module.collection.CollectionsFragment;
 import com.innofang.gankiodemo.module.dailygank.DailyGankFragment;
-import com.innofang.gankiodemo.module.luck.LuckFragment;
-import com.innofang.gankiodemo.module.search.SearchFragment;
 import com.innofang.gankiodemo.module.setting.SettingFragment;
 import com.innofang.gankiodemo.utils.ToastUtil;
+import com.konifar.fab_transformation.FabTransformation;
 
 public class MainActivity extends SingleFragmentActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
+    private FloatingActionButton mShowNavigationFab;
+    private BottomNavigationView mNavigationView;
 
     @Override
     protected Fragment createFragment() {
@@ -42,65 +39,36 @@ public class MainActivity extends SingleFragmentActivity
         return R.id.fragment_container;
     }
 
-
-    @SuppressWarnings("deprecation")
     @Override
     public void init() {
         super.init();
-
-        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(mToolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mShowNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
+        mNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        mNavigationView.setOnNavigationItemSelectedListener(this);
+        mShowNavigationFab.setOnClickListener(this);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mHandler.removeCallbacks(mRunnable);
         switch (item.getItemId()) {
             case R.id.nav_daily_gank:
-                setActionBarState(true);
-                if (null != getSupportActionBar()) {
-                    getSupportActionBar().setTitle(R.string.nav_daily_gank);
-                }
                 switchFragment(DailyGankFragment.newInstance());
                 break;
             case R.id.nav_category:
-                setActionBarState(false);
                 switchFragment(CategoryFragment.newInstance());
                 break;
-            case R.id.nav_search_gank:
-                setActionBarState(true);
-                if (null != getSupportActionBar()) {
-                    getSupportActionBar().setTitle(R.string.nav_search_gank);
-                }
-                switchFragment(SearchFragment.newInstance());
-                break;
-            case R.id.nav_luck:
-                setActionBarState(true);
-                if (null != getSupportActionBar()) {
-                    getSupportActionBar().setTitle(R.string.nav_luck);
-                }
-                switchFragment(LuckFragment.newInstance());
-                break;
+//            case R.id.nav_luck:
+//                switchFragment(LuckFragment.newInstance());
+//                break;
             case R.id.nav_collections:
-                setActionBarState(false);
                 switchFragment(CollectionsFragment.newInstance());
                 break;
             case R.id.nav_setting:
-                setActionBarState(true);
-                if (null != getSupportActionBar()) {
-                    getSupportActionBar().setTitle(R.string.nav_setting);
-                }
                 switchFragment(SettingFragment.newInstance());
                 break;
         }
-        mDrawerLayout.closeDrawer(GravityCompat.START);
+        mHandler.postDelayed(mRunnable, 5000);
         return true;
     }
 
@@ -109,28 +77,48 @@ public class MainActivity extends SingleFragmentActivity
 
     @Override
     public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
+        DailyGankFragment fragment = (DailyGankFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (fragment != null && fragment.isVisible() && fragment.onBackPressed()) {
+            return;
+        } else if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
         } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed();
-                return;
-            } else {
-                ToastUtil.showToast("再点击一次退出");
-            }
-            mBackPressed = System.currentTimeMillis();
+            ToastUtil.showToast("再点击一次退出");
+        }
+        mBackPressed = System.currentTimeMillis();
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.show_navigation_fab:
+                FabTransformation.with(v)
+                        .duration(500)
+                        .setListener(new FabTransformation.OnTransformListener() {
+                            @Override
+                            public void onStartTransform() {
+
+                            }
+
+                            @Override
+                            public void onEndTransform() {
+                                mHandler.postDelayed(mRunnable, 5000);
+                            }
+                        })
+                        .transformTo(mNavigationView);
+                break;
         }
     }
 
-    private void setActionBarState(boolean state) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            if (!state) {
-                actionBar.hide();
-            } else {
-                actionBar.show();
-            }
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            FabTransformation.with(mShowNavigationFab)
+                    .transformFrom(mNavigationView);
         }
-    }
-
+    };
 }
