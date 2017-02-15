@@ -20,7 +20,7 @@ public class GankDetailActivity extends SingleFragmentActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_gank_detail;
+        return R.layout.activity_fragment;
     }
 
     @Override

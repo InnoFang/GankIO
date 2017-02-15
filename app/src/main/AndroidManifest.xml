@@ -32,8 +32,11 @@
             android:name=".module.web.WebActivity"
             android:configChanges="keyboardHidden|keyboard|orientation|screenSize">
         </activity>
-        <activity android:name=".module.search.SearchActivity"
+        <activity
+            android:name=".module.search.SearchActivity"
             android:parentActivityName=".module.MainActivity">
+        </activity>
+        <activity android:name=".module.imageshower.ImageShowerActivity">
         </activity>
     </application>
 

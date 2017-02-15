@@ -20,7 +20,7 @@ public class SearchActivity extends SingleFragmentActivity {
 
     @Override
     protected int getLayoutResId() {
-        return R.layout.activity_search;
+        return R.layout.activity_fragment;
     }
 
     @Override

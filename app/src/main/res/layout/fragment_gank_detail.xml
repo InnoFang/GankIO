@@ -50,8 +50,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_fab_save"
+        android:src="@drawable/ic_file_download"
         app:backgroundTint="@color/colorFAB"
+        app:fabSize="normal"
         app:layout_anchor="@id/app_bar_layout"
         app:layout_anchorGravity="bottom|end"/>
 </android.support.design.widget.CoordinatorLayout>
