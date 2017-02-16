@@ -73,6 +73,7 @@ public class GankDetailPresenter implements GankDetailContract.Presenter{
                         List<GankDetail.ResultsBean.福利Bean> luck = value.getResults().get福利();
                         if (null != luck) {
                             String imgUrl = luck.get(0).getUrl() + URL.REQUEST_IMAGE_POSTFIX_FOR_SPANNER;
+                            mView.setImageUrl(imgUrl);
                             Glide.with(App.getContext())
                                     .load(imgUrl)
                                     .placeholder(R.drawable.default_nav_img)

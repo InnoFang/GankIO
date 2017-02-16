@@ -30,6 +30,8 @@ public class GankDetailContract {
     public interface View extends BaseView<Presenter>{
         // 显示加载指示器
         void setLoadingIndicator(boolean active);
+        void setImageUrl(String url);
+        String getImageUrl();
         void showGankOfAndroid(List<GankDetail.ResultsBean.AndroidBean> list);
         void showGankOfIOS(List<GankDetail.ResultsBean.IOSBean> list);
         void showGankOfApp(List<GankDetail.ResultsBean.AppBean> list);

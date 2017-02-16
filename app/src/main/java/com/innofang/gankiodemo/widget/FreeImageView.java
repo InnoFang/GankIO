@@ -58,7 +58,7 @@ public class FreeImageView extends ImageView {
         mMidPointF = new PointF();
 
         mDisplayMetrics = getContext().getResources().getDisplayMetrics();
-        BitmapDrawable bd = (BitmapDrawable) this.getDrawable();
+        BitmapDrawable bd = (BitmapDrawable) getDrawable();
         if (bd != null) {
             mBitmap = bd.getBitmap();
         }
@@ -108,7 +108,7 @@ public class FreeImageView extends ImageView {
         }
         setImageMatrix(mMatrix);
         zoomImage();
-        resetCenter(true, true);
+        //resetCenter(true, true);
         return true;
     }
 

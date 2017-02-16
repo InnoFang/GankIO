@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,12 @@ import android.widget.TextView;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
+import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 import com.innofang.gankiodemo.module.web.WebActivity;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Author: Inno Fang
@@ -30,7 +34,8 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
 
     private static final String ARG_GANK_URL = "gank_url";
 
-    private String mGankUrl;
+    private String mGankUrl,
+                   mImageUrl;
     private ImageView mMeizhiIamgeView;
     private TextView mAndroid,
             mIOS,
@@ -62,6 +67,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         super.onCreate(savedInstanceState);
         mGankUrl = getArguments().getString(ARG_GANK_URL);
         mPresenter = new GankDetailPresenter(this);
+        mImageUrl = null;
         setHasOptionsMenu(true);
     }
 
@@ -115,6 +121,17 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         String title = (String) mGankUrl.subSequence(mGankUrl.length() - 10, mGankUrl.length());
         toolbar.setTitle(title);
 
+        mMeizhiIamgeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = getImageUrl();
+                if (null != url) {
+                    startActivity(ImageShowerActivity.newIntent(getActivity(), url));
+                } else {
+                    Log.i(TAG, "onClick: image url is null");
+                }
+            }
+        });
     }
 
     @Override
@@ -125,6 +142,16 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
 //                mSwipeRefreshLayout.setRefreshing(active);
 //            }
 //        });
+    }
+
+    @Override
+    public void setImageUrl(String url) {
+        mImageUrl = url;
+    }
+
+    @Override
+    public String getImageUrl() {
+        return mImageUrl;
     }
 
     @Override
