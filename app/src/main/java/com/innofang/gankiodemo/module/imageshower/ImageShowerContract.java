@@ -18,9 +18,9 @@ public class ImageShowerContract {
 
         void loadingIamge(Context context, DragImageView imageView, String url);
 
-        void shareImage();
+        void shareImage(Context context, String url);
 
-        void downloadImage();
+        void downloadImage(Context context, String url);
 
     }
 

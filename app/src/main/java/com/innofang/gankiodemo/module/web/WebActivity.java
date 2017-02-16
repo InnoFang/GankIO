@@ -13,7 +13,7 @@ import android.view.View;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Collection;
 import com.innofang.gankiodemo.module.SingleFragmentActivity;
-import com.innofang.gankiodemo.utils.CollectionManager;
+import com.innofang.gankiodemo.database.CollectionManager;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
 import java.util.List;

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
-import com.innofang.gankiodemo.utils.TimeUtil;
+import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
 
@@ -82,7 +82,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     android.getDesc(),
                                     android.getWho().toString(),
                                     android.getType(),
-                                    TimeUtil.formatPublishAt(android.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(android.getPublishedAt()));
                         }
                     });
                 }
@@ -99,7 +99,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     iOS.getDesc(),
                                     iOS.getWho(),
                                     iOS.getType(),
-                                    TimeUtil.formatPublishAt(iOS.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(iOS.getPublishedAt()));
                         }
                     });
                 }
@@ -115,7 +115,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     web.getDesc(),
                                     web.getWho(),
                                     web.getType(),
-                                    TimeUtil.formatPublishAt(web.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(web.getPublishedAt()));
                         }
                     });
                 }
@@ -131,7 +131,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     expandResource.getDesc(),
                                     expandResource.getWho(),
                                     expandResource.getType(),
-                                    TimeUtil.formatPublishAt(expandResource.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(expandResource.getPublishedAt()));
                         }
                     });
                 }
@@ -147,7 +147,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     recommend.getDesc(),
                                     recommend.getWho(),
                                     recommend.getType(),
-                                    TimeUtil.formatPublishAt(recommend.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(recommend.getPublishedAt()));
                         }
                     });
                 }
@@ -163,7 +163,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     app.getDesc(),
                                     app.getWho(),
                                     app.getType(),
-                                    TimeUtil.formatPublishAt(app.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(app.getPublishedAt()));
                         }
                     });
                 }
@@ -179,7 +179,7 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                                     video.getDesc(),
                                     video.getWho(),
                                     video.getType(),
-                                    TimeUtil.formatPublishAt(video.getPublishedAt()));
+                                    StringFormatUtil.formatPublishAt(video.getPublishedAt()));
                         }
                     });
                 }

@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.bean.Collection;
-import com.innofang.gankiodemo.utils.CollectionManager;
+import com.innofang.gankiodemo.database.CollectionManager;
 
 import java.util.ArrayList;
 import java.util.List;

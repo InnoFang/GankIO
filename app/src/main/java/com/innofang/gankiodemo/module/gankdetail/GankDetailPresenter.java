@@ -1,5 +1,8 @@
 package com.innofang.gankiodemo.module.gankdetail;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -10,8 +13,14 @@ import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.URL;
 import com.innofang.gankiodemo.http.LoadingCallback;
 import com.innofang.gankiodemo.http.RemoteManager;
+import com.innofang.gankiodemo.utils.CloseUtils;
 import com.innofang.gankiodemo.utils.JSONParser;
+import com.innofang.gankiodemo.utils.StringFormatUtil;
+import com.innofang.gankiodemo.utils.ToastUtil;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -28,7 +37,7 @@ import io.reactivex.schedulers.Schedulers;
  * Description:
  */
 
-public class GankDetailPresenter implements GankDetailContract.Presenter{
+public class GankDetailPresenter implements GankDetailContract.Presenter {
     private static final String TAG = "GankDetailPresenter";
 
     private GankDetailContract.View mView;
@@ -73,6 +82,7 @@ public class GankDetailPresenter implements GankDetailContract.Presenter{
                         List<GankDetail.ResultsBean.福利Bean> luck = value.getResults().get福利();
                         if (null != luck) {
                             String imgUrl = luck.get(0).getUrl() + URL.REQUEST_IMAGE_POSTFIX_FOR_SPANNER;
+                            Log.i(TAG, "onNext: imgUrl = " + imgUrl);
                             mView.setImageUrl(imgUrl);
                             Glide.with(App.getContext())
                                     .load(imgUrl)
@@ -137,6 +147,66 @@ public class GankDetailPresenter implements GankDetailContract.Presenter{
     @Override
     public void showGankOfRecommend(List<GankDetail.ResultsBean.瞎推荐Bean> list) {
         mView.showGankOfRecommend(list);
+    }
+
+    @Override
+    public void downloadImage(final Context context, final String url) {
+        Observable.create(new ObservableOnSubscribe<Bitmap>() {
+            @Override
+            public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
+                Bitmap bitmap = null;
+                bitmap = Glide.with(context)
+                        .load(url)
+                        .asBitmap()
+                        .into(500, 500)
+                        .get();
+                if (null == bitmap) {
+                    e.onError(new Exception("下载失败"));
+                }
+                ToastUtil.showToast("下载进行中");
+                e.onNext(bitmap);
+                e.onComplete();
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Bitmap>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Bitmap bitmap) {
+                        File dir = new File(Environment.getExternalStorageDirectory(), "Gank");
+                        if (!dir.exists()) {
+                            dir.mkdir();
+                        }
+                        String fileName = StringFormatUtil.formatIamgeFileName(url);
+                        File file = new File(dir, fileName);
+                        FileOutputStream fos = null;
+                        try {
+                            fos = new FileOutputStream(file);
+                            if (null != bitmap) {
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                            }
+                            fos.flush();
+                        } catch (IOException e) {
+                            Log.e(TAG, "onNext: ", e);
+                        } finally {
+                            CloseUtils.closeQuietly(fos);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        ToastUtil.showToast(e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        ToastUtil.showToast("下载完成");
+                    }
+                });
     }
 
 

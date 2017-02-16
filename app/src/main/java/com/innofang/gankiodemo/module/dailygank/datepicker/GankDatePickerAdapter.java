@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.constant.URL;
-import com.innofang.gankiodemo.utils.TimeUtil;
+import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
 
@@ -70,7 +70,7 @@ public class GankDatePickerAdapter extends RecyclerView.Adapter<GankDatePickerAd
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String d = TimeUtil.formatPublishAt(TimeUtil.formatPublishAt(date));
+                        String d = StringFormatUtil.formatPublishAt(StringFormatUtil.formatPublishAt(date));
                         String url = URL.DAILY_DATA + d;
                         mOnClickItemListener.onClick(url);
                     }

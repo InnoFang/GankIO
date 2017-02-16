@@ -1,5 +1,6 @@
 package com.innofang.gankiodemo.module.gankdetail;
 
+import android.content.Context;
 import android.widget.ImageView;
 
 import com.innofang.gankiodemo.bean.GankDetail;
@@ -25,6 +26,7 @@ public class GankDetailContract {
         void showGankOfWeb(List<GankDetail.ResultsBean.前端Bean> list);
         void showGankOfExpand(List<GankDetail.ResultsBean.拓展资源Bean> list);
         void showGankOfRecommend(List<GankDetail.ResultsBean.瞎推荐Bean> list);
+        void downloadImage(Context context, String url);
     }
 
     public interface View extends BaseView<Presenter>{

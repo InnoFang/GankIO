@@ -38,6 +38,11 @@
         </activity>
         <activity android:name=".module.imageshower.ImageShowerActivity">
         </activity>
+
+        <service
+            android:name=".DownloadService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

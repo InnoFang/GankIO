@@ -47,7 +47,7 @@
     <include layout="@layout/content_gank"/>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/like_fab"
+        android:id="@+id/download_image_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"

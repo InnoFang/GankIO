@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo.utils;
+package com.innofang.gankiodemo.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.innofang.gankiodemo.bean.Collection;
-import com.innofang.gankiodemo.database.CollectionCursorWrapper;
-import com.innofang.gankiodemo.database.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.List;

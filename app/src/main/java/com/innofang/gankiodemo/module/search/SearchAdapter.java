@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankSearch;
-import com.innofang.gankiodemo.utils.TimeUtil;
+import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
 
@@ -75,7 +75,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
             mDescTextView.setText(result.getDesc());
             mTypeTextView.setText(result.getType());
             mWhoTextView.setText(result.getWho());
-            mPublishAtTextView.setText(TimeUtil.formatPublishAt(result.getPublishedAt()));
+            mPublishAtTextView.setText(StringFormatUtil.formatPublishAt(result.getPublishedAt()));
             if (null != mOnClickItemListener) {
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -84,7 +84,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.SearchHold
                                 result.getDesc(),
                                 result.getWho(),
                                 result.getType(),
-                                TimeUtil.formatPublishAt(result.getPublishedAt()));
+                                StringFormatUtil.formatPublishAt(result.getPublishedAt()));
                     }
                 });
             }

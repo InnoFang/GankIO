@@ -1,16 +1,26 @@
 package com.innofang.gankiodemo.module.imageshower;
 
+import android.Manifest;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.innofang.gankiodemo.DownloadService;
 import com.innofang.gankiodemo.R;
+import com.innofang.gankiodemo.utils.ToastUtil;
 import com.innofang.gankiodemo.widget.DragImageView;
 
 /**
@@ -32,6 +42,18 @@ public class ImageShowerFragment extends Fragment
     private ImageShowerContract.Presenter mPresenter;
 
     private String mUrl;
+
+    private DownloadService.DownloadBinder mDownloadBinder;
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mDownloadBinder = (DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     public static ImageShowerFragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -71,7 +93,7 @@ public class ImageShowerFragment extends Fragment
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        if (active){
+        if (active) {
             mProgressBar.setVisibility(View.VISIBLE);
         } else {
             mProgressBar.setVisibility(View.GONE);
@@ -85,13 +107,52 @@ public class ImageShowerFragment extends Fragment
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+        switch (v.getId()) {
             case R.id.download_image:
-                mPresenter.downloadImage();
+
+                mPresenter.downloadImage(getActivity(), mUrl);
+                ToastUtil.showToast("正在下载图片");
+/*
+                Intent intent = new Intent(getActivity(), DownloadService.class);
+                getActivity().startService(intent);
+                getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+                if (null == mDownloadBinder) {
+                    return;
+                }
+                mDownloadBinder.startDownload(mUrl);
+*/
+
                 break;
             case R.id.share_image:
-                mPresenter.shareImage();
+                mPresenter.shareImage(getActivity(), mUrl);
                 break;
         }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 &&
+                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    ToastUtil.showToast("拒绝权限将无法下载");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        getActivity().unbindService(mConnection);
     }
 }

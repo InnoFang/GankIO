@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Gank;
-import com.innofang.gankiodemo.utils.TimeUtil;
+import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
 
@@ -80,7 +80,7 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
             Log.i(TAG, "bindHolder: Gank " + result.toString());
             mWhoTextView.setText(result.getWho());
             mTypeTextView.setText(result.getType());
-            mPublishAtTextView.setText(TimeUtil.formatPublishAt(result.getPublishedAt()));
+            mPublishAtTextView.setText(StringFormatUtil.formatPublishAt(result.getPublishedAt()));
             mDescTextView.setText(result.getDesc());
             if (null != result.getImages() && null != result.getImages().get(0)) {
                 mImageView.setVisibility(View.VISIBLE);
@@ -99,7 +99,7 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
                                 result.getDesc(),
                                 result.getWho(),
                                 result.getType(),
-                                TimeUtil.formatPublishAt(result.getPublishedAt()));
+                                StringFormatUtil.formatPublishAt(result.getPublishedAt()));
                     }
                 });
             }

@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.constant.URL;
-import com.innofang.gankiodemo.utils.TimeUtil;
+import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.Dail
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String date = TimeUtil.formatPublishAt(luckResult.getPublishedAt());
+                    String date = StringFormatUtil.formatPublishAt(luckResult.getPublishedAt());
                     String url = URL.DAILY_DATA + date;
                     mOnShowDailyGankClickListener.onClick(url);
                 }
@@ -84,7 +84,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.Dail
         }
 
         public void bindHolder(Luck.ResultsBean results) {
-            String date = TimeUtil.formatPublishAt(results.getPublishedAt());
+            String date = StringFormatUtil.formatPublishAt(results.getPublishedAt());
             String url = results.getUrl() + URL.REQUEST_IMAGE_POSTFIX;
             Log.i(TAG, "bindHolder: image url " + url);
             mDateTextView.setText(date);

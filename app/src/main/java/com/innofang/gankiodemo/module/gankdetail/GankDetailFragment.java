@@ -1,9 +1,18 @@
 package com.innofang.gankiodemo.module.gankdetail;
 
+import android.Manifest;
+import android.content.ComponentName;
+import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,11 +24,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.innofang.gankiodemo.DownloadService;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
 import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 import com.innofang.gankiodemo.module.web.WebActivity;
+import com.innofang.gankiodemo.utils.ToastUtil;
 
 import java.util.List;
 
@@ -52,6 +63,18 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             mVideoRecyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private GankDetailContract.Presenter mPresenter;
+
+    private DownloadService.DownloadBinder mDownloadBinder;
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mDownloadBinder = (DownloadService.DownloadBinder) service;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+        }
+    };
 
     public static Fragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -130,16 +153,60 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
                 startActivity(ImageShowerActivity.newIntent(getActivity(), url), options.toBundle());
             }
         });
+
+        FloatingActionButton downloadFab = (FloatingActionButton) view.findViewById(R.id.download_image_fab);
+        downloadFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.downloadImage(getActivity(), mImageUrl);
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                }
+                /*  Intent intent = new Intent(getActivity(), DownloadService.class);
+                getActivity().startService(intent);
+                getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+
+                if (null == mDownloadBinder) {
+                    return;
+                }
+                mDownloadBinder.startDownload(mImageUrl);*/
+            }
+        });
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1:
+                if (grantResults.length > 0 &&
+                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    ToastUtil.showToast("拒绝权限将无法下载");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        getActivity().unbindService(mConnection);
+    }
+
+
+    @Override
     public void setLoadingIndicator(final boolean active) {
-//        mSwipeRefreshLayout.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                mSwipeRefreshLayout.setRefreshing(active);
-//            }
-//        });
+/*        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(active);
+            }
+        });*/
     }
 
     @Override
