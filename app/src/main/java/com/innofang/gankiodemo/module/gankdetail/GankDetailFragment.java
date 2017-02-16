@@ -2,12 +2,13 @@ package com.innofang.gankiodemo.module.gankdetail;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,6 @@ import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 import com.innofang.gankiodemo.module.web.WebActivity;
 
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Author: Inno Fang
@@ -125,11 +124,10 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             @Override
             public void onClick(View v) {
                 String url = getImageUrl();
-                if (null != url) {
-                    startActivity(ImageShowerActivity.newIntent(getActivity(), url));
-                } else {
-                    Log.i(TAG, "onClick: image url is null");
-                }
+                ViewCompat.setTransitionName(mMeizhiIamgeView, "image");
+                ActivityOptionsCompat options = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(getActivity(), mMeizhiIamgeView, "image");
+                startActivity(ImageShowerActivity.newIntent(getActivity(), url), options.toBundle());
             }
         });
     }
