@@ -13,14 +13,18 @@ import com.innofang.gankiodemo.module.BaseView;
 
 public class CategoryContract {
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
         void requestRandomMeizhi(ImageView imageView);
     }
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
 
         void showMeizhi();
 
         void showErrorOrEmptyInfo(String info);
+
+        void setImageUrl(String url);
+
+        String getImageUrl();
     }
 }

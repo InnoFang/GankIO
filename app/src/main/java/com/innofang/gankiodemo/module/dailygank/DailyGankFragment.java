@@ -62,6 +62,7 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_daily_gank, container, false);
         initView(view);
+        mPresenter.loadingDailyGank();
         return view;
     }
 

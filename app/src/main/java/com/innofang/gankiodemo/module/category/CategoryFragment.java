@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.category.gank.GankFragment;
+import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 
 /**
  * Author: Inno Fang
@@ -28,6 +30,7 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
     private ImageView mMeizhiImageView;
     private CategoryContract.Presenter mPresenter;
 
+    private String mImgUrl;
     public static Fragment newInstance(){
         return new CategoryFragment();
     }
@@ -36,6 +39,7 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = new CategoryPresenter(this);
+        mImgUrl = null;
     }
 
     @Nullable
@@ -45,6 +49,21 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         mViewPager = (ViewPager) v.findViewById(R.id.view_pager);
         mTabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
         mMeizhiImageView = (ImageView) v.findViewById(R.id.meizhi_image_view);
+
+        mMeizhiImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = getImageUrl();
+                if (null != url) {
+                    startActivity(ImageShowerActivity.newIntent(getActivity(), url));
+                } else {
+                    Log.i(TAG, "onClick: image url is null");
+                }
+            }
+        });
+
+        showMeizhi();
+
         String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App", "休息视频"};
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titles);
 
@@ -80,6 +99,17 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
     @Override
     public void showErrorOrEmptyInfo(String info) {
         Snackbar.make(mMeizhiImageView, info, Snackbar.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void setImageUrl(String url) {
+        mImgUrl = url;
+    }
+
+    @Override
+    public String getImageUrl() {
+        return mImgUrl;
     }
 
     @Override

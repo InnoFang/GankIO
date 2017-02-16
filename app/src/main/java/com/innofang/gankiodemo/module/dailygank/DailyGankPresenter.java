@@ -91,7 +91,7 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
 
     @Override
     public void start() {
-        loadingDailyGank();
+
     }
 
     @Override

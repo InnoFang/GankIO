@@ -70,6 +70,7 @@ public class CategoryPresenter implements CategoryContract.Presenter {
                         Log.i(TAG, "onNext: " + value.getResults().toString());
                         if (null != value.getResults()) {
                             String imgUrl = value.getResults().get(0).getUrl() + URL.REQUEST_IMAGE_POSTFIX_FOR_SPANNER;
+                            mView.setImageUrl(imgUrl);
                             Log.i(TAG, "onNext: imgUrl = " + imgUrl);
                             Glide.with(App.getContext())
                                     .load(imgUrl)
@@ -93,7 +94,6 @@ public class CategoryPresenter implements CategoryContract.Presenter {
 
     @Override
     public void start() {
-        mView.showMeizhi();
     }
 
     @Override
