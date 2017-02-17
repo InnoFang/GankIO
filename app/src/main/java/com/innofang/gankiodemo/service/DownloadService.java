@@ -1,4 +1,4 @@
-package com.innofang.gankiodemo;
+package com.innofang.gankiodemo.service;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
+import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.http.DownloadTask;
 import com.innofang.gankiodemo.utils.StringFormatUtil;
 import com.innofang.gankiodemo.utils.ToastUtil;

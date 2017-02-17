@@ -2,6 +2,8 @@ package com.innofang.gankiodemo.module.gankdetail;
 
 import android.Manifest;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -24,7 +26,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.innofang.gankiodemo.DownloadService;
+import com.innofang.gankiodemo.service.DownloadService;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
@@ -158,21 +160,26 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         downloadFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.downloadImage(getActivity(), mImageUrl);
+//                mPresenter.downloadImage(getActivity(), mImageUrl);
+                Intent intent = new Intent(getActivity(), DownloadService.class);
+                getActivity().startService(intent);
+                getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
                 if (ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(getActivity(),
                             new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 }
-                /*  Intent intent = new Intent(getActivity(), DownloadService.class);
-                getActivity().startService(intent);
-                getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(getActivity(),
+                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+                }
                 if (null == mDownloadBinder) {
                     return;
                 }
-                mDownloadBinder.startDownload(mImageUrl);*/
+                mDownloadBinder.startDownload(mImageUrl);
             }
         });
     }
@@ -184,7 +191,13 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             case 1:
                 if (grantResults.length > 0 &&
                         grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    ToastUtil.showToast("拒绝权限将无法下载");
+                    ToastUtil.showToast("拒绝权限将无法进行该操作");
+                }
+                break;
+            case 2:
+                if (grantResults.length > 0 &&
+                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    ToastUtil.showToast("拒绝权限将无法进行该操作");
                 }
                 break;
             default:
@@ -195,7 +208,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        getActivity().unbindService(mConnection);
+        getActivity().unbindService(mConnection);
     }
 
 

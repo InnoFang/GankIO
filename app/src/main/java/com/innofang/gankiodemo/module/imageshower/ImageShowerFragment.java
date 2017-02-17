@@ -2,6 +2,8 @@ package com.innofang.gankiodemo.module.imageshower;
 
 import android.Manifest;
 import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,7 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.innofang.gankiodemo.DownloadService;
+import com.innofang.gankiodemo.service.DownloadService;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.utils.ToastUtil;
 import com.innofang.gankiodemo.widget.DragImageView;
@@ -113,12 +115,17 @@ public class ImageShowerFragment extends Fragment
             ActivityCompat.requestPermissions(getActivity(),
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(),
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 2);
+        }
         switch (v.getId()) {
             case R.id.download_image:
 
-                mPresenter.downloadImage(getActivity(), mUrl);
-                ToastUtil.showToast("正在下载图片");
-/*
+//                mPresenter.downloadImage(getActivity(), mUrl);
+//                ToastUtil.showToast("正在下载图片");
                 Intent intent = new Intent(getActivity(), DownloadService.class);
                 getActivity().startService(intent);
                 getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
@@ -126,8 +133,6 @@ public class ImageShowerFragment extends Fragment
                     return;
                 }
                 mDownloadBinder.startDownload(mUrl);
-*/
-
                 break;
             case R.id.share_image:
                 mPresenter.shareImage(getActivity(), mUrl);
@@ -142,7 +147,13 @@ public class ImageShowerFragment extends Fragment
             case 1:
                 if (grantResults.length > 0 &&
                         grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    ToastUtil.showToast("拒绝权限将无法下载");
+                    ToastUtil.showToast("拒绝权限将无法进行该操作");
+                }
+                break;
+            case 2:
+                if (grantResults.length > 0 &&
+                        grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    ToastUtil.showToast("拒绝权限将无法进行该操作");
                 }
                 break;
             default:
@@ -153,6 +164,6 @@ public class ImageShowerFragment extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        getActivity().unbindService(mConnection);
+        getActivity().unbindService(mConnection);
     }
 }

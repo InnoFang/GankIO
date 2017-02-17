@@ -47,10 +47,15 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
         try {
             long downloadedLength = 0; // 记录文件下载长度
             String downloadUrl = params[0];
-            String fileName = StringFormatUtil.formatIamgeFileName(downloadUrl);
+          /*  String fileName = StringFormatUtil.formatIamgeFileName(downloadUrl);
             String directory = Environment.getExternalStoragePublicDirectory(
-                    Environment.DIRECTORY_DOWNLOADS).getPath();
-            file = new File(directory + fileName);
+                    Environment.DIRECTORY_DOWNLOADS).getPath();*/
+            File dir = new File(Environment.getExternalStorageDirectory(), "Gank");
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
+            String fileName = StringFormatUtil.formatIamgeFileName(downloadUrl);
+            file = new File(dir, fileName);
             if (file.exists()) {
                 downloadedLength = file.length();
             }
@@ -64,7 +69,7 @@ public class DownloadTask extends AsyncTask<String, Integer, Integer> {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
                     // 断点下载，指定从哪个字节开始下载
-                    .addHeader("RANGE", "byte=" + downloadedLength + "-")
+                    .addHeader("RANGE", "bytes=" + downloadedLength + "-")
                     .url(downloadUrl)
                     .build();
             Response response = client.newCall(request).execute();

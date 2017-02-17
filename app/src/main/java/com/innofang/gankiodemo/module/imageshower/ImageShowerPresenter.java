@@ -66,7 +66,6 @@ public class ImageShowerPresenter implements ImageShowerContract.Presenter {
                     e.onError(new Exception("分享失败"));
                 }
                 e.onNext(bitmap);
-                e.onComplete();
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -113,7 +112,6 @@ public class ImageShowerPresenter implements ImageShowerContract.Presenter {
 
                     @Override
                     public void onComplete() {
-                        ToastUtil.showToast("下载完成");
                     }
                 });
 
@@ -142,7 +140,6 @@ public class ImageShowerPresenter implements ImageShowerContract.Presenter {
                 .subscribe(new Observer<Bitmap>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-
                     }
 
                     @Override
