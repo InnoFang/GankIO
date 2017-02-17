@@ -21,6 +21,8 @@
             android:id="@+id/app_icon"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:src="@mipmap/ic_launcher"/>

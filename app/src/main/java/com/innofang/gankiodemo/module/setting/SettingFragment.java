@@ -16,7 +16,6 @@ import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.setting.about.AboutFragment;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
-import jp.wasabeef.glide.transformations.BlurTransformation;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
@@ -40,14 +39,9 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
         ImageView settingBg = (ImageView) view.findViewById(R.id.setting_bg);
         ImageView icon = (ImageView) view.findViewById(R.id.app_icon);
-        // 将背景模糊处理
-        Glide.with(getActivity())
-                .load(R.drawable.default_nav_img)
-                .bitmapTransform(new BlurTransformation(getActivity()))
-                .into(settingBg);
         // 将图标圆角处理
         Glide.with(getActivity())
-                .load(R.mipmap.ic_launcher)
+                .load(R.drawable.icon)
                 .bitmapTransform(new CropCircleTransformation(getActivity()))
                 .into(icon);
 
