@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.constant.URL;
@@ -90,6 +91,8 @@ public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.Dail
             mDateTextView.setText(date);
             Glide.with(mContext)
                     .load(url)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .crossFade()
                     .into(mMeizhiImageView);
         }
     }

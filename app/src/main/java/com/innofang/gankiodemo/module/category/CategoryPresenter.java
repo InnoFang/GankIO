@@ -4,6 +4,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
@@ -76,6 +77,7 @@ public class CategoryPresenter implements CategoryContract.Presenter {
                                     .load(imgUrl)
                                     .placeholder(R.drawable.default_nav_img)
                                     .animate(R.anim.anim_scale)
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .into(imageView);
                         }
                     }

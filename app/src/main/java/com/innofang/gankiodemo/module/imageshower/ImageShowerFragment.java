@@ -45,6 +45,8 @@ public class ImageShowerFragment extends Fragment
 
     private String mUrl;
 
+    private boolean isRunning = false;
+
     private DownloadService.DownloadBinder mDownloadBinder;
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
@@ -126,9 +128,11 @@ public class ImageShowerFragment extends Fragment
 
 //                mPresenter.downloadImage(getActivity(), mUrl);
 //                ToastUtil.showToast("正在下载图片");
+                // 采用后台下载
                 Intent intent = new Intent(getActivity(), DownloadService.class);
                 getActivity().startService(intent);
                 getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+                isRunning = true;
                 if (null == mDownloadBinder) {
                     return;
                 }
@@ -164,6 +168,8 @@ public class ImageShowerFragment extends Fragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unbindService(mConnection);
+        if (isRunning){
+            getActivity().unbindService(mConnection);
+        }
     }
 }

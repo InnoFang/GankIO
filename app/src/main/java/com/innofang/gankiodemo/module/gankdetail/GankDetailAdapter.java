@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.innofang.gankiodemo.R;
@@ -184,8 +185,16 @@ public class GankDetailAdapter extends RecyclerView.Adapter<GankDetailAdapter.Ga
                     });
                 }
             }
+            // 为每个item添加动画
+            itemView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.anim_item));
         }
+    }
 
+    // 消除动画减少卡顿
+    @Override
+    public void onViewDetachedFromWindow(GankDetailHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+        holder.itemView.clearAnimation();
     }
 
     public interface OnClickItemListener {

@@ -23,15 +23,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.innofang.gankiodemo.service.DownloadService;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
 import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 import com.innofang.gankiodemo.module.web.WebActivity;
+import com.innofang.gankiodemo.service.DownloadService;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     private static final String ARG_GANK_URL = "gank_url";
 
     private String mGankUrl,
-                   mImageUrl;
+            mImageUrl;
     private ImageView mMeizhiIamgeView;
     private TextView mAndroid,
             mIOS,
@@ -77,6 +78,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         public void onServiceDisconnected(ComponentName name) {
         }
     };
+    private boolean isRunning = false;  // 用与判断Service是否绑定
 
     public static Fragment newInstance(String url) {
         Bundle args = new Bundle();
@@ -164,6 +166,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
                 Intent intent = new Intent(getActivity(), DownloadService.class);
                 getActivity().startService(intent);
                 getActivity().bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+                isRunning = true;
                 if (ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -208,7 +211,10 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     @Override
     public void onDestroy() {
         super.onDestroy();
-        getActivity().unbindService(mConnection);
+        if (isRunning) {
+            getActivity().unbindService(mConnection);
+            isRunning = false;
+        }
     }
 
 
@@ -236,6 +242,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfAndroid(List<GankDetail.ResultsBean.AndroidBean> list) {
         if (null != list) {
             mAndroid.setVisibility(View.VISIBLE);
+            mAndroid.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.ANDROID);
             mAndroidRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
@@ -252,10 +259,10 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfIOS(List<GankDetail.ResultsBean.IOSBean> list) {
         if (null != list) {
             mIOS.setVisibility(View.VISIBLE);
+            mIOS.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.IOS);
             mIOSRecyclerViwe.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
-
                 @Override
                 public void onClick(String url, String desc, String who, String type, String publishAt) {
                     startActivity(WebActivity.newIntent(getActivity(), url, desc, who, type, publishAt));
@@ -268,6 +275,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfApp(List<GankDetail.ResultsBean.AppBean> list) {
         if (null != list) {
             mApp.setVisibility(View.VISIBLE);
+            mApp.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.APP);
             mAppRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
@@ -283,6 +291,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfVideo(List<GankDetail.ResultsBean.休息视频Bean> list) {
         if (null != list) {
             mVideo.setVisibility(View.VISIBLE);
+            mVideo.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.VIDEO);
             mVideoRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
@@ -298,6 +307,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfWeb(List<GankDetail.ResultsBean.前端Bean> list) {
         if (null != list) {
             mWeb.setVisibility(View.VISIBLE);
+            mWeb.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.WEB);
             mWebRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
@@ -313,6 +323,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfExpand(List<GankDetail.ResultsBean.拓展资源Bean> list) {
         if (null != list) {
             mExpandResource.setVisibility(View.VISIBLE);
+            mExpandResource.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.EXPAND_RESOURCE);
             mExpandResourceRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
@@ -328,6 +339,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     public void showGankOfRecommend(List<GankDetail.ResultsBean.瞎推荐Bean> list) {
         if (null != list) {
             mRecommend.setVisibility(View.VISIBLE);
+            mRecommend.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.anim_title));
             GankDetailAdapter adapter = new GankDetailAdapter(getContext(), list, GankItem.RECOMMEND);
             mRecommendRecyclerView.setAdapter(adapter);
             adapter.setOnClickItemListener(new GankDetailAdapter.OnClickItemListener() {
