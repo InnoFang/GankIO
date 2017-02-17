@@ -29,5 +29,7 @@ public class DailyGankContract {
 
         void showEmptyOrError(String error);
 
+        void setPullUpLoadingState(boolean state);
+
     }
 }

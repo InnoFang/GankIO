@@ -17,7 +17,7 @@ public class GankContract {
     interface Presenter extends BasePresenter{
 
 
-        void requestGank(String category, int number);
+        void requestGank(String category);
     }
 
     interface View extends BaseView<Presenter>{
@@ -28,10 +28,9 @@ public class GankContract {
 
         void showEmptyOrError(String msg);
 
+        void setPullUpLoadingState(boolean state);
+
         // 请求数据分类
         String getCategory();
-
-        // 请求数据个数
-        int getNumber();
     }
 }

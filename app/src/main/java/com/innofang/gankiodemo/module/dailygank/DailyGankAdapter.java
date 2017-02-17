@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -24,9 +25,11 @@ import java.util.List;
  * Description:
  */
 
-public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.DailyGankHolder> {
+public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = "DailyGankAdapter";
+    public static final int TYPE_FOOTER = 1;
+    public static final int TYPE_NORMAL = 2;
 
     private Context mContext;
     private List<Luck.ResultsBean> mLuckResutList;
@@ -37,7 +40,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.Dail
         mLuckResutList = luckResutList;
     }
 
-    public void setList(List<Luck.ResultsBean> list){
+    public void setList(List<Luck.ResultsBean> list) {
         mLuckResutList = list;
     }
 
@@ -47,24 +50,47 @@ public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.Dail
     }
 
     @Override
-    public DailyGankHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_daily_gank, parent, false);
-        return new DailyGankHolder(view);
+    public int getItemViewType(int position) {
+        if (mLuckResutList.get(position).get_id() != null) {
+            return TYPE_NORMAL;
+        } else {
+            Log.i(TAG, "getItemViewType: type footer");
+            return TYPE_FOOTER;
+        }
     }
 
     @Override
-    public void onBindViewHolder(DailyGankHolder holder, int position) {
-        final Luck.ResultsBean luckResult = mLuckResutList.get(position);
-        holder.bindHolder(luckResult);
-        if (null != mOnShowDailyGankClickListener) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String date = StringFormatUtil.formatPublishAt(luckResult.getPublishedAt());
-                    String url = URL.DAILY_DATA + date;
-                    mOnShowDailyGankClickListener.onClick(url);
-                }
-            });
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType) {
+            default:
+            case TYPE_NORMAL:
+                view = LayoutInflater.from(mContext).inflate(R.layout.item_daily_gank, parent, false);
+                return new DailyGankHolder(view);
+            case TYPE_FOOTER:
+                view = LayoutInflater.from(mContext).inflate(R.layout.item_footer, parent, false);
+                return new FooterViewHolder(view);
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof FooterViewHolder) {
+            ((FooterViewHolder) holder).bindHolder();
+        }
+        if (holder instanceof DailyGankHolder) {
+            final Luck.ResultsBean luckResult = mLuckResutList.get(position);
+            ((DailyGankHolder) holder).bindHolder(luckResult);
+            if (null != mOnShowDailyGankClickListener) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String date = StringFormatUtil.formatPublishAt(luckResult.getPublishedAt());
+                        String url = URL.DAILY_DATA + date;
+                        mOnShowDailyGankClickListener.onClick(url);
+                    }
+                });
+            }
         }
     }
 
@@ -94,6 +120,20 @@ public class DailyGankAdapter extends RecyclerView.Adapter<DailyGankAdapter.Dail
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .crossFade()
                     .into(mMeizhiImageView);
+        }
+    }
+
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        private ProgressBar mProgressBar;
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+            mProgressBar = (ProgressBar) itemView.findViewById(R.id.progress);
+        }
+
+        public void bindHolder() {
+            mProgressBar.setVisibility(View.VISIBLE);
         }
     }
 

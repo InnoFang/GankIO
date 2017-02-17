@@ -49,7 +49,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
 
     private String mGankUrl,
             mImageUrl;
-    private ImageView mMeizhiIamgeView;
+    private ImageView mMeizhiImageView;
     private TextView mAndroid,
             mIOS,
             mWeb,
@@ -106,7 +106,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
     }
 
     private void initView(View view) {
-        mMeizhiIamgeView = (ImageView) view.findViewById(R.id.meizhi_image_view);
+        mMeizhiImageView = (ImageView) view.findViewById(R.id.meizhi_image_view);
         mAndroid = (TextView) view.findViewById(R.id.android);
         mIOS = (TextView) view.findViewById(R.id.ios);
         mWeb = (TextView) view.findViewById(R.id.web);
@@ -138,27 +138,28 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadingGank(mGankUrl, mMeizhiIamgeView);
+                mPresenter.loadingGank(mGankUrl, mMeizhiImageView);
             }
         });*/
-        mPresenter.loadingGank(mGankUrl, mMeizhiIamgeView);
+        mPresenter.loadingGank(mGankUrl, mMeizhiImageView);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
         String title = (String) mGankUrl.subSequence(mGankUrl.length() - 10, mGankUrl.length());
         toolbar.setTitle(title);
 
-        mMeizhiIamgeView.setOnClickListener(new View.OnClickListener() {
+        mMeizhiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String url = getImageUrl();
-                ViewCompat.setTransitionName(mMeizhiIamgeView, "image");
+                ViewCompat.setTransitionName(mMeizhiImageView, "image");
                 ActivityOptionsCompat options = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(getActivity(), mMeizhiIamgeView, "image");
+                        .makeSceneTransitionAnimation(getActivity(), mMeizhiImageView, "image");
                 startActivity(ImageShowerActivity.newIntent(getActivity(), url), options.toBundle());
             }
         });
 
         FloatingActionButton downloadFab = (FloatingActionButton) view.findViewById(R.id.download_image_fab);
+        // 点击按钮下载图片
         downloadFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

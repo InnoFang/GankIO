@@ -31,12 +31,12 @@ public class GankFragment extends Fragment implements GankContract.View{
     private static final String TAG = "GankFragment";
     private static final String ARGS_TITLE = "com.innofang.gankiodemo.module.category.title";
 
-    private static int sNumber = 15;
     private String mCategory;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mGankRecyclerView;
     private GankAdapter mGankAdapter;
     private GankContract.Presenter mPresenter;
+    private boolean mIsLoadingMore = false;
 
     public static GankFragment newInstance(String title){
         GankFragment gankFragment = new GankFragment();
@@ -56,6 +56,7 @@ public class GankFragment extends Fragment implements GankContract.View{
     }
 
 
+    @SuppressWarnings("deprecation")
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -64,7 +65,25 @@ public class GankFragment extends Fragment implements GankContract.View{
         mGankRecyclerView = (RecyclerView) view.findViewById(R.id.gank_recycler_view);
         mGankRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mGankRecyclerView.setAdapter(mGankAdapter);
-
+        // 监听滑动，滑倒底部更新数据
+        mGankRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.i(TAG, "onScrolled: is called");
+                LinearLayoutManager layoutManager =
+                        (LinearLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+                if (!mIsLoadingMore && visibleItemCount > 0
+                        && lastVisibleItem >= totalItemCount - 1) {
+                    Log.i(TAG, "onScrollStateChanged: bottom");
+                    mPresenter.requestGank(getCategory());
+                    mIsLoadingMore = true;
+                }
+            }
+        });
         mSwipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
                 ContextCompat.getColor(getActivity(), R.color.colorAccent),
@@ -72,21 +91,14 @@ public class GankFragment extends Fragment implements GankContract.View{
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                sNumber += 5;
-                mPresenter.requestGank(mCategory, sNumber);
+                mPresenter.requestGank(mCategory);
             }
         });
         setLoadingIndicator(true);
+        mPresenter.requestGank(getCategory());
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (null != mPresenter){
-            mPresenter.start();
-        }
-    }
 
     @Override
     public void onResume() {
@@ -131,13 +143,14 @@ public class GankFragment extends Fragment implements GankContract.View{
     }
 
     @Override
+    public void setPullUpLoadingState(boolean state) {
+        mIsLoadingMore = state;
+    }
+
+    @Override
     public String getCategory() {
         return mCategory;
     }
 
-    @Override
-    public int getNumber() {
-        return sNumber;
-    }
 
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,8 +23,10 @@ import java.util.List;
  * Description:
  */
 
-public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
+public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "GankAdapter";
+    private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_NORMAL = 2;
 
     private List<Gank.ResultsBean> mList;
     private Context mContext;
@@ -43,15 +46,37 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
     }
 
     @Override
-    public GankHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_gank_with_img, parent, false);
-        return new GankHolder(view);
+    public int getItemViewType(int position) {
+        if (mList.get(position).get_id() != null) {
+            return TYPE_NORMAL;
+        } else {
+            Log.i(TAG, "getItemViewType: type footer");
+            return TYPE_FOOTER;
+        }
     }
 
     @Override
-    public void onBindViewHolder(GankHolder holder, int position) {
-        Log.i(TAG, "onBindViewHolder: is called");
-        holder.bindHolder(mList.get(position));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType) {
+            default:
+            case TYPE_NORMAL:
+                view = LayoutInflater.from(mContext).inflate(R.layout.item_gank_with_img, parent, false);
+                return new GankHolder(view);
+            case TYPE_FOOTER:
+                view = LayoutInflater.from(mContext).inflate(R.layout.item_footer, parent, false);
+                return new FooterViewHolder(view);
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof FooterViewHolder){
+            ((FooterViewHolder) holder).bindHolder();
+        }
+        if (holder instanceof GankHolder){
+            ((GankHolder) holder).bindHolder(mList.get(position));
+        }
     }
 
     @Override
@@ -62,9 +87,9 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
     public class GankHolder extends RecyclerView.ViewHolder {
 
         private TextView mWhoTextView,
-                    mPublishAtTextView,
-                    mDescTextView,
-                    mTypeTextView;
+                mPublishAtTextView,
+                mDescTextView,
+                mTypeTextView;
         private ImageView mImageView;
 
         public GankHolder(View itemView) {
@@ -103,6 +128,20 @@ public class GankAdapter extends RecyclerView.Adapter<GankAdapter.GankHolder> {
                     }
                 });
             }
+        }
+    }
+
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        private ProgressBar mProgressBar;
+
+        public FooterViewHolder(View itemView) {
+            super(itemView);
+            mProgressBar = (ProgressBar) itemView.findViewById(R.id.progress);
+        }
+
+        public void bindHolder() {
+            mProgressBar.setVisibility(View.VISIBLE);
         }
     }
 

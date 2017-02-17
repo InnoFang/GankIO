@@ -4,9 +4,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,11 +55,10 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
             @Override
             public void onClick(View v) {
                 String url = getImageUrl();
-                if (null != url) {
-                    startActivity(ImageShowerActivity.newIntent(getActivity(), url));
-                } else {
-                    Log.i(TAG, "onClick: image url is null");
-                }
+                ViewCompat.setTransitionName(mMeizhiImageView, "image");
+                ActivityOptionsCompat options = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(getActivity(), mMeizhiImageView, "image");
+                startActivity(ImageShowerActivity.newIntent(getActivity(), url), options.toBundle());
             }
         });
 

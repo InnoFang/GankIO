@@ -32,7 +32,7 @@ import java.util.List;
  * 展示每日干货，默认主界面
  */
 
-public class DailyGankFragment extends Fragment implements DailyGankContract.View{
+public class DailyGankFragment extends Fragment implements DailyGankContract.View {
 
     private static final String TAG = "DailyGankFragment";
     private static final String DIALOG_DATE = "dialog_date";
@@ -45,7 +45,7 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
 
-    public static Fragment newInstance(){
+    public static Fragment newInstance() {
         return new DailyGankFragment();
     }
 
@@ -66,11 +66,24 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
         return view;
     }
 
+    private boolean mIsLoadingMore = false;
+
     private void initView(View view) {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
         mDailyGankRecyclerView = (RecyclerView) view.findViewById(R.id.daily_gank_recycler_view);
-
-        mDailyGankRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        final GridLayoutManager gridLayoutManager =new GridLayoutManager(getActivity(), 2);
+        mDailyGankRecyclerView.setLayoutManager(gridLayoutManager);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                int type = mDailyGankRecyclerView.getAdapter().getItemViewType(position);
+                if (type == DailyGankAdapter.TYPE_FOOTER){
+                    return gridLayoutManager.getSpanCount();
+                } else {
+                    return 1;
+                }
+            }
+        });
         mDailyGankRecyclerView.setAdapter(mAdapter);
 
         mSwipeRefreshLayout.setColorSchemeColors(
@@ -111,12 +124,18 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
         setLoadingIndicator(true);
     }
 
-    public boolean onBackPressed(){
+    public boolean onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
             return true;
         }
         return false;
+    }
+
+    // 用于判断是否需要上拉加载更多
+    @Override
+    public void setPullUpLoadingState(boolean state) {
+        mIsLoadingMore = state;
     }
 
     @Override
@@ -129,15 +148,34 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
         });
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void showDailyGank(List<Luck.ResultsBean> list) {
         mAdapter.setList(list);
         mAdapter.notifyDataSetChanged();
+        // 监听滑动，滑倒底部更新数据
+        mDailyGankRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                Log.i(TAG, "onScrolled: is called");
+                GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+                if (!mIsLoadingMore && visibleItemCount > 0
+                        && lastVisibleItem >= totalItemCount - 1) {
+                    Log.i(TAG, "onScrollStateChanged: bottom");
+                    mPresenter.loadingDailyGank();
+                    mIsLoadingMore = true;
+                }
+            }
+        });
     }
 
     @Override
     public void showEmptyOrError(String error) {
-        if (null != error){
+        if (null != error) {
             Log.i(TAG, error);
             Snackbar.make(mToolbar, error, Snackbar.LENGTH_LONG).show();
         }

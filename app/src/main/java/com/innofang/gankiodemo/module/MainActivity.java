@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -77,17 +78,23 @@ public class MainActivity extends SingleFragmentActivity
 
     @Override
     public void onBackPressed() {
-        DailyGankFragment fragment = (DailyGankFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (fragment != null && fragment.isVisible() && fragment.onBackPressed()) {
-            return;
-        } else if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-            super.onBackPressed();
-            return;
-        } else {
-            ToastUtil.showToast("再点击一次退出");
+        try {
+            // 用于DailyGankFragment的DrawerLayout的关闭
+            DailyGankFragment fragment = (DailyGankFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            if (fragment != null && fragment.isVisible() && fragment.onBackPressed()) {
+                return;
+            }
+        } catch (ClassCastException e){
+            Log.i(TAG, "onBackPressed: " + e);
+        }finally {
+            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+                super.onBackPressed();
+                return;
+            } else {
+                ToastUtil.showToast("再点击一次退出");
+            }
+            mBackPressed = System.currentTimeMillis();
         }
-        mBackPressed = System.currentTimeMillis();
-
     }
 
 

@@ -8,6 +8,7 @@ import com.innofang.gankiodemo.http.LoadingCallback;
 import com.innofang.gankiodemo.http.RemoteManager;
 import com.innofang.gankiodemo.utils.JSONParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -27,10 +28,16 @@ import io.reactivex.schedulers.Schedulers;
 public class DailyGankPresenter implements DailyGankContract.Presenter {
     private static final String TAG = "DailyGankPresenter";
 
+    private static int sPage = 0;
+    private static List<Luck.ResultsBean> mList;
+
     private DailyGankContract.View mView;
+
     public DailyGankPresenter(DailyGankContract.View view) {
         mView = view;
         mView.setPresenter(this);
+        mList = new ArrayList<>();
+        sPage = 0;
     }
 
     @Override
@@ -38,7 +45,9 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
         Observable.create(new ObservableOnSubscribe<Luck>() {
             @Override
             public void subscribe(final ObservableEmitter<Luck> e) throws Exception {
-                RemoteManager.getInstance().asyncRequest(URL.DATA_LUCK, new LoadingCallback() {
+                sPage++;
+                Log.i(TAG, "subscribe: " + URL.DATA_LUCK + sPage);
+                RemoteManager.getInstance().asyncRequest(URL.DATA_LUCK + sPage, new LoadingCallback() {
                     @Override
                     public void onUnavailable() {
                         mView.setLoadingIndicator(false);
@@ -67,7 +76,16 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
                     public void onNext(Luck value) {
                         Log.i(TAG, "onNext: " + value.getResults().toString());
                         if (null != value.getResults()) {
-                            showDailyGank(value.getResults());
+                            if (mList.size() == 0) {
+                                mList.addAll(value.getResults());
+                            } else {
+                                // 删除footer
+                                mList.remove(mList.size() - 1);
+                                mList.addAll(value.getResults());
+                            }
+                            // 用于添加footer
+                            mList.add(new Luck.ResultsBean());
+                            showDailyGank(mList);
                         }
                     }
 
@@ -87,6 +105,7 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
     public void showDailyGank(List<Luck.ResultsBean> list) {
         mView.showDailyGank(list);
         mView.setLoadingIndicator(false);
+        mView.setPullUpLoadingState(false);
     }
 
     @Override
