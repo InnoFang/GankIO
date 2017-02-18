@@ -79,7 +79,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                mPresenter.requestSearchResult(s.toString());
             }
         });
         return view;

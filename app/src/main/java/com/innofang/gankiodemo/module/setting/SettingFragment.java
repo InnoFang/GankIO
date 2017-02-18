@@ -37,7 +37,6 @@ public class SettingFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_setting, container, false);
-        ImageView settingBg = (ImageView) view.findViewById(R.id.setting_bg);
         ImageView icon = (ImageView) view.findViewById(R.id.app_icon);
         // 将图标圆角处理
         Glide.with(getActivity())
