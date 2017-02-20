@@ -76,6 +76,7 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
+
                 int type = mDailyGankRecyclerView.getAdapter().getItemViewType(position);
                 if (type == DailyGankAdapter.TYPE_FOOTER){
                     return gridLayoutManager.getSpanCount();

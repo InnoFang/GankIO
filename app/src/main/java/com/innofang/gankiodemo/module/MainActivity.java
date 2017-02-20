@@ -80,21 +80,23 @@ public class MainActivity extends SingleFragmentActivity
     public void onBackPressed() {
         try {
             // 用于DailyGankFragment的DrawerLayout的关闭
-            DailyGankFragment fragment = (DailyGankFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+            DailyGankFragment fragment =
+                    (DailyGankFragment) getSupportFragmentManager()
+                            .findFragmentById(R.id.fragment_container);
             if (fragment != null && fragment.isVisible() && fragment.onBackPressed()) {
                 return;
             }
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             Log.i(TAG, "onBackPressed: " + e);
-        }finally {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed();
-                return;
-            } else {
-                ToastUtil.showToast("再点击一次退出");
-            }
-            mBackPressed = System.currentTimeMillis();
         }
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            ToastUtil.showToast("再点击一次退出");
+        }
+        mBackPressed = System.currentTimeMillis();
+
     }
 
 
