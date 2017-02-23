@@ -4,9 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorFAB">#005eff</color>
-    <color name="colorGankDetailOfAuthor">#95bfef</color>
-    <color name="colorGankDetailOfTitle">#27a8b4</color>
-    <color name="colorGankDescAndImgBg">#6fc9cc</color>
     <color name="colorCollectionHeart">#ccff0004</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorTransitionToolbar">#af028bf4</color>

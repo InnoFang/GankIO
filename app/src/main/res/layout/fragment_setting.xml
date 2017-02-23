@@ -10,7 +10,6 @@
         android:layout_height="350dp">
 
         <ImageView
-            android:id="@+id/setting_bg"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:contentDescription="@null"
@@ -30,7 +29,6 @@
 
 
     <android.support.v7.widget.CardView
-        android:id="@+id/switch_mode_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

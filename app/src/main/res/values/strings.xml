@@ -2,15 +2,10 @@
     <string name="app_name">GankIO</string>
     <string name="nav_daily_gank">每日干货</string>
     <string name="nav_category">分类浏览</string>
-    <string name="nav_luck">福利 (☆▽☆)y</string>
-    <string name="gank">Gank</string>
-    <string name="i_o">IO</string>
     <string name="nav_collection">干货收藏</string>
     <string name="nav_setting">设置</string>
     <string name="about_app">关于App</string>
     <string name="switch_mode">夜间模式</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="android">Android</string>
     <string name="ios">iOS</string>
     <string name="web">前端</string>
@@ -20,7 +15,6 @@
     <string name="video">休息视频</string>
     <string name="action_open_browser">在浏览器中打开</string>
     <string name="action_share">分享</string>
-    <string name="date_picker_title">干货日期选择</string>
     <string name="cancel">取消</string>
     <string name="author">作者：</string>
     <string name="author_name"><u>@InnoFang</u></string>
@@ -28,7 +22,6 @@
     <string name="project_address"><u>https://github.com/InnoFang/GankIO</u></string>
     <string name="source">数据来源：</string>
     <string name="source_from"><u>http://gank.io/</u></string>
-    <string name="nav_search_gank">干货搜索</string>
     <string name="search_gank">搜搜都有啥干货？</string>
     <string name="action_dislike">dislike</string>
     <string name="action_like">like</string>
