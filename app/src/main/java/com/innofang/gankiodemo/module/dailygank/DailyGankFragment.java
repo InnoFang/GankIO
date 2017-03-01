@@ -100,10 +100,12 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
             }
         });
 
-        mAdapter.setOnShowDailyGankClickListener(new DailyGankAdapter.OnShowDailyGankClickListener() {
+        mAdapter.setOnShowDailyGankClickListener(
+                new DailyGankAdapter.OnShowDailyGankClickListener() {
             @Override
-            public void onClick(String url) {
-                startActivity(GankDetailActivity.newIntent(getActivity(), url));
+            public void onClick(String url, ActivityOptionsCompat options) {
+                startActivity(GankDetailActivity.newIntent(getActivity(), url)
+                        , options.toBundle());
             }
         });
 

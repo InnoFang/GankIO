@@ -20,6 +20,7 @@
             android:id="@+id/meizhi_image_view"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:transitionName="meizhi"
             android:layout_centerInParent="true"/>
 
         <TextView

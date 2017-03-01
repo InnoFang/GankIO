@@ -1,6 +1,9 @@
 package com.innofang.gankiodemo.module.dailygank;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,7 +77,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof FooterViewHolder) {
             ((FooterViewHolder) holder).bindHolder();
         }
@@ -87,7 +90,14 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     public void onClick(View v) {
                         String date = StringFormatUtil.formatPublishAt(luckResult.getPublishedAt());
                         String url = URL.DAILY_DATA + date;
-                        mOnShowDailyGankClickListener.onClick(url);
+                        ViewCompat.setTransitionName(
+                                ((DailyGankHolder) holder).mMeizhiImageView, "meizhi");
+                        ActivityOptionsCompat options = ActivityOptionsCompat
+                                .makeSceneTransitionAnimation(
+                                        (Activity) mContext,
+                                        ((DailyGankHolder) holder).mMeizhiImageView,
+                                        "meizhi");
+                        mOnShowDailyGankClickListener.onClick(url, options);
                     }
                 });
             }
@@ -101,8 +111,8 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public class DailyGankHolder extends RecyclerView.ViewHolder {
 
-        private TextView mDateTextView;
-        private ImageView mMeizhiImageView;
+        public TextView mDateTextView;
+        public ImageView mMeizhiImageView;
 
         public DailyGankHolder(View itemView) {
             super(itemView);
@@ -138,6 +148,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface OnShowDailyGankClickListener {
-        void onClick(String url);
+        void onClick(String url, ActivityOptionsCompat options);
     }
 }
