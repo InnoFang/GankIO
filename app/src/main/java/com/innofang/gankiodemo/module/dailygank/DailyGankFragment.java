@@ -3,9 +3,11 @@ package com.innofang.gankiodemo.module.dailygank;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -115,11 +117,14 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
             }
         });
 
-        TextView searchTextView = (TextView) view.findViewById(R.id.search_text_view);
+        final TextView searchTextView = (TextView) view.findViewById(R.id.search_text_view);
         searchTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(SearchActivity.newIntent(getActivity()));
+                ViewCompat.setTransitionName(searchTextView, "search");
+                ActivityOptionsCompat options = ActivityOptionsCompat
+                        .makeSceneTransitionAnimation(getActivity(), searchTextView, "search");
+                startActivity(SearchActivity.newIntent(getActivity()), options.toBundle());
             }
         });
         setLoadingIndicator(true);

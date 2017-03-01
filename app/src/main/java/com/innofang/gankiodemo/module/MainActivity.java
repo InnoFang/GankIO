@@ -59,9 +59,6 @@ public class MainActivity extends SingleFragmentActivity
             case R.id.nav_category:
                 switchFragment(CategoryFragment.newInstance());
                 break;
-//            case R.id.nav_luck:
-//                switchFragment(LuckFragment.newInstance());
-//                break;
             case R.id.nav_collections:
                 switchFragment(CollectionsFragment.newInstance());
                 break;

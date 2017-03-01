@@ -61,7 +61,6 @@
                     android:layout_width="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="2dp"
-                    android:textSize="16sp"
                     tools:text="Android"
                     android:layout_height="wrap_content"/>
 
@@ -78,7 +77,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="2dp"
-                    android:textSize="16sp"
                     tools:text="Inno"/>
 
                 <android.support.v7.widget.AppCompatImageView
@@ -94,7 +92,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginStart="2dp"
-                    android:textSize="16sp"
                     tools:text="2017-02-07"/>
 
             </LinearLayout>
