@@ -13,7 +13,7 @@ Gank.io unoffical app
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
 
-### Third-party libraries used
+## Third-party libraries used
 
 ```gradle
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -26,3 +26,29 @@ Gank.io unoffical app
     compile 'konifar:fab-transformation:1.0.0'
     compile files('libs/nineoldandroids-2.4.0.jar')
 ```
+
+## License 
+
+    MIT License
+
+    Copyright (c) [year] [fullname]
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+  
+ 
