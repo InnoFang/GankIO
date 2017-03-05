@@ -31,6 +31,9 @@
         <activity
             android:name=".module.web.WebActivity"
             android:configChanges="keyboardHidden|keyboard|orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".module.search.SearchActivity"

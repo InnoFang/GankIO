@@ -12,8 +12,8 @@ import android.view.View;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Collection;
-import com.innofang.gankiodemo.module.SingleFragmentActivity;
 import com.innofang.gankiodemo.database.CollectionManager;
+import com.innofang.gankiodemo.module.SingleFragmentActivity;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
 import java.util.List;
@@ -132,8 +132,8 @@ public class WebActivity extends SingleFragmentActivity {
             case R.id.action_share:
                 intent = new Intent();
                 intent.setAction(Intent.ACTION_SEND);
-                intent.putExtra(Intent.EXTRA_TEXT, uri);
                 intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, uri);
                 startActivity(Intent.createChooser(intent, "分享到"));
                 break;
             case R.id.action_open_browser:
