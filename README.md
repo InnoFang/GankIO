@@ -4,6 +4,8 @@ Gank.io unoffical app
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/app/src/main/res/drawable/icon.png" height="100px" width="100px"/>
 
+[Download Apk](https://github.com/InnoFang/GankIO/blob/master/apk/gankio.apk)
+
 ### MVP + OkHttp + RxJava + Glide
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/Category.gif" height="500px" width="300px"/>  <img src="https://github.com/InnoFang/GankIO/blob/master/gif/DailyGank.gif" height="500px" width="300px"/>  
