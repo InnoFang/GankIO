@@ -6,6 +6,10 @@ Gank.io unoffical app
 
 ### MVP + OkHttp + RxJava + Glide
 
+<img src="https://github.com/InnoFang/GankIO/blob/master/gif/Category.gif" height="500px" width="300px"/>  <img src="https://github.com/InnoFang/GankIO/blob/master/gif/DailyGank.gif" height="500px" width="300px"/>  
+<img src="https://github.com/InnoFang/GankIO/blob/master/gif/collection.gif" height="500px" width="300px"/>  <img src="https://github.com/InnoFang/GankIO/blob/master/gif/gankdetail.gif" height="500px" width="300px"/>
+
+<img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
 
 ### Third-party libraries used
 
