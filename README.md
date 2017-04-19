@@ -13,7 +13,7 @@ Gank.io unoffical app
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
 
-### Third-party libraries used
+## Third-party libraries used
 
 ```gradle
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -26,3 +26,7 @@ Gank.io unoffical app
     compile 'konifar:fab-transformation:1.0.0'
     compile files('libs/nineoldandroids-2.4.0.jar')
 ```
+
+## License 
+
+   [Apache License 2.0](https://github.com/InnoFang/GankIO/blob/master/LICENSE)
