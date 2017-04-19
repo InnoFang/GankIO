@@ -6,7 +6,7 @@
     android:shareInterpolator="true">
 
     <alpha
-        android:fromAlpha="0.1"
+        android:fromAlpha="0"
         android:toAlpha="1"
         />
 
