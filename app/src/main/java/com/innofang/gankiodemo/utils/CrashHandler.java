@@ -142,7 +142,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void uploadExceptionToServer() {
-        // TODO:2017/4/20 Upload Exception Message To Your Web Server
-
+//         TODO:2017/4/20 Upload Exception Message To Your Web Server
+        Log.i(TAG, "uploadExceptionToServer: is called");
     }
 }
