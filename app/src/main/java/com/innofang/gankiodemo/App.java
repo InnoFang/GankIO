@@ -3,6 +3,8 @@ package com.innofang.gankiodemo;
 import android.app.Application;
 import android.content.Context;
 
+import com.innofang.gankiodemo.utils.CrashHandler;
+
 /**
  * Author: Inno Fang
  * Time: 2017/2/1 12:01
@@ -16,7 +18,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        sContext = getApplicationContext();
+        sContext = this;
+        CrashHandler.getInstance().init(getApplicationContext());
     }
 
     public static Context getContext() {
