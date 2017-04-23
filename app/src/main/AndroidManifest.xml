@@ -22,17 +22,19 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".module.MainActivity">
+        <activity
+            android:name=".module.MainActivity">
         </activity>
         <activity
             android:name=".module.gankdetail.GankDetailActivity"
-            android:parentActivityName=".module.MainActivity">
+            android:parentActivityName=".module.MainActivity"
+            android:theme="@style/ImmersiveStatueBarStyle">
         </activity>
         <activity
             android:name=".module.web.WebActivity"
             android:configChanges="keyboardHidden|keyboard|orientation|screenSize">
             <intent-filter>
-                <action android:name="android.intent.action.SEND" />
+                <action android:name="android.intent.action.SEND"/>
             </intent-filter>
         </activity>
         <activity
