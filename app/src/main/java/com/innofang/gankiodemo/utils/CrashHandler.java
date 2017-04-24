@@ -85,7 +85,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
-                Log.e(TAG, "error : ", e);
+                Log.e(TAG, "Error : ", e);
             }
             Process.killProcess(Process.myPid());
         }
