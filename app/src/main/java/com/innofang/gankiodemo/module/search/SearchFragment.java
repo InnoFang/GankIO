@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,8 @@ public class SearchFragment extends Fragment implements SearchContract.View {
         mRecyclerView.setAdapter(mAdapter);
 
         mSearchEditeText.addTextChangedListener(new TextWatcher() {
+            long startTime = System.currentTimeMillis();
+
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -74,12 +77,20 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mPresenter.requestSearchResult(s.toString());
-            }
 
+            }
+            long endTime;
+            int times = 0;
             @Override
             public void afterTextChanged(Editable s) {
-                mPresenter.requestSearchResult(s.toString());
+                endTime = System.currentTimeMillis();
+                Log.i(TAG, "onTextChanged: endTime " + endTime);
+                if (s.toString().trim().length() > 0 && endTime - startTime > 1000) {
+                    Log.i(TAG, "afterTextChanged: is called");
+                    startTime = System.currentTimeMillis();
+                    mPresenter.requestSearchResult(s.toString());
+                    Log.i("TAG", "afterTextChanged: times " + times++);
+                }
             }
         });
         return view;
