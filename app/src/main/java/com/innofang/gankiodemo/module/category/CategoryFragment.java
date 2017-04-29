@@ -55,9 +55,9 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
             @Override
             public void onClick(View v) {
                 String url = getImageUrl();
-                ViewCompat.setTransitionName(mMeizhiImageView, "image");
+                ViewCompat.setTransitionName(mMeizhiImageView, "meizhi");
                 ActivityOptionsCompat options = ActivityOptionsCompat
-                        .makeSceneTransitionAnimation(getActivity(), mMeizhiImageView, "image");
+                        .makeSceneTransitionAnimation(getActivity(), mMeizhiImageView, "meizhi");
                 startActivity(ImageShowerActivity.newIntent(getActivity(), url), options.toBundle());
             }
         });
