@@ -1,10 +1,14 @@
 package com.innofang.gankiodemo.module;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,12 +45,13 @@ public class MainActivity extends SingleFragmentActivity
     }
 
     @Override
-    public void init() {
-        super.init();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         showNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
         navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         navigationView.setOnNavigationItemSelectedListener(this);
         showNavigationFab.setOnClickListener(this);
+        setTransition();
     }
 
     @Override
@@ -55,6 +60,7 @@ public class MainActivity extends SingleFragmentActivity
         switch (item.getItemId()) {
             case R.id.nav_daily_gank:
                 switchFragment(DailyGankFragment.newInstance());
+                setTransition();
                 break;
             case R.id.nav_category:
                 switchFragment(CategoryFragment.newInstance());
@@ -68,6 +74,20 @@ public class MainActivity extends SingleFragmentActivity
         }
         mHandler.postDelayed(mRunnable, 5000);
         return true;
+    }
+
+    private void setTransition() {
+        Transition transition = TransitionInflater
+                .from(this)
+                .inflateTransition(R.transition.explode); /* 爆炸效果 */
+//                .inflateTransition(R.transition.slide); /* 滑动效果 */
+
+        /* 退出时使用 */
+        getWindow().setExitTransition(transition);
+        /* 再次进入时使用 */
+        getWindow().setReenterTransition(transition);
+        /* 第一次进入时使用 */
+        getWindow().setEnterTransition(transition);
     }
 
     private static final int TIME_INTERVAL = 2000;

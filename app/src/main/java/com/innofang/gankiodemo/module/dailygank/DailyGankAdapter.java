@@ -127,7 +127,8 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             mDateTextView.setText(date);
             Glide.with(mContext)
                     .load(url)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .skipMemoryCache(false)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .crossFade()
                     .into(mMeizhiImageView);
         }

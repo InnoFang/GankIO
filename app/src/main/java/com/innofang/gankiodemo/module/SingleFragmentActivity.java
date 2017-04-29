@@ -33,7 +33,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
+        if (Build.VERSION.SDK_INT >= 21)
+            getWindow().requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS);
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= 21){
             View decorView = getWindow().getDecorView();
@@ -53,8 +54,6 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                     .add(getFragmentContainerId(), mFragment)
                     .commit();
         }
-
-        init();
     }
 
     @Override
