@@ -21,17 +21,25 @@ import com.innofang.gankiodemo.module.setting.SettingFragment;
 import com.innofang.gankiodemo.utils.ToastUtil;
 import com.konifar.fab_transformation.FabTransformation;
 
+import java.util.HashMap;
+
 public class MainActivity extends SingleFragmentActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = "MainActivity";
+    private static final String KEY_DAILY_GANK = "DailyGankFragment";
+    private static final String KEY_COLLECTIONS = "CollectionFragment";
+    private static final String KEY_CATEGORY = "CategoryFragment";
+    private static final String KEY_SETTING = "SettingFragment";
+
 
     public FloatingActionButton showNavigationFab;
     public BottomNavigationView navigationView;
+    private HashMap<String, Fragment> mFragmentCache = new HashMap<>();
 
     @Override
     protected Fragment createFragment() {
-        return DailyGankFragment.newInstance();
+        return getFragmentFromCache(KEY_DAILY_GANK);
     }
 
     @Override
@@ -59,21 +67,37 @@ public class MainActivity extends SingleFragmentActivity
         mHandler.removeCallbacks(mRunnable);
         switch (item.getItemId()) {
             case R.id.nav_daily_gank:
-                switchFragment(DailyGankFragment.newInstance());
+                switchFragment(getFragmentFromCache(KEY_DAILY_GANK));
                 setTransition();
                 break;
             case R.id.nav_category:
-                switchFragment(CategoryFragment.newInstance());
+                switchFragment(getFragmentFromCache(KEY_CATEGORY));
                 break;
             case R.id.nav_collections:
-                switchFragment(CollectionsFragment.newInstance());
+                switchFragment(getFragmentFromCache(KEY_COLLECTIONS));
                 break;
             case R.id.nav_setting:
-                switchFragment(SettingFragment.newInstance());
+                switchFragment(getFragmentFromCache(KEY_COLLECTIONS));
                 break;
         }
         mHandler.postDelayed(mRunnable, 5000);
         return true;
+    }
+
+    public Fragment getFragmentFromCache(String key) {
+        if (!mFragmentCache.containsKey((key))) {
+            Fragment fragment;
+            if (key.equals(KEY_DAILY_GANK))
+                fragment = DailyGankFragment.newInstance();
+            else if (key.equals(KEY_CATEGORY))
+                fragment = CategoryFragment.newInstance();
+            else if (key.equals(KEY_COLLECTIONS))
+                fragment = CollectionsFragment.newInstance();
+            else
+                fragment = SettingFragment.newInstance();
+            mFragmentCache.put(key, fragment);
+        }
+        return mFragmentCache.get(key);
     }
 
     private void setTransition() {
@@ -107,13 +131,14 @@ public class MainActivity extends SingleFragmentActivity
             Log.i(TAG, "onBackPressed: " + e);
         }
         if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
+            // 清空 Fragment 缓存，防止泄露
+            mFragmentCache.clear();
             super.onBackPressed();
             return;
         } else {
             ToastUtil.showToast("再点击一次退出");
         }
         mBackPressed = System.currentTimeMillis();
-
     }
 
 
