@@ -57,7 +57,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (mLuckResutList.get(position).get_id() != null) {
             return TYPE_NORMAL;
         } else {
-            Log.i(TAG, "getItemViewType: type footer");
             return TYPE_FOOTER;
         }
     }
@@ -123,7 +122,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public void bindHolder(Luck.ResultsBean results) {
             String date = StringFormatUtil.formatPublishAt(results.getPublishedAt());
             String url = results.getUrl() + URL.REQUEST_IMAGE_POSTFIX;
-            Log.i(TAG, "bindHolder: image url " + url);
             mDateTextView.setText(date);
             Glide.with(mContext)
                     .load(url)

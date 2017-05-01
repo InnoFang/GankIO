@@ -9,7 +9,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -78,7 +77,7 @@ public class MainActivity extends FragmentContainerActivity
                 switchFragment(getFragmentFromCache(KEY_COLLECTIONS));
                 break;
             case R.id.nav_setting:
-                switchFragment(getFragmentFromCache(KEY_COLLECTIONS));
+                switchFragment(getFragmentFromCache(KEY_SETTING));
                 break;
         }
         mHandler.postDelayed(mRunnable, 5000);
@@ -121,16 +120,10 @@ public class MainActivity extends FragmentContainerActivity
 
     @Override
     public void onBackPressed() {
-        try {
-            // 用于DailyGankFragment的DrawerLayout的关闭
-            DailyGankFragment fragment =
-                    (DailyGankFragment) getSupportFragmentManager()
-                            .findFragmentById(R.id.fragment_container);
-            if (fragment != null && fragment.isVisible() && fragment.onBackPressed()) {
-                return;
-            }
-        } catch (ClassCastException e) {
-            Log.i(TAG, "onBackPressed: " + e);
+        // 用于DailyGankFragment的DrawerLayout的关闭
+        DailyGankFragment fragment = (DailyGankFragment) getFragmentFromCache(KEY_DAILY_GANK);
+        if (fragment != null && fragment.isVisible() && fragment.onBackPressed()) {
+            return;
         }
         if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
             // 清空 Fragment 缓存，防止泄露

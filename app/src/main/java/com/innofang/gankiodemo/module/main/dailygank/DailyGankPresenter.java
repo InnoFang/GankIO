@@ -46,7 +46,6 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
             @Override
             public void subscribe(final ObservableEmitter<Luck> e) throws Exception {
                 sPage++;
-                Log.i(TAG, "subscribe: " + URL.DATA_LUCK + sPage);
                 RemoteManager.getInstance().asyncRequest(URL.DATA_LUCK + sPage, new LoadingCallback() {
                     @Override
                     public void onUnavailable() {
@@ -74,7 +73,6 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
 
                     @Override
                     public void onNext(Luck value) {
-                        Log.i(TAG, "onNext: " + value.getResults().toString());
                         if (null != value.getResults()) {
                             if (mList.size() == 0) {
                                 mList.addAll(value.getResults());
