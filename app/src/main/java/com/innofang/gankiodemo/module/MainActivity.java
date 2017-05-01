@@ -23,7 +23,7 @@ import com.konifar.fab_transformation.FabTransformation;
 
 import java.util.HashMap;
 
-public class MainActivity extends SingleFragmentActivity
+public class MainActivity extends FragmentContainerActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private static final String TAG = "MainActivity";

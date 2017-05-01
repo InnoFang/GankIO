@@ -19,7 +19,7 @@ import android.view.Window;
  * Description:
  */
 
-public abstract class SingleFragmentActivity extends AppCompatActivity {
+public abstract class FragmentContainerActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
     private Fragment mCurrentFragment;

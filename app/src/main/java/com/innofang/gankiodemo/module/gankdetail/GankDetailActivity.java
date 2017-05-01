@@ -9,9 +9,9 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.module.SingleFragmentActivity;
+import com.innofang.gankiodemo.module.FragmentContainerActivity;
 
-public class GankDetailActivity extends SingleFragmentActivity {
+public class GankDetailActivity extends FragmentContainerActivity {
 
     private static final String EXTRA_GANK_URL =
             "com.innofang.gankiodemo.ui.activity.gank_url";

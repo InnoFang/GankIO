@@ -13,12 +13,12 @@ import android.view.View;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Collection;
 import com.innofang.gankiodemo.database.CollectionManager;
-import com.innofang.gankiodemo.module.SingleFragmentActivity;
+import com.innofang.gankiodemo.module.FragmentContainerActivity;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
 import java.util.List;
 
-public class WebActivity extends SingleFragmentActivity {
+public class WebActivity extends FragmentContainerActivity {
 
     private static final String TAG = "WebActivity";
     private static final String EXTRA_URL = "com.innofang.gankiodemo.ui.activity.url";

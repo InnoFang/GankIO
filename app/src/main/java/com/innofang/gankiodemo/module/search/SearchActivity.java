@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.module.SingleFragmentActivity;
+import com.innofang.gankiodemo.module.FragmentContainerActivity;
 
-public class SearchActivity extends SingleFragmentActivity {
+public class SearchActivity extends FragmentContainerActivity {
 
     public static Intent newIntent(Context context){
         return new Intent(context, SearchActivity.class);
