@@ -20,9 +20,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +28,7 @@ import android.widget.TextView;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.GankItem;
+import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 import com.innofang.gankiodemo.module.web.WebActivity;
 import com.innofang.gankiodemo.service.DownloadService;
@@ -43,7 +42,7 @@ import java.util.List;
  * Description:
  */
 
-public class GankDetailFragment extends Fragment implements GankDetailContract.View {
+public class GankDetailFragment extends BaseFragment implements GankDetailContract.View {
 
     private static final String ARG_GANK_URL = "gank_url";
 
@@ -97,30 +96,28 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         setHasOptionsMenu(true);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gank_detail, container, false);
-        initView(view);
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_gank_detail;
     }
 
-    private void initView(View view) {
-        mMeizhiImageView = (ImageView) view.findViewById(R.id.meizhi_image_view);
-        mAndroid = (TextView) view.findViewById(R.id.android);
-        mIOS = (TextView) view.findViewById(R.id.ios);
-        mWeb = (TextView) view.findViewById(R.id.web);
-        mExpandResource = (TextView) view.findViewById(R.id.expand_resource);
-        mRecommend = (TextView) view.findViewById(R.id.recommend);
-        mApp = (TextView) view.findViewById(R.id.app);
-        mVideo = (TextView) view.findViewById(R.id.video);
-        mAndroidRecyclerView = (RecyclerView) view.findViewById(R.id.android_recycler_view);
-        mIOSRecyclerViwe = (RecyclerView) view.findViewById(R.id.ios_recycler_view);
-        mWebRecyclerView = (RecyclerView) view.findViewById(R.id.web_recycler_view);
-        mExpandResourceRecyclerView = (RecyclerView) view.findViewById(R.id.expand_resource_recycler_view);
-        mRecommendRecyclerView = (RecyclerView) view.findViewById(R.id.recommend_recycler_view);
-        mAppRecyclerView = (RecyclerView) view.findViewById(R.id.app_recycler_view);
-        mVideoRecyclerView = (RecyclerView) view.findViewById(R.id.video_recycler_view);
+    @Override
+    protected void createView(View view,@Nullable Bundle savedInstanceState) {
+        mMeizhiImageView = (ImageView) find(R.id.meizhi_image_view);
+        mAndroid = (TextView) find(R.id.android);
+        mIOS = (TextView) find(R.id.ios);
+        mWeb = (TextView) find(R.id.web);
+        mExpandResource = (TextView) find(R.id.expand_resource);
+        mRecommend = (TextView) find(R.id.recommend);
+        mApp = (TextView) find(R.id.app);
+        mVideo = (TextView) find(R.id.video);
+        mAndroidRecyclerView = (RecyclerView) find(R.id.android_recycler_view);
+        mIOSRecyclerViwe = (RecyclerView) find(R.id.ios_recycler_view);
+        mWebRecyclerView = (RecyclerView) find(R.id.web_recycler_view);
+        mExpandResourceRecyclerView = (RecyclerView) find(R.id.expand_resource_recycler_view);
+        mRecommendRecyclerView = (RecyclerView) find(R.id.recommend_recycler_view);
+        mAppRecyclerView = (RecyclerView) find(R.id.app_recycler_view);
+        mVideoRecyclerView = (RecyclerView) find(R.id.video_recycler_view);
 
         mAndroidRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mIOSRecyclerViwe.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -129,8 +126,12 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         mRecommendRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mAppRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mVideoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        initEvent();
+    }
 
-       /* mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+    private void initEvent() {
+
+       /* mSwipeRefreshLayout = (SwipeRefreshLayout) find(R.id.swipe_refresh_layout);
         mSwipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
                 ContextCompat.getColor(getActivity(), R.color.colorAccent),
@@ -143,7 +144,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
         });*/
         mPresenter.loadingGank(mGankUrl, mMeizhiImageView);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar) find(R.id.tool_bar);
         String title = (String) mGankUrl.subSequence(mGankUrl.length() - 10, mGankUrl.length());
         toolbar.setTitle(title);
 
@@ -158,7 +159,7 @@ public class GankDetailFragment extends Fragment implements GankDetailContract.V
             }
         });
 
-        FloatingActionButton downloadFab = (FloatingActionButton) view.findViewById(R.id.download_image_fab);
+        FloatingActionButton downloadFab = (FloatingActionButton) find(R.id.download_image_fab);
         // 点击按钮下载图片
         downloadFab.setOnClickListener(new View.OnClickListener() {
             @Override

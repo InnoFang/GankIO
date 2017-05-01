@@ -5,11 +5,10 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.innofang.gankiodemo.R;
+import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.main.category.ViewPagerAdapter;
 import com.innofang.gankiodemo.module.main.collection.collectiongank.CollectionGankFragment;
 
@@ -20,7 +19,7 @@ import com.innofang.gankiodemo.module.main.collection.collectiongank.CollectionG
  * 个人收藏
  */
 
-public class CollectionsFragment extends Fragment{
+public class CollectionsFragment extends BaseFragment{
     private static final String TAG = "CollectionsFragment";
 
     private ViewPager mViewPager;
@@ -29,13 +28,17 @@ public class CollectionsFragment extends Fragment{
     public static Fragment newInstance(){
         return new CollectionsFragment();
     }
+    
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_collections, container, false);
-        mViewPager = (ViewPager) view.findViewById(R.id.view_pager);
-        mTabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+    public int getLayoutId() {
+        return R.layout.fragment_collections;
+    }
+
+    @Override
+    protected void createView(View view, @Nullable Bundle savedInstanceState) {
+        mViewPager = (ViewPager) find(R.id.view_pager);
+        mTabLayout = (TabLayout) find(R.id.tab_layout);
         String[] titles = {"Android", "iOS", "前端", "拓展资源", "瞎推荐", "App", "休息视频"};
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titles);
 
@@ -59,7 +62,5 @@ public class CollectionsFragment extends Fragment{
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mViewPager.setCurrentItem(0);
-
-        return view;
     }
 }

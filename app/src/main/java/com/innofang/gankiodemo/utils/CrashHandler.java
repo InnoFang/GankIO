@@ -83,7 +83,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             mDefaultCrashHandler.uncaughtException(thread, ex);
         } else {
             try {
-                Thread.sleep(2000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 Log.e(TAG, "Error : ", e);
             }

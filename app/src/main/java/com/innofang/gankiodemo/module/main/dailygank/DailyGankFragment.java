@@ -13,13 +13,12 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
+import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.gankdetail.GankDetailActivity;
 import com.innofang.gankiodemo.module.search.SearchActivity;
 
@@ -33,7 +32,7 @@ import java.util.List;
  * 展示每日干货，默认主界面
  */
 
-public class DailyGankFragment extends Fragment implements DailyGankContract.View {
+public class DailyGankFragment extends BaseFragment implements DailyGankContract.View {
 
     private static final String TAG = "DailyGankFragment";
 
@@ -57,20 +56,22 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
         setHasOptionsMenu(true);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_daily_gank, container, false);
-        initView(view);
-        mPresenter.loadingDailyGank();
-        return view;
+    public int getLayoutId() {
+        return R.layout.fragment_daily_gank;
     }
 
+    @Override
+    protected void createView(View view, @Nullable Bundle savedInstanceState) {
+        initView();
+        mPresenter.loadingDailyGank();
+    }
+    
     private boolean mIsLoadingMore = false;
 
-    private void initView(View view) {
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        mDailyGankRecyclerView = (RecyclerView) view.findViewById(R.id.daily_gank_recycler_view);
+    private void initView() {
+        mSwipeRefreshLayout = (SwipeRefreshLayout) find(R.id.swipe_refresh_layout);
+        mDailyGankRecyclerView = (RecyclerView) find(R.id.daily_gank_recycler_view);
         final GridLayoutManager gridLayoutManager =new GridLayoutManager(getActivity(), 2);
         mDailyGankRecyclerView.setLayoutManager(gridLayoutManager);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -107,8 +108,8 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
             }
         });
 
-        mToolbar = (Toolbar) view.findViewById(R.id.tool_bar);
-        mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawer_layout);
+        mToolbar = (Toolbar) find(R.id.tool_bar);
+        mDrawerLayout = (DrawerLayout) find(R.id.drawer_layout);
         mToolbar.setNavigationIcon(R.drawable.ic_nav_calendar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +118,7 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
             }
         });
 
-        final TextView searchTextView = (TextView) view.findViewById(R.id.search_text_view);
+        final TextView searchTextView = (TextView) find(R.id.search_text_view);
         searchTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

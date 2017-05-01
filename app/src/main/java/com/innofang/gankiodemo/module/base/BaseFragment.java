@@ -20,6 +20,11 @@ public abstract class BaseFragment extends Fragment {
 
     protected View mView;
 
+    @LayoutRes
+    public abstract int getLayoutId();
+
+    protected abstract void createView(View view, @Nullable Bundle savedInstanceState);
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,12 +32,6 @@ public abstract class BaseFragment extends Fragment {
         createView(mView, savedInstanceState);
         return mView;
     }
-
-    protected abstract void createView(View view, Bundle savedInstanceState);
-
-
-    @LayoutRes
-    public abstract int getLayoutId();
 
     public View find(@IdRes int id) {
         return mView.findViewById(id);

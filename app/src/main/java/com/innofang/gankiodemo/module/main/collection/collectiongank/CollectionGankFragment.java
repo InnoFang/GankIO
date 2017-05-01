@@ -2,16 +2,14 @@ package com.innofang.gankiodemo.module.main.collection.collectiongank;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Collection;
+import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.web.WebActivity;
 
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ import java.util.List;
  * Description:
  */
 
-public class CollectionGankFragment extends Fragment implements CollectionGankContract.View {
+public class CollectionGankFragment extends BaseFragment implements CollectionGankContract.View {
     private static final String TAG = "CollectionGankFragment";
     private static final String ARGS_TYPE = "com.innofang.gankiodemo.module.collection.collectiongank.type";
 
@@ -51,17 +49,20 @@ public class CollectionGankFragment extends Fragment implements CollectionGankCo
         mAdapter = new CollectionGankAdapter(getContext(), new ArrayList<Collection>(0));
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_collection_gank, container, false);
-        mEmptyView = (LinearLayout) view.findViewById(R.id.empty_view);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.collection_gank_recycler_view);
+    public int getLayoutId() {
+        return R.layout.fragment_collection_gank;
+    }
+
+    @Override
+    protected void createView(View view, @Nullable Bundle savedInstanceState) {
+        mEmptyView = (LinearLayout) find(R.id.empty_view);
+        mRecyclerView = (RecyclerView) find(R.id.collection_gank_recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
         mPresenter.queryCollections(mType);
-        return view;
     }
+    
 
     // 刷新列表视图
     @Override

@@ -3,18 +3,16 @@ package com.innofang.gankiodemo.module.main.category.gank;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Gank;
+import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.web.WebActivity;
 
 import java.util.ArrayList;
@@ -26,7 +24,7 @@ import java.util.List;
  * Description: ViewPager 展示每项Gank列表
  */
 
-public class GankFragment extends Fragment implements GankContract.View{
+public class GankFragment extends BaseFragment implements GankContract.View{
 
     private static final String TAG = "GankFragment";
     private static final String ARGS_TITLE = "com.innofang.gankiodemo.module.category.title";
@@ -55,14 +53,16 @@ public class GankFragment extends Fragment implements GankContract.View{
         mCategory = getArguments().getString(ARGS_TITLE);
     }
 
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_gank;
+    }
 
     @SuppressWarnings("deprecation")
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_gank, container, false);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
-        mGankRecyclerView = (RecyclerView) view.findViewById(R.id.gank_recycler_view);
+    protected void createView(View view, @Nullable Bundle savedInstanceState) {
+        mSwipeRefreshLayout = (SwipeRefreshLayout) find(R.id.swipe_refresh_layout);
+        mGankRecyclerView = (RecyclerView) find(R.id.gank_recycler_view);
         mGankRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mGankRecyclerView.setAdapter(mGankAdapter);
         // 监听滑动，滑倒底部更新数据
@@ -96,7 +96,6 @@ public class GankFragment extends Fragment implements GankContract.View{
         });
         setLoadingIndicator(true);
         mPresenter.requestGank(getCategory());
-        return view;
     }
 
 

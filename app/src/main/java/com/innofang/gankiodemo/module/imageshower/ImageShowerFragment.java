@@ -12,16 +12,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.innofang.gankiodemo.service.DownloadService;
 import com.innofang.gankiodemo.R;
+import com.innofang.gankiodemo.module.base.BaseFragment;
+import com.innofang.gankiodemo.service.DownloadService;
 import com.innofang.gankiodemo.utils.ToastUtil;
 import com.innofang.gankiodemo.widget.DragImageView;
 
@@ -31,7 +29,7 @@ import com.innofang.gankiodemo.widget.DragImageView;
  * Description:
  */
 
-public class ImageShowerFragment extends Fragment
+public class ImageShowerFragment extends BaseFragment
         implements ImageShowerContract.View, View.OnClickListener {
     private static final String TAG = "ImageShowerFragment";
     private static final String ARGS_URL = "com.innofang.gankiodemo.module.showpicture.url";
@@ -74,20 +72,22 @@ public class ImageShowerFragment extends Fragment
         mUrl = getArguments().getString(ARGS_URL);
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_image_shower, container, false);
-        mMeizhiImageView = (DragImageView) view.findViewById(R.id.meizhi_image_view);
-        mProgressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
-        mDownloadImage = (AppCompatImageView) view.findViewById(R.id.download_image);
-        mShareIamge = (AppCompatImageView) view.findViewById(R.id.share_image);
+    public int getLayoutId() {
+        return R.layout.fragment_image_shower;
+    }
+
+    @Override
+    protected void createView(View view,@Nullable Bundle savedInstanceState) {
+        mMeizhiImageView = (DragImageView) find(R.id.meizhi_image_view);
+        mProgressBar = (ProgressBar) find(R.id.progress_bar);
+        mDownloadImage = (AppCompatImageView) find(R.id.download_image);
+        mShareIamge = (AppCompatImageView) find(R.id.share_image);
 
         mDownloadImage.setOnClickListener(this);
         mShareIamge.setOnClickListener(this);
 
         mPresenter.loadingIamge(getActivity(), mMeizhiImageView, mUrl);
-        return view;
     }
 
     @Override

@@ -8,14 +8,15 @@ import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.module.main.category.gank.GankFragment;
+import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
+import com.innofang.gankiodemo.module.main.category.gank.GankFragment;
+
+import static com.innofang.gankiodemo.R.layout.fragment_category;
 
 /**
  * Author: Inno Fang
@@ -23,7 +24,7 @@ import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
  * Description: 分类浏览
  */
 
-public class CategoryFragment extends Fragment implements CategoryContract.View{
+public class CategoryFragment extends BaseFragment implements CategoryContract.View{
     private static final String TAG = "CategoryFragment";
 
     private ViewPager mViewPager;
@@ -43,13 +44,16 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         mImgUrl = null;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v =  inflater.inflate(R.layout.fragment_category, container, false);
-        mViewPager = (ViewPager) v.findViewById(R.id.view_pager);
-        mTabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
-        mMeizhiImageView = (ImageView) v.findViewById(R.id.meizhi_image_view);
+    public int getLayoutId() {
+        return fragment_category;
+    }
+
+    @Override
+    protected void createView(View view, @Nullable Bundle savedInstanceState) {
+        mViewPager = (ViewPager) find(R.id.view_pager);
+        mTabLayout = (TabLayout) find(R.id.tab_layout);
+        mMeizhiImageView = (ImageView) find(R.id.meizhi_image_view);
 
         mMeizhiImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,7 +92,6 @@ public class CategoryFragment extends Fragment implements CategoryContract.View{
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mViewPager.setCurrentItem(0);
-        return v;
     }
 
     @Override
