@@ -75,7 +75,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     /**
      * 转换Fragment
-     *  首先当前存在Fragment，并且当前Fragment不是要转换的Fragment，避免重复操作
+     * 首先当前存在Fragment，并且当前Fragment不是要转换的Fragment，避免重复操作
      * @param fragment 需要转换的Fargment
      */
     public void switchFragment(Fragment fragment) {

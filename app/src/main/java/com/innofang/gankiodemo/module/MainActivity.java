@@ -59,7 +59,7 @@ public class MainActivity extends SingleFragmentActivity
         navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         navigationView.setOnNavigationItemSelectedListener(this);
         showNavigationFab.setOnClickListener(this);
-        setTransition();
+//        setTransition();
     }
 
     @Override
@@ -68,7 +68,7 @@ public class MainActivity extends SingleFragmentActivity
         switch (item.getItemId()) {
             case R.id.nav_daily_gank:
                 switchFragment(getFragmentFromCache(KEY_DAILY_GANK));
-                setTransition();
+//                setTransition();
                 break;
             case R.id.nav_category:
                 switchFragment(getFragmentFromCache(KEY_CATEGORY));
@@ -103,8 +103,9 @@ public class MainActivity extends SingleFragmentActivity
     private void setTransition() {
         Transition transition = TransitionInflater
                 .from(this)
-                .inflateTransition(R.transition.explode); /* 爆炸效果 */
-//                .inflateTransition(R.transition.slide); /* 滑动效果 */
+//                .inflateTransition(R.transition.explode); /* 爆炸效果 */
+                .inflateTransition(R.transition.slide); /* 滑动效果 */
+//                .inflateTransition(R.transition.fade); /* 淡化效果 */
 
         /* 退出时使用 */
         getWindow().setExitTransition(transition);
