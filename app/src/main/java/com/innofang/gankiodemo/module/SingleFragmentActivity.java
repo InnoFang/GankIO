@@ -8,6 +8,7 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +22,7 @@ import android.view.Window;
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     private FragmentManager mFragmentManager;
-    private Fragment mFragment;
+    private Fragment mCurrentFragment;
 
     protected abstract Fragment createFragment();
 
@@ -46,12 +47,12 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
 
         mFragmentManager = getSupportFragmentManager();
-        mFragment = mFragmentManager.findFragmentById(getFragmentContainerId());
+        mCurrentFragment = mFragmentManager.findFragmentById(getFragmentContainerId());
 
-        if (null == mFragment) {
-            mFragment = createFragment();
+        if (null == mCurrentFragment) {
+            mCurrentFragment = createFragment();
             mFragmentManager.beginTransaction()
-                    .add(getFragmentContainerId(), mFragment)
+                    .add(getFragmentContainerId(), mCurrentFragment)
                     .commit();
         }
     }
@@ -78,12 +79,27 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
      * @param fragment 需要转换的Fargment
      */
     public void switchFragment(Fragment fragment) {
-        if (mFragment == null
-                || !fragment.getClass().getName().equals(mFragment.getClass().getName())) {
-            mFragmentManager.beginTransaction()
-                    .replace(getFragmentContainerId(), fragment)
-                    .commit();
-            mFragment = fragment;
+        if (mCurrentFragment == null
+                || !fragment.getClass().getName().equals(mCurrentFragment.getClass().getName())) {
+            FragmentTransaction fragmentTransaction = mFragmentManager
+                    .beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in,
+                            android.R.anim.fade_out);
+            if (!fragment.isAdded()) { // 检查 fragment 是否被添加
+                // 隐藏当前 mCurrentFragment，add fragment 到 Activity 中
+                fragmentTransaction
+                        .hide(mCurrentFragment)
+                        .add(getFragmentContainerId(), fragment)
+                        .commit();
+                mCurrentFragment = fragment;
+            } else {
+                // 隐藏当前 mCurrentFragment，显示 fragment
+                fragmentTransaction
+                        .hide(mCurrentFragment)
+                        .show(fragment)
+                        .commit();
+                mCurrentFragment = fragment;
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.innofang.gankiodemo.module.dailygank;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -54,7 +53,6 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG, "onCreate: is called");
         mAdapter = new DailyGankAdapter(getActivity(), new ArrayList<Luck.ResultsBean>(0));
         mPresenter = new DailyGankPresenter(this);
         setHasOptionsMenu(true);
@@ -63,7 +61,6 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG, "onCreateView: is called");
         View view = inflater.inflate(R.layout.fragment_daily_gank, container, false);
         initView(view);
         mPresenter.loadingDailyGank();
@@ -168,14 +165,12 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.i(TAG, "onScrolled: is called");
                 GridLayoutManager layoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
                 if (!mIsLoadingMore && visibleItemCount > 0
                         && lastVisibleItem >= totalItemCount - 1) {
-                    Log.i(TAG, "onScrollStateChanged: bottom");
                     mPresenter.loadingDailyGank();
                     mIsLoadingMore = true;
                 }
@@ -186,7 +181,6 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     @Override
     public void showEmptyOrError(String error) {
         if (null != error) {
-            Log.i(TAG, error);
             Snackbar.make(mToolbar, error, Snackbar.LENGTH_LONG).show();
         }
     }
@@ -200,7 +194,6 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
     @Override
     public void onResume() {
         super.onResume();
-        Log.i(TAG, "onResume: is called");
         if (mPresenter != null) {
             mPresenter.start();
         }
@@ -208,52 +201,10 @@ public class DailyGankFragment extends Fragment implements DailyGankContract.Vie
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "onDestroy: is called");
         if (mPresenter != null) {
             mPresenter.destroy();
         }
         super.onDestroy();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Log.i(TAG, "onAttach: ");
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.i(TAG, "onActivityCreated: ");
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart: ");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop: ");
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        Log.i(TAG, "onDestroyView: ");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.i(TAG, "onDetach: ");
-    }
 }
