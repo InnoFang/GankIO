@@ -9,7 +9,7 @@ import android.transition.Transition;
 import android.transition.TransitionInflater;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.module.FragmentContainerActivity;
+import com.innofang.gankiodemo.module.base.FragmentContainerActivity;
 
 public class GankDetailActivity extends FragmentContainerActivity {
 

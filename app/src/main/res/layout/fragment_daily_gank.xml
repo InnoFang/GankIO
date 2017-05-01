@@ -63,7 +63,7 @@
 
     <fragment
         android:id="@+id/date_picker_fragment"
-        android:name="com.innofang.gankiodemo.module.dailygank.datepicker.DatePickerFragment"
+        android:name="com.innofang.gankiodemo.module.main.dailygank.datepicker.DatePickerFragment"
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"/>

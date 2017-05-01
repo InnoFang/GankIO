@@ -1,8 +1,8 @@
 package com.innofang.gankiodemo.module.search;
 
 import com.innofang.gankiodemo.bean.GankSearch;
-import com.innofang.gankiodemo.module.BasePresenter;
-import com.innofang.gankiodemo.module.BaseView;
+import com.innofang.gankiodemo.module.base.BasePresenter;
+import com.innofang.gankiodemo.module.base.BaseView;
 
 import java.util.List;
 

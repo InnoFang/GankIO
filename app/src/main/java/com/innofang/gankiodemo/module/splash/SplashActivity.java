@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.innofang.gankiodemo.module.MainActivity;
+import com.innofang.gankiodemo.module.main.MainActivity;
 
 /**
  * 闪屏页显示，显示时间为3秒

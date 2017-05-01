@@ -23,11 +23,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.MainActivity">
+            android:name=".module.main.MainActivity">
         </activity>
         <activity
             android:name=".module.gankdetail.GankDetailActivity"
-            android:parentActivityName=".module.MainActivity"
+            android:parentActivityName=".module.main.MainActivity"
             android:theme="@style/ImmersiveStatueBarStyle">
         </activity>
         <activity
@@ -39,7 +39,7 @@
         </activity>
         <activity
             android:name=".module.search.SearchActivity"
-            android:parentActivityName=".module.MainActivity">
+            android:parentActivityName=".module.main.MainActivity">
         </activity>
         <activity android:name=".module.imageshower.ImageShowerActivity">
         </activity>
