@@ -18,6 +18,7 @@ import com.innofang.gankiodemo.module.main.category.CategoryFragment;
 import com.innofang.gankiodemo.module.main.collection.CollectionsFragment;
 import com.innofang.gankiodemo.module.main.dailygank.DailyGankFragment;
 import com.innofang.gankiodemo.module.main.setting.SettingFragment;
+import com.innofang.gankiodemo.utils.BottomNavigationViewHelper;
 import com.innofang.gankiodemo.utils.ToastUtil;
 import com.konifar.fab_transformation.FabTransformation;
 
@@ -57,6 +58,7 @@ public class MainActivity extends FragmentContainerActivity
         super.onCreate(savedInstanceState);
         showNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
         navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        BottomNavigationViewHelper.disableShiftMode(navigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
         showNavigationFab.setOnClickListener(this);
 //        setTransition();
