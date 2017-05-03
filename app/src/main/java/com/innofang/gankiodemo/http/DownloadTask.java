@@ -19,7 +19,7 @@ import okhttp3.Response;
 /**
  * Author: Inno Fang
  * Time: 2017/2/16 19:11
- * Description:
+ * Description: 多线程断点续传下载
  */
 
 public class DownloadTask extends AsyncTask<String, Integer, Integer> {
