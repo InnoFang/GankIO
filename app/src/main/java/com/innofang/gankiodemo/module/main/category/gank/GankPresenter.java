@@ -3,17 +3,11 @@ package com.innofang.gankiodemo.module.main.category.gank;
 import android.util.Log;
 
 import com.innofang.gankiodemo.bean.Gank;
-import com.innofang.gankiodemo.constant.URL;
-import com.innofang.gankiodemo.http.LoadingCallback;
-import com.innofang.gankiodemo.http.RemoteManager;
-import com.innofang.gankiodemo.utils.JSONParser;
+import com.innofang.gankiodemo.http.Api;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -42,31 +36,10 @@ public class GankPresenter implements GankContract.Presenter {
     @Override
     public void requestGank(final String category) {
         sPage++;
-        Observable.create(new ObservableOnSubscribe<Gank>() {
-            @Override
-            public void subscribe(final ObservableEmitter<Gank> e) throws Exception {
-                RemoteManager.getInstance().asyncRequest(
-                        URL.getCategoryData(category, sPage), new LoadingCallback() {
-                            @Override
-                            public void onUnavailable() {
-                                mView.showEmptyOrError("加载失败");
-                                mView.setLoadingIndicator(false);
-                            }
-
-                            @Override
-                            public void onLoad(String json) {
-                                Gank gank = JSONParser.parseJson(json, Gank.class);
-                                if (null != gank) {
-                                    Log.i(TAG, "gank = " + gank);
-                                    e.onNext(gank);
-                                }
-                            }
-                        });
-            }
-        }).subscribeOn(Schedulers.io())
+        Api.getGankService().getCategoryData(category, 15, sPage)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Gank>() {
-
                     @Override
                     public void onSubscribe(Disposable d) {
 
@@ -76,7 +49,7 @@ public class GankPresenter implements GankContract.Presenter {
                     public void onNext(Gank value) {
                         Log.i(TAG, "onNext: " + value.getResults().toString());
                         if (null != value.getResults()) {
-                            if (mList.size() == 0){
+                            if (mList.size() == 0) {
                                 mList.addAll(value.getResults());
                             } else {
                                 // 删除footer

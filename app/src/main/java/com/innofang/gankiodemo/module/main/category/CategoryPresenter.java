@@ -9,13 +9,8 @@ import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.constant.URL;
-import com.innofang.gankiodemo.http.LoadingCallback;
-import com.innofang.gankiodemo.http.RemoteManager;
-import com.innofang.gankiodemo.utils.JSONParser;
+import com.innofang.gankiodemo.http.Api;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -39,26 +34,8 @@ public class CategoryPresenter implements CategoryContract.Presenter {
 
     @Override
     public void requestRandomMeizhi(final ImageView imageView) {
-        Observable.create(new ObservableOnSubscribe<Luck>() {
-            @Override
-            public void subscribe(final ObservableEmitter<Luck> e) throws Exception {
-                RemoteManager.getInstance().asyncRequest(URL.DATA_RANDOM_MEIZHI, new LoadingCallback() {
-                    @Override
-                    public void onUnavailable() {
-                        mView.showErrorOrEmptyInfo("图片获取失败");
-                    }
-
-                    @Override
-                    public void onLoad(String json) {
-                        Luck luck = JSONParser.parseJson(json, Luck.class);
-                        if (null != luck) {
-                            Log.i(TAG, luck.toString());
-                            e.onNext(luck);
-                        }
-                    }
-                });
-            }
-        }).subscribeOn(Schedulers.io())
+        Api.getGankService().getRadomLuck(1)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Luck>() {
                     @Override
