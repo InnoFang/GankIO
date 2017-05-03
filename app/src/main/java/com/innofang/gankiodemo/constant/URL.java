@@ -8,6 +8,8 @@ package com.innofang.gankiodemo.constant;
 
 public class URL {
 
+
+
     // 每日数据请求URL(须在后面添加日期)
     public static final String DAILY_DATA = "http://gank.io/api/day/";
 

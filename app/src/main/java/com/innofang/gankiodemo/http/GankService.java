@@ -22,6 +22,10 @@ public interface GankService {
     @GET("day/{date}")
     Observable<GankDate> getDate(@Path("date") String date);
 
+    // 获取每日数据或历史
+    @GET("day/history")
+    Observable<GankDate> getHistory();
+
     // 分类数据，请求福利图片个数：10 页数：1
     @GET("data/福利/{count}/{page}")
     Observable<Luck> getLuck(@Path("count") int count,

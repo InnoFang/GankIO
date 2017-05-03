@@ -3,14 +3,8 @@ package com.innofang.gankiodemo.module.main.dailygank.datepicker;
 import android.util.Log;
 
 import com.innofang.gankiodemo.bean.GankDate;
-import com.innofang.gankiodemo.constant.URL;
-import com.innofang.gankiodemo.http.LoadingCallback;
-import com.innofang.gankiodemo.http.RemoteManager;
-import com.innofang.gankiodemo.utils.JSONParser;
+import com.innofang.gankiodemo.http.Api;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -34,26 +28,8 @@ public class GankDatePickerPresenter implements GankDatePickerContract.Presenter
 
     @Override
     public void loadingGankDate() {
-        Observable.create(new ObservableOnSubscribe<GankDate>() {
-            @Override
-            public void subscribe(final ObservableEmitter<GankDate> e) throws Exception {
-                RemoteManager.getInstance().asyncRequest(URL.HISTORY, new LoadingCallback() {
-                    @Override
-                    public void onUnavailable() {
-
-                    }
-
-                    @Override
-                    public void onLoad(String json) {
-                        GankDate gankDate = JSONParser.parseJson(json, GankDate.class);
-                        if (null != gankDate){
-                            Log.i(TAG, "onLoad: " + gankDate);
-                            e.onNext(gankDate);
-                        }
-                    }
-                });
-            }
-        }).subscribeOn(Schedulers.io())
+        Api.getGankService().getHistory()
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<GankDate>() {
                     @Override

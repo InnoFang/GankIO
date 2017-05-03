@@ -62,7 +62,8 @@ public class DailyGankPresenter implements DailyGankContract.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mView.setLoadingIndicator(false);
+                        mView.showEmptyOrError("加载失败");
                     }
 
                     @Override
