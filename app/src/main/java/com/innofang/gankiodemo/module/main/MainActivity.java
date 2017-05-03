@@ -1,16 +1,13 @@
 package com.innofang.gankiodemo.module.main;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.base.FragmentContainerActivity;
@@ -20,12 +17,11 @@ import com.innofang.gankiodemo.module.main.dailygank.DailyGankFragment;
 import com.innofang.gankiodemo.module.main.setting.SettingFragment;
 import com.innofang.gankiodemo.utils.BottomNavigationViewHelper;
 import com.innofang.gankiodemo.utils.ToastUtil;
-import com.konifar.fab_transformation.FabTransformation;
 
 import java.util.HashMap;
 
 public class MainActivity extends FragmentContainerActivity
-        implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+        implements BottomNavigationView.OnNavigationItemSelectedListener/*, View.OnClickListener*/ {
 
     private static final String TAG = "MainActivity";
     private static final String KEY_DAILY_GANK = "DailyGankFragment";
@@ -34,7 +30,7 @@ public class MainActivity extends FragmentContainerActivity
     private static final String KEY_SETTING = "SettingFragment";
 
 
-    public FloatingActionButton showNavigationFab;
+//    public FloatingActionButton showNavigationFab;
     public BottomNavigationView navigationView;
     private HashMap<String, Fragment> mFragmentCache = new HashMap<>();
 
@@ -56,17 +52,17 @@ public class MainActivity extends FragmentContainerActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
+//        showNavigationFab = (FloatingActionButton) findViewById(R.id.show_navigation_fab);
         navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
-        BottomNavigationViewHelper.disableShiftMode(navigationView);
+//        BottomNavigationViewHelper.disableShiftMode(navigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
-        showNavigationFab.setOnClickListener(this);
+//        showNavigationFab.setOnClickListener(this);
 //        setTransition();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mHandler.removeCallbacks(mRunnable);
+//        mHandler.removeCallbacks(mRunnable);
         switch (item.getItemId()) {
             case R.id.nav_daily_gank:
                 switchFragment(getFragmentFromCache(KEY_DAILY_GANK));
@@ -82,7 +78,7 @@ public class MainActivity extends FragmentContainerActivity
                 switchFragment(getFragmentFromCache(KEY_SETTING));
                 break;
         }
-        mHandler.postDelayed(mRunnable, 5000);
+//        mHandler.postDelayed(mRunnable, 5000);
         return true;
     }
 
@@ -138,7 +134,7 @@ public class MainActivity extends FragmentContainerActivity
         mBackPressed = System.currentTimeMillis();
     }
 
-
+/*
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -168,5 +164,5 @@ public class MainActivity extends FragmentContainerActivity
             FabTransformation.with(showNavigationFab)
                     .transformFrom(navigationView);
         }
-    };
+    };*/
 }

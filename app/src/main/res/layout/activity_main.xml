@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <android.support.design.widget.FloatingActionButton
+   <!-- <android.support.design.widget.FloatingActionButton
         android:id="@+id/show_navigation_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,23 +21,22 @@
         android:layout_marginEnd="30dp"
         android:src="@drawable/ic_fab_navigation"
         app:backgroundTint="@color/colorFAB"
-        app:fabSize="normal"/>
-
-    <io.codetail.widget.RevealFrameLayout
+        app:fabSize="normal"/>-->
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@android:color/white"
+        app:menu="@menu/navigation_drawer"/>
+   <!-- <io.codetail.widget.RevealFrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         >
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottom_navigation_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:visibility="gone"
-            app:itemBackground="@android:color/white"
-            app:menu="@menu/navigation_drawer"/>
-    </io.codetail.widget.RevealFrameLayout>
+
+    </io.codetail.widget.RevealFrameLayout>-->
 
 </RelativeLayout>
 
