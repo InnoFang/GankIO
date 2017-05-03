@@ -12,10 +12,8 @@ import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.constant.URL;
-import com.innofang.gankiodemo.http.LoadingCallback;
-import com.innofang.gankiodemo.http.RemoteManager;
+import com.innofang.gankiodemo.http.Api;
 import com.innofang.gankiodemo.utils.CloseUtils;
-import com.innofang.gankiodemo.utils.JSONParser;
 import com.innofang.gankiodemo.utils.StringFormatUtil;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
@@ -30,6 +28,7 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -49,38 +48,14 @@ public class GankDetailPresenter implements GankDetailContract.Presenter {
     }
 
     @Override
-    public void loadingGank(final String url, final ImageView imageView) {
-        Observable.create(new ObservableOnSubscribe<GankDetail>() {
-            @Override
-            public void subscribe(final ObservableEmitter<GankDetail> e) throws Exception {
-                RemoteManager.getInstance().asyncRequest(url, new LoadingCallback() {
-                    @Override
-                    public void onUnavailable() {
-
-                    }
-
-                    @Override
-                    public void onLoad(String json) {
-                        GankDetail gankDetail = JSONParser.parseJson(json, GankDetail.class);
-                        if (null != gankDetail) {
-                            Log.i(TAG, gankDetail.toString());
-                            e.onNext(gankDetail);
-                        }
-                    }
-                });
-            }
-        }).subscribeOn(Schedulers.io())
+    public void loadingGank(final String date, final ImageView imageView) {
+        Api.getGankService().getDate(date)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<GankDetail>() {
+                .subscribe(new Consumer<GankDetail>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(GankDetail value) {
-                        Log.i(TAG, "onNext: " + value.getResults().toString());
-                        List<GankDetail.ResultsBean.福利Bean> luck = value.getResults().get福利();
+                    public void accept(GankDetail gankDetail) throws Exception {
+                        List<GankDetail.ResultsBean.福利Bean> luck = gankDetail.getResults().get福利();
                         if (null != luck) {
                             String imgUrl = luck.get(0).getUrl() + URL.REQUEST_IMAGE_POSTFIX_FOR_SPANNER;
                             Log.i(TAG, "onNext: imgUrl = " + imgUrl);
@@ -92,28 +67,16 @@ public class GankDetailPresenter implements GankDetailContract.Presenter {
                                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                                     .into(imageView);
                         }
-                        showGankOfAndroid(value.getResults().getAndroid());
-                        showGankOfIOS(value.getResults().getIOS());
-                        showGankOfWeb(value.getResults().get前端());
-                        showGankOfExpand(value.getResults().get拓展资源());
-                        showGankOfRecommend(value.getResults().get瞎推荐());
-                        showGankOfApp(value.getResults().getApp());
-                        showGankOfVideo(value.getResults().get休息视频());
+                        showGankOfAndroid(gankDetail.getResults().getAndroid());
+                        showGankOfIOS(gankDetail.getResults().getIOS());
+                        showGankOfWeb(gankDetail.getResults().get前端());
+                        showGankOfExpand(gankDetail.getResults().get拓展资源());
+                        showGankOfRecommend(gankDetail.getResults().get瞎推荐());
+                        showGankOfApp(gankDetail.getResults().getApp());
+                        showGankOfVideo(gankDetail.getResults().get休息视频());
                         mView.setLoadingIndicator(false);
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
-
     }
 
     @Override

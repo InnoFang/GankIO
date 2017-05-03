@@ -13,13 +13,13 @@ import com.innofang.gankiodemo.module.base.FragmentContainerActivity;
 
 public class GankDetailActivity extends FragmentContainerActivity {
 
-    private static final String EXTRA_GANK_URL =
-            "com.innofang.gankiodemo.ui.activity.gank_url";
+    private static final String EXTRA_GANK_DATE =
+            "com.innofang.gankiodemo.ui.activity.gank_date";
 
     @Override
     protected Fragment createFragment() {
-        String url = getIntent().getStringExtra(EXTRA_GANK_URL);
-        return GankDetailFragment.newInstance(url);
+        String date = getIntent().getStringExtra(EXTRA_GANK_DATE);
+        return GankDetailFragment.newInstance(date);
     }
 
     @Override
@@ -32,9 +32,9 @@ public class GankDetailActivity extends FragmentContainerActivity {
         return R.id.fragment_container;
     }
 
-    public static Intent newIntent(Context context, String url) {
+    public static Intent newIntent(Context context, String date) {
         Intent intent = new Intent(context, GankDetailActivity.class);
-        intent.putExtra(EXTRA_GANK_URL, url);
+        intent.putExtra(EXTRA_GANK_DATE, date);
         return intent;
     }
 

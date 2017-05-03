@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +87,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     @Override
                     public void onClick(View v) {
                         String date = StringFormatUtil.formatPublishAt(luckResult.getPublishedAt());
-                        String url = URL.DAILY_DATA + date;
                         ViewCompat.setTransitionName(
                                 ((DailyGankHolder) holder).mMeizhiImageView, "meizhi");
                         ActivityOptionsCompat options = ActivityOptionsCompat
@@ -96,7 +94,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                                         (Activity) mContext,
                                         ((DailyGankHolder) holder).mMeizhiImageView,
                                         "meizhi");
-                        mOnShowDailyGankClickListener.onClick(url, options);
+                        mOnShowDailyGankClickListener.onClick(date, options);
                     }
                 });
             }
@@ -147,6 +145,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     public interface OnShowDailyGankClickListener {
-        void onClick(String url, ActivityOptionsCompat options);
+        void onClick(String date, ActivityOptionsCompat options);
     }
 }

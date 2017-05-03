@@ -55,9 +55,9 @@ public class DatePickerFragment extends BaseFragment implements GankDatePickerCo
         mAdapter.notifyDataSetChanged();
         mAdapter.setOnClickItemListener(new GankDatePickerAdapter.OnClickItemListener() {
             @Override
-            public void onClick(String url) {
+            public void onClick(String date) {
                 getActivity().onBackPressed();
-                startActivity(GankDetailActivity.newIntent(getActivity(), url));
+                startActivity(GankDetailActivity.newIntent(getActivity(), date));
             }
         });
     }

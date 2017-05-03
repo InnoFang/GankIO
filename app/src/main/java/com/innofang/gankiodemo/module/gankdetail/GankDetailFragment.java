@@ -44,9 +44,9 @@ import java.util.List;
 
 public class GankDetailFragment extends BaseFragment implements GankDetailContract.View {
 
-    private static final String ARG_GANK_URL = "gank_url";
+    private static final String ARG_GANK_DATE = "gank_date";
 
-    private String mGankUrl,
+    private String mGankDate,
             mImageUrl;
     private ImageView mMeizhiImageView;
     private TextView mAndroid,
@@ -79,9 +79,9 @@ public class GankDetailFragment extends BaseFragment implements GankDetailContra
     };
     private boolean isRunning = false;  // 用与判断Service是否绑定
 
-    public static Fragment newInstance(String url) {
+    public static Fragment newInstance(String date) {
         Bundle args = new Bundle();
-        args.putString(ARG_GANK_URL, url);
+        args.putString(ARG_GANK_DATE, date);
         GankDetailFragment fragment = new GankDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -90,7 +90,7 @@ public class GankDetailFragment extends BaseFragment implements GankDetailContra
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGankUrl = getArguments().getString(ARG_GANK_URL);
+        mGankDate = getArguments().getString(ARG_GANK_DATE);
         mPresenter = new GankDetailPresenter(this);
         mImageUrl = null;
         setHasOptionsMenu(true);
@@ -139,13 +139,13 @@ public class GankDetailFragment extends BaseFragment implements GankDetailContra
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadingGank(mGankUrl, mMeizhiImageView);
+                mPresenter.loadingGank(mGankDate, mMeizhiImageView);
             }
         });*/
-        mPresenter.loadingGank(mGankUrl, mMeizhiImageView);
+        mPresenter.loadingGank(mGankDate, mMeizhiImageView);
 
         Toolbar toolbar = (Toolbar) find(R.id.tool_bar);
-        String title = (String) mGankUrl.subSequence(mGankUrl.length() - 10, mGankUrl.length());
+        String title = (String) mGankDate.subSequence(mGankDate.length() - 10, mGankDate.length());
         toolbar.setTitle(title);
 
         mMeizhiImageView.setOnClickListener(new View.OnClickListener() {

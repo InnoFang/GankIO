@@ -102,8 +102,8 @@ public class DailyGankFragment extends BaseFragment implements DailyGankContract
         mAdapter.setOnShowDailyGankClickListener(
                 new DailyGankAdapter.OnShowDailyGankClickListener() {
             @Override
-            public void onClick(String url, ActivityOptionsCompat options) {
-                startActivity(GankDetailActivity.newIntent(getActivity(), url)
+            public void onClick(String date, ActivityOptionsCompat options) {
+                startActivity(GankDetailActivity.newIntent(getActivity(), date)
                         , options.toBundle());
             }
         });

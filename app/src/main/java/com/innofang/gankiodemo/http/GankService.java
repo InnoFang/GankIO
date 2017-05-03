@@ -2,6 +2,7 @@ package com.innofang.gankiodemo.http;
 
 import com.innofang.gankiodemo.bean.Gank;
 import com.innofang.gankiodemo.bean.GankDate;
+import com.innofang.gankiodemo.bean.GankDetail;
 import com.innofang.gankiodemo.bean.GankSearch;
 import com.innofang.gankiodemo.bean.Luck;
 
@@ -20,7 +21,7 @@ public interface GankService {
 
     // 获取每日数据或历史
     @GET("day/{date}")
-    Observable<GankDate> getDate(@Path("date") String date);
+    Observable<GankDetail> getDate(@Path("date") String date);
 
     // 获取每日数据或历史
     @GET("day/history")

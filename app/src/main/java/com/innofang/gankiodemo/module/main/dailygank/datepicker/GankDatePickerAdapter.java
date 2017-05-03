@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.innofang.gankiodemo.R;
-import com.innofang.gankiodemo.constant.URL;
 import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
@@ -71,8 +70,7 @@ public class GankDatePickerAdapter extends RecyclerView.Adapter<GankDatePickerAd
                     @Override
                     public void onClick(View v) {
                         String d = StringFormatUtil.formatPublishAt(StringFormatUtil.formatPublishAt(date));
-                        String url = URL.DAILY_DATA + d;
-                        mOnClickItemListener.onClick(url);
+                        mOnClickItemListener.onClick(d);
                     }
                 });
             }
@@ -80,6 +78,6 @@ public class GankDatePickerAdapter extends RecyclerView.Adapter<GankDatePickerAd
     }
 
     public interface OnClickItemListener{
-        void onClick(String url);
+        void onClick(String date);
     }
 }

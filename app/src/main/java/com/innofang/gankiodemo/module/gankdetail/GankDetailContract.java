@@ -18,7 +18,7 @@ import java.util.List;
 public class GankDetailContract {
 
     public interface Presenter extends BasePresenter{
-        void loadingGank(String url, ImageView imageView);
+        void loadingGank(String date, ImageView imageView);
         void showGankOfAndroid(List<GankDetail.ResultsBean.AndroidBean> list);
         void showGankOfIOS(List<GankDetail.ResultsBean.IOSBean> list);
         void showGankOfApp(List<GankDetail.ResultsBean.AppBean> list);
