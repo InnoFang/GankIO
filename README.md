@@ -1,12 +1,12 @@
 # GankIO
-Gank.io unoffical app
+[Gank.io](http://gank.io) unoffical app
 
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/app/src/main/res/drawable/icon.png" height="100px" width="100px"/>
 
 [Download Apk](https://github.com/InnoFang/GankIO/blob/master/apk/gankio.apk?raw=true)
 
-### MVP + OkHttp + RxJava + Glide
+### MVP + OkHttp3 + RxJava2 + Retrofit2 + Glide
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/app.gif" height="500px" width="300px"/>
 
@@ -21,10 +21,15 @@ Gank.io unoffical app
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
+
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'com.google.code.gson:gson:2.7'
+
     compile 'konifar:fab-transformation:1.0.0'
     compile files('libs/nineoldandroids-2.4.0.jar')
 ```
