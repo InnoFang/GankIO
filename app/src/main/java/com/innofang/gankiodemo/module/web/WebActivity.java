@@ -143,6 +143,6 @@ public class WebActivity extends FragmentContainerActivity {
                 startActivity(Intent.createChooser(intent, "请选择浏览器"));
                 break;
         }
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 }

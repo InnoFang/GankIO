@@ -7,18 +7,20 @@
         android:id="@+id/action_collection"
         android:icon="@drawable/ic_menu_dislike"
         android:title="@string/action_dislike"
-        app:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/action_share"
         android:title="@string/action_share"
-        app:showAsAction="never"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="ifRoom"
         />
 
     <item
         android:id="@+id/action_open_browser"
         android:title="@string/action_open_browser"
-        app:showAsAction="never"
+        android:icon="@drawable/ic_browser"
+        app:showAsAction="ifRoom"
         />
 </menu>
