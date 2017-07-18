@@ -89,6 +89,7 @@ public class WebActivity extends FragmentContainerActivity {
         super.onBackPressed();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_web, menu);
@@ -101,11 +102,13 @@ public class WebActivity extends FragmentContainerActivity {
                 item.setTitle(R.string.action_like);
             }
         }
+        Log.i(TAG, "onCreateOptionsMenu: is called");
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.i(TAG, "onOptionsItemSelected: is called");
         Intent intent;
         String url = mWebFragment.getCurrentUrl();
         Uri uri = Uri.parse(url);

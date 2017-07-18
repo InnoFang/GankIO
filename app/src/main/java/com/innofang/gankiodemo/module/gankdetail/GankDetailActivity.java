@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.base.FragmentContainerActivity;
@@ -45,14 +43,6 @@ public class GankDetailActivity extends FragmentContainerActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        Transition transition = TransitionInflater
-                .from(this)
-                .inflateTransition(R.transition.slide); /* 滑动效果 */
-
-        /* 退出时使用 */
-        getWindow().setExitTransition(transition);
-        /* 第一次进入时使用 */
-        getWindow().setEnterTransition(transition);
     }
 
 }
