@@ -110,6 +110,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public TextView mDateTextView;
         public ImageView mMeizhiImageView;
+        private String date;
 
         public DailyGankHolder(View itemView) {
             super(itemView);
@@ -118,7 +119,7 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
 
         public void bindHolder(Luck.ResultsBean results) {
-            String date = StringFormatUtil.formatPublishAt(results.getPublishedAt());
+            date = StringFormatUtil.formatPublishAt(results.getPublishedAt());
             String url = results.getUrl() + URL.REQUEST_IMAGE_POSTFIX;
             mDateTextView.setText(date);
             Glide.with(mContext)
@@ -127,6 +128,10 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .crossFade()
                     .into(mMeizhiImageView);
+        }
+
+        public String getDate() {
+            return date;
         }
     }
 

@@ -21,6 +21,7 @@ import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.gankdetail.GankDetailActivity;
 import com.innofang.gankiodemo.module.search.SearchActivity;
+import com.innofang.gankiodemo.utils.OnRecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,6 +88,22 @@ public class DailyGankFragment extends BaseFragment implements DailyGankContract
             }
         });
         mDailyGankRecyclerView.setAdapter(mAdapter);
+        mDailyGankRecyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(mDailyGankRecyclerView){
+
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder vh) {
+                if (vh instanceof DailyGankAdapter.DailyGankHolder) {
+                    DailyGankAdapter.DailyGankHolder holder =
+                            (DailyGankAdapter.DailyGankHolder) vh;
+                    startActivity(GankDetailActivity.newIntent(getActivity(), holder.getDate()));
+                }
+            }
+
+            @Override
+            public void onItemLongClick(RecyclerView.ViewHolder vh) {
+
+            }
+        });
 
         mSwipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
@@ -99,14 +116,16 @@ public class DailyGankFragment extends BaseFragment implements DailyGankContract
             }
         });
 
-        mAdapter.setOnShowDailyGankClickListener(
+      /*
+      // debug: the click listener of recycler view
+      mAdapter.setOnShowDailyGankClickListener(
                 new DailyGankAdapter.OnShowDailyGankClickListener() {
             @Override
             public void onClick(String date, ActivityOptionsCompat options) {
                 startActivity(GankDetailActivity.newIntent(getActivity(), date)
                         , options.toBundle());
             }
-        });
+        });*/
 
         mToolbar = (Toolbar) find(R.id.tool_bar);
         mDrawerLayout = (DrawerLayout) find(R.id.drawer_layout);
