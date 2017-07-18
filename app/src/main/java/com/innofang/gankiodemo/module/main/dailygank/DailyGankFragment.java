@@ -95,14 +95,23 @@ public class DailyGankFragment extends BaseFragment implements DailyGankContract
                 if (vh instanceof DailyGankAdapter.DailyGankHolder) {
                     DailyGankAdapter.DailyGankHolder holder =
                             (DailyGankAdapter.DailyGankHolder) vh;
-                    startActivity(GankDetailActivity.newIntent(getActivity(), holder.getDate()));
+
+                    ViewCompat.setTransitionName(
+                             holder.mMeizhiImageView, getString(R.string.tag_element_meizhi));
+                    ActivityOptionsCompat options = ActivityOptionsCompat
+                            .makeSceneTransitionAnimation(
+                                    getActivity(),
+                                    holder.mMeizhiImageView,
+                                    getString(R.string.tag_element_meizhi));
+
+                    startActivity(
+                            GankDetailActivity.newIntent(getActivity(), holder.getDate()),
+                            options.toBundle());
+
                 }
             }
-
             @Override
-            public void onItemLongClick(RecyclerView.ViewHolder vh) {
-
-            }
+            public void onItemLongClick(RecyclerView.ViewHolder vh) {}
         });
 
         mSwipeRefreshLayout.setColorSchemeColors(
@@ -115,17 +124,6 @@ public class DailyGankFragment extends BaseFragment implements DailyGankContract
                 mPresenter.loadingDailyGank();
             }
         });
-
-      /*
-      // debug: the click listener of recycler view
-      mAdapter.setOnShowDailyGankClickListener(
-                new DailyGankAdapter.OnShowDailyGankClickListener() {
-            @Override
-            public void onClick(String date, ActivityOptionsCompat options) {
-                startActivity(GankDetailActivity.newIntent(getActivity(), date)
-                        , options.toBundle());
-            }
-        });*/
 
         mToolbar = (Toolbar) find(R.id.tool_bar);
         mDrawerLayout = (DrawerLayout) find(R.id.drawer_layout);

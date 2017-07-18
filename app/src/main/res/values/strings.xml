@@ -28,4 +28,5 @@
     <string name="empty_view_desc">这里空空如也~</string>
     <string name="add_collection">已添加至收藏夹</string>
     <string name="delete_collection">已从收藏夹中移除</string>
+    <string name="tag_element_meizhi">meizhi</string>
 </resources>

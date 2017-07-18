@@ -7,8 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -60,7 +58,6 @@ public class MainActivity extends FragmentContainerActivity
 //        BottomNavigationViewHelper.disableShiftMode(navigationView);
         navigationView.setOnNavigationItemSelectedListener(this);
         showNavigationFab.setOnClickListener(this);
-        setTransition();
     }
 
     @Override
@@ -99,21 +96,6 @@ public class MainActivity extends FragmentContainerActivity
             mFragmentCache.put(key, fragment);
         }
         return mFragmentCache.get(key);
-    }
-
-    private void setTransition() {
-        Transition transition = TransitionInflater
-                .from(this)
-//                .inflateTransition(R.transition.explode); /* 爆炸效果 */
-                .inflateTransition(R.transition.slide); /* 滑动效果 */
-//                .inflateTransition(R.transition.fade); /* 淡化效果 */
-
-        /* 退出时使用 */
-        getWindow().setExitTransition(transition);
-        /* 再次进入时使用 */
-        getWindow().setReenterTransition(transition);
-        /* 第一次进入时使用 */
-        getWindow().setEnterTransition(transition);
     }
 
     private static final int TIME_INTERVAL = 2000;

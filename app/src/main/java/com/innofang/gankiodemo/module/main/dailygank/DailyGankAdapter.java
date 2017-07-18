@@ -1,9 +1,6 @@
 package com.innofang.gankiodemo.module.main.dailygank;
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +32,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private Context mContext;
     private List<Luck.ResultsBean> mLuckResutList;
-    private OnShowDailyGankClickListener mOnShowDailyGankClickListener;
 
     public DailyGankAdapter(Context context, List<Luck.ResultsBean> luckResutList) {
         mContext = context;
@@ -44,11 +40,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     public void setList(List<Luck.ResultsBean> list) {
         mLuckResutList = list;
-    }
-
-
-    public void setOnShowDailyGankClickListener(OnShowDailyGankClickListener onShowDailyGankClickListener) {
-        mOnShowDailyGankClickListener = onShowDailyGankClickListener;
     }
 
     @Override
@@ -82,22 +73,6 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof DailyGankHolder) {
             final Luck.ResultsBean luckResult = mLuckResutList.get(position);
             ((DailyGankHolder) holder).bindHolder(luckResult);
-            if (null != mOnShowDailyGankClickListener) {
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String date = StringFormatUtil.formatPublishAt(luckResult.getPublishedAt());
-                        ViewCompat.setTransitionName(
-                                ((DailyGankHolder) holder).mMeizhiImageView, "meizhi");
-                        ActivityOptionsCompat options = ActivityOptionsCompat
-                                .makeSceneTransitionAnimation(
-                                        (Activity) mContext,
-                                        ((DailyGankHolder) holder).mMeizhiImageView,
-                                        "meizhi");
-                        mOnShowDailyGankClickListener.onClick(date, options);
-                    }
-                });
-            }
         }
     }
 
@@ -149,7 +124,4 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public interface OnShowDailyGankClickListener {
-        void onClick(String date, ActivityOptionsCompat options);
-    }
 }
