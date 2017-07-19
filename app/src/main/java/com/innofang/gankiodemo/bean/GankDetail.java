@@ -1,5 +1,6 @@
 package com.innofang.gankiodemo.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,7 +9,7 @@ import java.util.List;
  * Description: 每日干货
  */
 
-public class GankDetail {
+public class GankDetail implements Serializable{
 
     /**
      * category : ["前端","休息视频","Android","iOS","瞎推荐","App","福利","拓展资源"]
@@ -44,7 +45,7 @@ public class GankDetail {
         this.category = category;
     }
 
-    public static class ResultsBean {
+    public static class ResultsBean implements Serializable{
         private List<AndroidBean> Android;
         private List<AppBean> App;
         private List<IOSBean> iOS;
@@ -132,7 +133,7 @@ public class GankDetail {
             this.福利 = 福利;
         }
 
-        public static class AndroidBean {
+        public static class AndroidBean implements Serializable {
             /**
              * _id : 5885c080421aa95ea7cbcf0d
              * createdAt : 2017-01-23T16:36:16.600Z
@@ -238,7 +239,7 @@ public class GankDetail {
             }
         }
 
-        public static class AppBean {
+        public static class AppBean implements Serializable {
             /**
              * _id : 589414c6421aa97bb3b1a371
              * createdAt : 2017-02-03T13:27:34.760Z
@@ -334,7 +335,7 @@ public class GankDetail {
             }
         }
 
-        public static class IOSBean {
+        public static class IOSBean implements Serializable{
             /**
              * _id : 5885db2b421aa95ea9de7a19
              * createdAt : 2017-01-23T18:30:03.877Z
@@ -440,7 +441,7 @@ public class GankDetail {
             }
         }
 
-        public static class 休息视频Bean {
+        public static class 休息视频Bean implements Serializable {
             /**
              * _id : 5884ba88421aa95ea9de7a11
              * createdAt : 2017-01-22T21:58:32.709Z
@@ -536,7 +537,7 @@ public class GankDetail {
             }
         }
 
-        public static class 前端Bean {
+        public static class 前端Bean implements Serializable{
             /**
              * _id : 5883618d421aa95ea7cbcefc
              * createdAt : 2017-01-21T21:26:37.143Z
@@ -632,7 +633,7 @@ public class GankDetail {
             }
         }
 
-        public static class 拓展资源Bean {
+        public static class 拓展资源Bean implements Serializable{
             /**
              * _id : 58952811421aa970bb15487b
              * createdAt : 2017-02-04T09:02:09.170Z
@@ -728,7 +729,7 @@ public class GankDetail {
             }
         }
 
-        public static class 瞎推荐Bean {
+        public static class 瞎推荐Bean implements Serializable{
             /**
              * _id : 5886eaf1421aa95ead13c4d0
              * createdAt : 2017-01-24T13:49:37.471Z
@@ -834,7 +835,7 @@ public class GankDetail {
             }
         }
 
-        public static class 福利Bean {
+        public static class 福利Bean implements Serializable{
             /**
              * _id : 58947b15421aa970bb154878
              * createdAt : 2017-02-03T20:44:05.311Z

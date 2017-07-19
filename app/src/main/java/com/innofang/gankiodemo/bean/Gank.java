@@ -1,6 +1,5 @@
 package com.innofang.gankiodemo.bean;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
  * Description:
  */
 
-public class Gank implements Serializable{
+public class Gank{
 
     /**
      * error : false
