@@ -1,12 +1,11 @@
 # GankIO
 [Gank.io](http://gank.io) unoffical app
 
+**MVP + OkHttp3 + RxJava2 + Retrofit2 + Glide**
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/app/src/main/res/drawable/icon.png" height="100px" width="100px"/>
 
 [Download Apk](https://github.com/InnoFang/GankIO/blob/master/apk/gankio.apk?raw=true)
-
-### MVP + OkHttp3 + RxJava2 + Retrofit2 + Glide
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/app.gif" height="500px" width="300px"/>
 
@@ -15,7 +14,7 @@
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
 
-## Third-party libraries used
+# Third-party libraries used
 
 ```gradle
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -34,6 +33,20 @@
     compile files('libs/nineoldandroids-2.4.0.jar')
 ```
 
-## License 
+# [License](https://github.com/InnoFang/GankIO/blob/master/LICENSE)
+   
+```
+   Copyright 2017 InnoFang
 
-   [Apache License 2.0](https://github.com/InnoFang/GankIO/blob/master/LICENSE)
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
