@@ -10,13 +10,14 @@ import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.main.setting.about.AboutFragment;
 import com.innofang.gankiodemo.utils.ToastUtil;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import java.util.Objects;
 
 /**
  * Author: Inno Fang
@@ -42,9 +43,9 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
     protected void createView(View view, @Nullable Bundle savedInstanceState) {
         ImageView icon = (ImageView) find(R.id.app_icon);
         // 将图标圆角处理
-        Glide.with(getActivity())
+        Glide.with(Objects.requireNonNull(getActivity()))
                 .load(R.drawable.icon)
-                .apply(new RequestOptions().transform(new CropCircleTransformation(getActivity())))
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
                 .into(icon);
 
         Switch modeSwitcher = (Switch) find(R.id.switch_mode);
