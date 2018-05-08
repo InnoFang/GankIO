@@ -10,7 +10,11 @@
 
 [Download Apk](https://github.com/InnoFang/GankIO/blob/master/apk/gankio.apk?raw=true)
 
+<br />
+
 <img src="https://github.com/InnoFang/GankIO/blob/master/gif/app.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/Category.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/DailyGank.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/collection.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/gankdetail.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
+
+<br />
 
 # Third-party libraries used
 
@@ -31,7 +35,7 @@
             implementation 'com.nineoldandroids:library:2.4.0'
 
 
-
+<br />
 # [License](https://github.com/InnoFang/GankIO/blob/master/LICENSE)
    
 ```
