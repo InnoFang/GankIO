@@ -11,12 +11,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
 import com.innofang.gankiodemo.constant.URL;
 import com.innofang.gankiodemo.utils.StringFormatUtil;
 
 import java.util.List;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 /**
  * Author: Inno Fang
@@ -99,9 +102,11 @@ public class DailyGankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             mDateTextView.setText(date);
             Glide.with(mContext)
                     .load(url)
-                    .skipMemoryCache(false)
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .crossFade()
+                    .apply(new RequestOptions()
+                            .skipMemoryCache(false)
+                            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    )
+                    .transition(withCrossFade())
                     .into(mMeizhiImageView);
         }
 

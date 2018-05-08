@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.Switch;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.main.setting.about.AboutFragment;
@@ -43,7 +44,7 @@ public class SettingFragment extends BaseFragment implements View.OnClickListene
         // 将图标圆角处理
         Glide.with(getActivity())
                 .load(R.drawable.icon)
-                .bitmapTransform(new CropCircleTransformation(getActivity()))
+                .apply(new RequestOptions().transform(new CropCircleTransformation(getActivity())))
                 .into(icon);
 
         Switch modeSwitcher = (Switch) find(R.id.switch_mode);

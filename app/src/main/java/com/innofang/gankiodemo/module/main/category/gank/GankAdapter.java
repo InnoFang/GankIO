@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Gank;
 import com.innofang.gankiodemo.utils.StringFormatUtil;
@@ -110,9 +111,14 @@ public class GankAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (null != result.getImages() && null != result.getImages().get(0)) {
                 mImageView.setVisibility(View.VISIBLE);
                 String imgUrl = result.getImages().get(0);
+
+                RequestOptions requestOptions = new RequestOptions();
+                requestOptions.placeholder(R.drawable.image_default);
+
+
                 Glide.with(mContext)
+                        .setDefaultRequestOptions(requestOptions)
                         .load(imgUrl)
-                        .placeholder(R.drawable.image_default)
                         .into(mImageView);
             }
             if (null != mOnClickGankItemListener) {

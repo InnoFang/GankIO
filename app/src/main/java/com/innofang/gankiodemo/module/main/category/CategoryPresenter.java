@@ -5,6 +5,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.Luck;
@@ -52,9 +54,10 @@ public class CategoryPresenter implements CategoryContract.Presenter {
                             Log.i(TAG, "onNext: imgUrl = " + imgUrl);
                             Glide.with(App.getContext())
                                     .load(imgUrl)
-                                    .placeholder(R.drawable.default_nav_img)
-                                    .animate(R.anim.anim_scale)
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .apply(new RequestOptions()
+                                            .placeholder(R.drawable.default_nav_img)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL))
+                                    .transition(new DrawableTransitionOptions().transition(R.anim.anim_scale))
                                     .into(imageView);
                         }
                     }

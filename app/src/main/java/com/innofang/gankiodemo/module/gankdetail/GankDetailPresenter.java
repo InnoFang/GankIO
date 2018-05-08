@@ -8,6 +8,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.innofang.gankiodemo.App;
 import com.innofang.gankiodemo.R;
 import com.innofang.gankiodemo.bean.GankDetail;
@@ -62,9 +64,10 @@ public class GankDetailPresenter implements GankDetailContract.Presenter {
                             mView.setImageUrl(imgUrl);
                             Glide.with(App.getContext())
                                     .load(imgUrl)
-                                    .placeholder(R.drawable.default_nav_img)
-                                    .animate(R.anim.anim_scale)
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    .apply(new RequestOptions()
+                                            .placeholder(R.drawable.default_nav_img)
+                                            .diskCacheStrategy(DiskCacheStrategy.ALL))
+                                    .transition(new DrawableTransitionOptions().transition(R.anim.anim_scale))
                                     .into(imageView);
                         }
                         showGankOfAndroid(gankDetail.getResults().getAndroid());
@@ -115,14 +118,15 @@ public class GankDetailPresenter implements GankDetailContract.Presenter {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void downloadImage(final Context context, final String url) {
         Observable.create(new ObservableOnSubscribe<Bitmap>() {
             @Override
             public void subscribe(ObservableEmitter<Bitmap> e) throws Exception {
                 Bitmap bitmap = null;
                 bitmap = Glide.with(context)
-                        .load(url)
                         .asBitmap()
+                        .load(url)
                         .into(500, 500)
                         .get();
                 if (null == bitmap) {
