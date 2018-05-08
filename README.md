@@ -1,37 +1,36 @@
-# GankIO
-[Gank.io](http://gank.io) unoffical app
-
-**MVP + OkHttp3 + RxJava2 + Retrofit2 + Glide**
+<div align="center">
 
 <img src="https://github.com/InnoFang/GankIO/blob/master/app/src/main/res/drawable/icon.png" height="100px" width="100px"/>
 
+# GankIO
+
+[Gank.io](http://gank.io) unoffical app
+
+**MVP + OkHttp3 + RxJava2 + Retrofit2 + Glide4**
+
 [Download Apk](https://github.com/InnoFang/GankIO/blob/master/apk/gankio.apk?raw=true)
 
-<img src="https://github.com/InnoFang/GankIO/blob/master/gif/app.gif" height="500px" width="300px"/>
-
-<img src="https://github.com/InnoFang/GankIO/blob/master/gif/Category.gif" height="500px" width="300px"/>  <img src="https://github.com/InnoFang/GankIO/blob/master/gif/DailyGank.gif" height="500px" width="300px"/>  
-<img src="https://github.com/InnoFang/GankIO/blob/master/gif/collection.gif" height="500px" width="300px"/>  <img src="https://github.com/InnoFang/GankIO/blob/master/gif/gankdetail.gif" height="500px" width="300px"/>
-
-<img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
+<img src="https://github.com/InnoFang/GankIO/blob/master/gif/app.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/Category.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/DailyGank.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/collection.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/gankdetail.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
 
 # Third-party libraries used
 
-```gradle
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'jp.wasabeef:glide-transformations:2.0.1'
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
-    compile 'com.google.code.gson:gson:2.7'
+            implementation 'com.github.bumptech.glide:glide:4.0.0'
+            implementation 'jp.wasabeef:glide-transformations:2.0.1'
+            implementation 'jp.co.cyberagent.android.gpuimage:gpuimage-library:1.4.1'
 
-    compile 'konifar:fab-transformation:1.0.0'
-    compile files('libs/nineoldandroids-2.4.0.jar')
-```
+            implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+            implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+            implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+            implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+            implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+            implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+            implementation 'com.google.code.gson:gson:2.8.1'
+
+            implementation 'konifar:fab-transformation:1.0.0'
+            implementation 'com.nineoldandroids:library:2.4.0'
+
+
 
 # [License](https://github.com/InnoFang/GankIO/blob/master/LICENSE)
    
@@ -50,3 +49,5 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 ```
+
+</div>
