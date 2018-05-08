@@ -16,8 +16,6 @@ import com.innofang.gankiodemo.module.base.BaseFragment;
 import com.innofang.gankiodemo.module.imageshower.ImageShowerActivity;
 import com.innofang.gankiodemo.module.main.category.gank.GankFragment;
 
-import static com.innofang.gankiodemo.R.layout.fragment_category;
-
 /**
  * Author: Inno Fang
  * Time: 2017/2/1 10:50
@@ -46,7 +44,7 @@ public class CategoryFragment extends BaseFragment implements CategoryContract.V
 
     @Override
     public int getLayoutId() {
-        return fragment_category;
+        return R.layout.fragment_category;
     }
 
     @Override

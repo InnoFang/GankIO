@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:fitsSystemWindows="true"
-              android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:background="@color/colorPrimary"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginEnd="10dp"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:background="@color/colorWhite"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:layout_height="wrap_content">
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/go_back"
-                android:layout_marginStart="5dp"
-                android:src="@drawable/ic_nav_back"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/search_gank_edit_text"
-                android:layout_marginStart="10dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@android:color/darker_gray"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary" >
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/search_gank"
-                android:background="@null"
-                android:inputType="text"/>
-        </LinearLayout>
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorWhite"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="5dp">
 
-    </android.support.v7.widget.Toolbar>
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/go_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:src="@drawable/ic_nav_back"/>
+
+                <EditText
+                    android:id="@+id/search_gank_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:background="@null"
+                    android:hint="@string/search_gank"
+                    android:gravity="center_vertical|start"
+                    android:inputType="text"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@android:color/darker_gray"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+    </LinearLayout>
+
+
 
 
     <RelativeLayout

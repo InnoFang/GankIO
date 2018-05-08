@@ -3,9 +3,11 @@ package com.innofang.gankiodemo.module.search;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -55,6 +57,11 @@ public class SearchFragment extends BaseFragment implements SearchContract.View 
 
     @Override
     protected void createView(View view, @Nullable Bundle savedInstanceState) {
+
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.tool_bar);
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.setSupportActionBar(toolbar);
+
         AppCompatImageView goBack = (AppCompatImageView) find(R.id.go_back);
         goBack.setOnClickListener(new View.OnClickListener() {
             @Override
