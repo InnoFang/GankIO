@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/InnoFang/GankIO/blob/master/app/src/main/res/drawable/icon.png" height="100px" width="100px"/>
+<img src="https://cdn.jsdelivr.net/gh/innofang/gankio/app/src/main/res/drawable/icon.png" height="100px" width="100px"/>
 
 # GankIO
 
@@ -8,11 +8,11 @@
 
 **MVP + OkHttp3 + RxJava2 + Retrofit2 + Glide4**
 
-[Download Apk](https://github.com/InnoFang/GankIO/blob/master/apk/gankio.apk?raw=true)
+[Download Apk](https://cdn.jsdelivr.net/gh/innofang/gankio/apk/gankio.apk)
 
 <br />
 
-<img src="https://github.com/InnoFang/GankIO/blob/master/gif/app.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/Category.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/DailyGank.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/collection.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/gankdetail.gif" height="500px" width="300px"/> <img src="https://github.com/InnoFang/GankIO/blob/master/gif/search.gif" height="500px" width="300px"/>
+<img src="https://cdn.jsdelivr.net/gh/innofang/gankio/gif/app.gif" height="500px" width="300px"/> <img src="https://cdn.jsdelivr.net/gh/innofang/gankio/gif/Category.gif" height="500px" width="300px"/> <img src="https://cdn.jsdelivr.net/gh/innofang/gankio/gif/DailyGank.gif" height="500px" width="300px"/> <img src="https://cdn.jsdelivr.net/gh/innofang/gankio/gif/collection.gif" height="500px" width="300px"/> <img src="https://cdn.jsdelivr.net/gh/innofang/gankio/gif/gankdetail.gif" height="500px" width="300px"/> <img src="https://cdn.jsdelivr.net/gh/innofang/gankio/gif/search.gif" height="500px" width="300px"/>
 
 <br />
 
